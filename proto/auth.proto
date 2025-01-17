@@ -1,0 +1,35 @@
+syntax="proto3";
+
+package grpcauth;
+
+option go_package="mypreciouskeeper/grpcauth";
+
+//Auth service for managing account creation and login
+service Auth {
+    //REgister new user
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    //Login authorize user and returns auth token if success
+    rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+//User Register object
+message RegisterRequest{
+    string email = 1; //User email (login) for register
+    string pass = 2; //User Password
+} 
+
+//Register respnse object with user id and error message 
+message RegisterResponse {
+    int64 user_id = 1; //ID of registered user
+    string error = 2; //Any error message happened during registration
+}
+
+message LoginRequest {
+    string email = 1; //User email for login
+    string pass = 2;  //User pass
+}
+
+message LoginResponse{
+    string token = 1; //Auth token after success login
+    string error = 2; //Any error happened during login
+}
