@@ -11,6 +11,7 @@ const (
 	envProd  = "prod"
 )
 
+// Setup logger with specific log level basing on environment env variable
 func Setup(env string) *slog.Logger {
 	var log *slog.Logger
 	switch env {
@@ -28,4 +29,11 @@ func Setup(env string) *slog.Logger {
 		)
 	}
 	return log
+}
+
+func Err(err error) slog.Attr {
+	return slog.Attr{
+		Key:   "error",
+		Value: slog.StringValue(err.Error()),
+	}
 }

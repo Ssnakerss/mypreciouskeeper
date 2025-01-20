@@ -1,12 +1,12 @@
 syntax="proto3";
 
-package grpcauth;
+package grpcserver;
 
-option go_package="mypreciouskeeper/grpcauth";
+option go_package="mypreciouskeeper/grpcserver";
 
 //Auth service for managing account creation and login
 service Auth {
-    //REgister new user
+    //Register new user
     rpc Register (RegisterRequest) returns (RegisterResponse);
     //Login authorize user and returns auth token if success
     rpc Login(LoginRequest) returns (LoginResponse);

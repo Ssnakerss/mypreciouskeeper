@@ -11,9 +11,9 @@ func main() {
 	cfg := config.Load()
 
 	//TODO: logger initialize
-	log := logger.Setup(cfg.Env)
-	log = log.With("who", "server/main")
-	log.Info("server starting ...")
+	l := logger.Setup(cfg.Env)
+	l = l.With("who", "server/main")
+	l.Info("server starting ...")
 
 	//TODO: app initialize
 

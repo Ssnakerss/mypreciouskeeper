@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.1
-// source: auth.proto
+// source: server.proto
 
-package grpcauth
+package grpcserver
 
 import (
 	context "context"
@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Auth_Register_FullMethodName = "/grpcauth.Auth/Register"
-	Auth_Login_FullMethodName    = "/grpcauth.Auth/Login"
+	Auth_Register_FullMethodName = "/grpcserver.Auth/Register"
+	Auth_Login_FullMethodName    = "/grpcserver.Auth/Login"
 )
 
 // AuthClient is the client API for Auth service.
@@ -29,7 +29,7 @@ const (
 //
 // Auth service for managing account creation and login
 type AuthClient interface {
-	// REgister new user
+	// Register new user
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	// Login authorize user and returns auth token if success
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
@@ -69,7 +69,7 @@ func (c *authClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.C
 //
 // Auth service for managing account creation and login
 type AuthServer interface {
-	// REgister new user
+	// Register new user
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	// Login authorize user and returns auth token if success
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
@@ -150,7 +150,7 @@ func _Auth_Login_Handler(srv interface{}, ctx context.Context, dec func(interfac
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Auth_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "grpcauth.Auth",
+	ServiceName: "grpcserver.Auth",
 	HandlerType: (*AuthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -163,5 +163,5 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "auth.proto",
+	Metadata: "server.proto",
 }
