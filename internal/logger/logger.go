@@ -1,8 +1,11 @@
 package logger
 
 import (
+	"context"
 	"log/slog"
 	"os"
+
+	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 )
 
 const (
@@ -36,4 +39,12 @@ func Err(err error) slog.Attr {
 		Key:   "error",
 		Value: slog.StringValue(err.Error()),
 	}
+}
+
+// InterceptorLogger adapts slog logger to gRPC interceptor logger.
+
+func InterceptorLogger(l *slog.Logger) logging.Logger {
+	return logging.LoggerFunc(func(ctx context.Context, lvl logging.Level, msg string, fields ...any) {
+		l.Log(ctx, slog.Level(lvl), msg, fields...)
+	})
 }

@@ -1,21 +1,33 @@
 package main
 
 import (
+	"os"
+	"os/signal"
+	"syscall"
+
 	"github.com/Ssnakerss/mypreciouskeeper/internal/config"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/server"
 )
 
 func main() {
 
-	//TODO: config initialize
 	cfg := config.Load()
 
-	//TODO: logger initialize
 	l := logger.Setup(cfg.Env)
 	l = l.With("who", "server/main")
 	l.Info("server starting ...")
 
-	//TODO: app initialize
+	app := server.New(l, cfg.GRPC.Port)
 
-	//TODO: gRPC start
+	go app.MustRun()
+
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, syscall.SIGTERM, syscall.SIGINT)
+
+	// Waiting for SIGINT (pkill -2) or SIGTERM
+	<-stop
+
+	// initiate graceful shutdown
+	app.Shutdown()
 }

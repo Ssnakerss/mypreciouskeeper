@@ -15,7 +15,6 @@ import (
 
 type UserStorage interface {
 	CreateUser(ctx context.Context, email string, passHash string) (usr *models.User, err error)
-	CheckUserExist(ctx context.Context, email string) (bool, error)
 	GetUser(ctx context.Context, email string) (usr *models.User, err error)
 }
 
@@ -34,13 +33,13 @@ func New(l *slog.Logger, u UserStorage, tokenTTL time.Duration) *Auth {
 	}
 }
 
-// Register creates new user wirth email and password
+// Register creates new user with email and password
 // First check if same email exists - returns error
 // if not - create new user, password replaced with hash
-func (a *Auth) Register(ctx context.Context,
+func (a Auth) RegisterUser(ctx context.Context,
 	email string,
 	pass string,
-) (usr *models.User, err error) {
+) (usrID int64, err error) {
 	//who - current function name
 	//for logging purpose to identify which function is calling
 	who := "Auth.Register"
@@ -48,12 +47,12 @@ func (a *Auth) Register(ctx context.Context,
 	l.Info("registering new user")
 
 	//check if user already exist
-	if exist, err := a.u.CheckUserExist(ctx, email); err != nil {
+	if usr, err := a.u.GetUser(ctx, email); err != nil {
 		l.Error("error checking user exist", logger.Err(err))
-		return nil, err
-	} else if exist {
+		return -1, err
+	} else if usr != nil {
 		l.Warn("user already exist")
-		return nil, apperrs.ErrUserAlreadyExists
+		return -1, apperrs.ErrUserAlreadyExists
 	}
 
 	//generating hash for password
@@ -63,42 +62,42 @@ func (a *Auth) Register(ctx context.Context,
 	}
 
 	//Saving new user to storage
-	usr, err = a.u.CreateUser(ctx, email, string(passHash))
+	usr, err := a.u.CreateUser(ctx, email, string(passHash))
 	if err != nil {
 		l.Error("failed to create new user", logger.Err(err))
-		return nil, err
+		return -1, err
 	}
 
-	return usr, nil
+	return usr.ID, nil
 }
 
 // Login authorize user by email and password
 // first get user from storage by email
 // than compare password with hash from storage and return user if correct
-func (a *Auth) Login(ctx context.Context, email string, pass string) (usr *models.User, err error) {
+func (a Auth) Login(ctx context.Context, email string, pass string) (token string, err error) {
 	who := "Auth.Login"
 	l := a.l.With(slog.String("who", who), slog.String("email", email))
 	l.Info("logging in user")
 
-	usr, err = a.u.GetUser(ctx, email)
+	usr, err := a.u.GetUser(ctx, email)
 	if err != nil {
 		l.Error("failed to get user", logger.Err(err))
-		return nil, fmt.Errorf("%s : %w", who, apperrs.ErrInvalidCredentials)
+		return "", fmt.Errorf("%s : %w", who, apperrs.ErrInvalidCredentials)
 	} else if usr == nil {
 		l.Warn("user not found")
-		return nil, apperrs.ErrInvalidCredentials
+		return "", apperrs.ErrInvalidCredentials
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(usr.PassHash), []byte(pass))
 	if err != nil {
 		l.Warn("wrong password")
-		return nil, apperrs.ErrInvalidCredentials
+		return "", apperrs.ErrInvalidCredentials
 	}
 
-	usr.JWTToken, err = lib.NewJWT(usr, a.tokenTTL)
+	token, err = lib.NewJWT(usr, a.tokenTTL)
 	if err != nil {
 		l.Error("failed to generate jwt token", logger.Err(err))
-		return usr, err
+		return token, err
 	}
 
-	return usr, nil
+	return token, nil
 }
