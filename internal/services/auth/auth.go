@@ -16,6 +16,7 @@ import (
 type UserStorage interface {
 	CreateUser(ctx context.Context, email string, passHash string) (usr *models.User, err error)
 	GetUser(ctx context.Context, email string) (usr *models.User, err error)
+	Close() error
 }
 
 type Auth struct {

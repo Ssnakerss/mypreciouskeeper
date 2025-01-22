@@ -33,3 +33,51 @@ message LoginResponse{
     string token = 1; //Auth token after success login
     string error = 2; //Any error happened during login
 }
+
+
+//Asset service for work with user's asset - create, get and list up 
+service Asset{
+    //Create new asset record
+    rpc Create (CreateRequest) returns (CreateResponse);
+    //Get asset 
+    rpc Get(GetRequest) returns (GetResponse);
+    //List up assets of current user
+    rpc List(ListRequest) returns (ListResponse);
+}
+
+//Asset register object
+message CreateRequest {
+    string token = 1; //JWT auth token of Current user 
+    string type = 2; //Asset type
+    string sticker = 3; //Asset sticker -  desription tag
+    bytes body = 4; //Asset body
+}
+
+message CreateResponse {
+    int64 asset_id = 1; //ID of created asset
+}
+
+message GetRequest{
+    string token = 1; //JWT auth token of current user
+    int64 asset_id = 2; //ID of asset to request 
+}
+
+message GetResponse {
+    int64 asset_id = 1;
+    string type = 2; //Asset type
+    string sticker = 3; //Asset sticker -  desription tag
+    bytes body = 4; //Asset body 
+}
+
+message ListRequest{
+    string token = 1; //token contains current user ID 
+}
+
+message ListResponse{
+    message Asset {
+        string type = 1; //Asset type
+        string sticker = 2; //Asset sticker -  desription tag
+        bytes body = 3; //Asset body
+    }
+    repeated Asset assets = 1;//Array of user's assets
+}

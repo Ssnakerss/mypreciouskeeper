@@ -165,3 +165,191 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "server.proto",
 }
+
+const (
+	Asset_Create_FullMethodName = "/grpcserver.Asset/Create"
+	Asset_Get_FullMethodName    = "/grpcserver.Asset/Get"
+	Asset_List_FullMethodName   = "/grpcserver.Asset/List"
+)
+
+// AssetClient is the client API for Asset service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Asset service for work with user's asset - create, get and list up
+type AssetClient interface {
+	// Create new asset record
+	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
+	// Get asset
+	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
+	// List up assets of current user
+	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
+}
+
+type assetClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAssetClient(cc grpc.ClientConnInterface) AssetClient {
+	return &assetClient{cc}
+}
+
+func (c *assetClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateResponse)
+	err := c.cc.Invoke(ctx, Asset_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResponse)
+	err := c.cc.Invoke(ctx, Asset_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListResponse)
+	err := c.cc.Invoke(ctx, Asset_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AssetServer is the server API for Asset service.
+// All implementations must embed UnimplementedAssetServer
+// for forward compatibility.
+//
+// Asset service for work with user's asset - create, get and list up
+type AssetServer interface {
+	// Create new asset record
+	Create(context.Context, *CreateRequest) (*CreateResponse, error)
+	// Get asset
+	Get(context.Context, *GetRequest) (*GetResponse, error)
+	// List up assets of current user
+	List(context.Context, *ListRequest) (*ListResponse, error)
+	mustEmbedUnimplementedAssetServer()
+}
+
+// UnimplementedAssetServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAssetServer struct{}
+
+func (UnimplementedAssetServer) Create(context.Context, *CreateRequest) (*CreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedAssetServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedAssetServer) List(context.Context, *ListRequest) (*ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedAssetServer) mustEmbedUnimplementedAssetServer() {}
+func (UnimplementedAssetServer) testEmbeddedByValue()               {}
+
+// UnsafeAssetServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AssetServer will
+// result in compilation errors.
+type UnsafeAssetServer interface {
+	mustEmbedUnimplementedAssetServer()
+}
+
+func RegisterAssetServer(s grpc.ServiceRegistrar, srv AssetServer) {
+	// If the following call pancis, it indicates UnimplementedAssetServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Asset_ServiceDesc, srv)
+}
+
+func _Asset_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Asset_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServer).Create(ctx, req.(*CreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Asset_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Asset_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServer).Get(ctx, req.(*GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Asset_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Asset_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServer).List(ctx, req.(*ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Asset_ServiceDesc is the grpc.ServiceDesc for Asset service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Asset_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "grpcserver.Asset",
+	HandlerType: (*AssetServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _Asset_Create_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _Asset_Get_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _Asset_List_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "server.proto",
+}

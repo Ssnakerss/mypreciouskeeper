@@ -8,6 +8,7 @@ import (
 	"net"
 	"time"
 
+	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/services/auth"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/storage"
@@ -45,14 +46,15 @@ func New(l *slog.Logger, port int) *Server {
 		recovery.UnaryServerInterceptor(recoveryOpts...),
 		grpclogging.UnaryServerInterceptor(logger.InterceptorLogger(l), loggingOpts...),
 	))
-
+	//TO-DO get dsn from config
 	dsn := "postgres://orchestra:orchestra12qwaszx@pg-ext.os.serk.lan:5103/orchestra?sslmode=disable"
 	db, err := storage.New(context.Background(), dsn, time.Second*3)
 	if err != nil {
 		log.Fatal("db connection failed: ", err)
 	}
 
-	a := auth.New(l, db, time.Second*3)
+	//TO-DO get duration from config
+	a := auth.New(l, db, lib.JWTDuration)
 
 	RegisterGRPC(gRPCServer, *a)
 
@@ -88,5 +90,6 @@ func (s *Server) MustRun() {
 func (s *Server) Shutdown() {
 	s.l.Info("server shuting down ....")
 	s.gRPC.GracefulStop()
+
 	s.l.Info("server shutdown complete, exit")
 }

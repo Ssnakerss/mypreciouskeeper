@@ -5,7 +5,6 @@ import (
 	"errors"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
-
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -16,6 +15,7 @@ func RegisterGRPC(gRPCServer *grpc.Server, a Auth) {
 	grpcserver.RegisterAuthServer(gRPCServer, &serverAPI{auth: a})
 }
 
+// AUth interface for authorization business logic
 type Auth interface {
 	Login(
 		ctx context.Context,
