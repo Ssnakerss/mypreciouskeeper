@@ -4,7 +4,9 @@ import (
 	"context"
 	imsql "database/sql"
 	"errors"
+	"strings"
 
+	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
 )
 
@@ -16,6 +18,7 @@ func (s *DBStorage) CreateUser(pctx context.Context,
 	usr = &models.User{
 		Email:    uemail,
 		PassHash: upassHash,
+		ID:       -1,
 	}
 
 	sql := ` INSERT INTO  public.mpk_users (u_email, u_pass_hash) VALUES ($1, $2) RETURNING id`
@@ -23,17 +26,25 @@ func (s *DBStorage) CreateUser(pctx context.Context,
 	defer cancel()
 
 	err = s.DB.QueryRowContext(ctx, sql, uemail, upassHash).Scan(&usr.ID)
-	if err != nil {
-		return nil, err
-	}
 
+	//TO-DO -  check why not working errors.As(err, &pgErr)
+	if err != nil {
+		// var pgErr *pgconn.PgError
+		// if errors.As(err, &pgErr) {
+		if strings.Contains(err.Error(), "23505") {
+			//если пользователь уже существует, возвращаем ошибку
+			// if pgErr.Code == "23505" {
+			return usr, apperrs.ErrUserAlreadyExists
+			// }
+		}
+	}
 	return usr, err
 }
 
 // GetUser get user record from mpk_users table
 func (s DBStorage) GetUser(pctx context.Context, uemail string) (usr *models.User, err error) {
 	usr = &models.User{ID: -1}
-	sql := ` select id, u_email, u_pass_hash from public.mpk_users where u_email = $1`
+	sql := ` SELECT id, u_email, u_pass_hash FROM public.mpk_users WHERE u_email = $1`
 	ctx, cancel := context.WithTimeout(pctx, s.timeout)
 	defer cancel()
 

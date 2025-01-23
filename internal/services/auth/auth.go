@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"time"
@@ -48,12 +49,14 @@ func (a Auth) RegisterUser(ctx context.Context,
 	l.Info("registering new user")
 
 	//check if user already exist
-	if usr, err := a.u.GetUser(ctx, email); err != nil {
-		l.Error("error checking user exist", logger.Err(err))
-		return -1, err
-	} else if usr != nil {
-		l.Warn("user already exist")
-		return -1, apperrs.ErrUserAlreadyExists
+	if _, err := a.u.GetUser(ctx, email); err != nil {
+		if errors.Is(err, apperrs.ErrUserAlreadyExists) {
+			l.Warn("user already exist")
+			return -1, apperrs.ErrUserAlreadyExists
+		} else {
+			l.Error("error checking user exist", logger.Err(err))
+			return -1, err
+		}
 	}
 
 	//generating hash for password

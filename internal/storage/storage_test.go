@@ -3,75 +3,55 @@ package storage
 import (
 	"context"
 	"os"
-	"strconv"
 	"testing"
 	"time"
 
+	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
+	"github.com/brianvoe/gofakeit"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/stretchr/testify/require"
-	"golang.org/x/exp/rand"
 )
 
 func TestDBStorage_CreateUser(t *testing.T) {
 	dsn := os.Getenv("POSTGRE_DSN")
-	if dsn == "" {
-		t.Fatal("dsn is not set")
-		return
-	}
-	// dsn := "postgres://orchestra:orchestra12qwaszx@pg-ext.os.serk.lan:5103/orchestra?sslmode=disable"
-	db, err := New(context.Background(), dsn, time.Second*3)
-	if err != nil {
-		t.Fatalf("db connection error: %v", err)
-	}
+	require.NotEmpty(t, dsn)
 
-	rnd := rand.New(rand.NewSource(uint64(time.Now().Nanosecond())))
-	email := "email" + strconv.Itoa(rnd.Intn(256))
+	db, err := New(context.Background(), dsn, time.Second*3)
+	require.NoError(t, err)
+
+	email := gofakeit.Email()
+	// pass := gofakeit.Password(true, true, true, true, false, 10)
 
 	//Testing user creation
 	t.Log("testing create user")
 	usr, err := db.CreateUser(context.Background(), email, "abc")
-	if err != nil {
-		t.Fatalf("user create error: %v", err)
-	}
+	require.NoError(t, err)
 
 	//Testing user get
 	t.Log("testting get user")
 	usr, err = db.GetUser(context.Background(), email)
-	if err != nil {
-		t.Fatalf("user get error^ %v", err)
-	}
-	if usr.Email == "" {
-		t.Fatalf("user get fail, email is empty, usr: %v", usr)
-	}
+	require.NoError(t, err)
+	require.NotEmpty(t, usr.Email)
 
 	//Testing not existing  user get
 	t.Log("testting not existing get user")
 	usr, err = db.GetUser(context.Background(), "user_not-exist")
-	if err != nil {
-		t.Fatalf("user get error %v", err)
-	}
+	require.NoError(t, err)
 	require.Equal(t, int64(-1), usr.ID)
 
 	//Testing duplicate user creation
-	t.Log("testtin duplicate user")
+	t.Log("testing duplicate user creation")
 	usr, err = db.CreateUser(context.Background(), email, "abc")
-	if err == nil {
-		t.Fatalf("duplicate user create success, email: %v", email)
-	}
-
+	t.Log(err)
+	require.Equal(t, apperrs.ErrUserAlreadyExists, err)
 }
 
 func TestDBStorage_saveGetAsset(t *testing.T) {
 	dsn := os.Getenv("POSTGRE_DSN")
-	if dsn == "" {
-		t.Fatal("dsn is not set")
-		return
-	}
+	require.NotEmpty(t, dsn)
 	// dsn := "postgres://orchestra:orchestra12qwaszx@pg-ext.os.serk.lan:5103/orchestra?sslmode=disable"
 	db, err := New(context.Background(), dsn, time.Second*3)
-	if err != nil {
-		t.Fatalf("db connection error: %v", err)
-	}
+	require.NoError(t, err)
 
 	str := `
 	--------

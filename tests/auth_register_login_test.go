@@ -26,7 +26,7 @@ func TestRegisterLogin_Login_HappyPath(t *testing.T) {
 		Email: email,
 		Pass:  pass,
 	})
-	t.Log(respReg)
+	t.Log("user id ", respReg.GetUserId())
 	require.NoError(t, err)
 	assert.NotEmpty(t, respReg.GetUserId())
 
@@ -58,8 +58,8 @@ func TestRegisterLogin_Login_HappyPath(t *testing.T) {
 	t.Log(claims)
 
 	// Проверяем содержимое токена
-	assert.Equal(t, respReg.GetUserId(), int64(claims["uid"].(float64)))
-	assert.Equal(t, email, claims["email"].(string))
+	assert.Equal(t, respReg.GetUserId(), int64(claims["id"].(float64)))
+	assert.Equal(t, email, claims["username"].(string))
 
 	// Проверяем, что TTL токена примерно соответствует нашим ожиданиям.
 	assert.InDelta(t, loginTime.Add(time.Hour*24).Unix(), claims["exp"].(float64), 5)
