@@ -18,10 +18,9 @@ message RegisterRequest{
     string pass = 2; //User Password
 } 
 
-//Register respnse object with user id and error message 
+//Register respnse object with user id 
 message RegisterResponse {
     int64 user_id = 1; //ID of registered user
-    string error = 2; //Any error message happened during registration
 }
 
 message LoginRequest {
@@ -31,10 +30,9 @@ message LoginRequest {
 
 message LoginResponse{
     string token = 1; //Auth token after success login
-    string error = 2; //Any error happened during login
 }
 
-
+//------------------------------------------------------------------
 //Asset service for work with user's asset - create, get and list up 
 service Asset{
     //Create new asset record
@@ -43,6 +41,10 @@ service Asset{
     rpc Get(GetRequest) returns (GetResponse);
     //List up assets of current user
     rpc List(ListRequest) returns (ListResponse);
+    //Update asset information
+    rpc Update(UpdateRequest) returns (UpdateResponse);
+    //Delete asset by id
+    rpc Delete(DeleteRequest) returns (DeleteResponse);
 }
 
 //Asset register object
@@ -69,15 +71,40 @@ message GetResponse {
     bytes body = 4; //Asset body 
 }
 
-message ListRequest{
-    string token = 1; //token contains current user ID 
+message UpdateRequest {
+    string token = 1; //JWT auth token of Current user 
+    int64 asset_id = 2; //ID of asset to update 
+    string type = 3; //Asset type
+    string sticker = 4; //Asset sticker -  desription tag
+    bytes body = 5; //Asset body
 }
 
+message UpdateResponse{
+    int64 asset_id = 1; //Updated asset id
+    bool success = 2; //was operation success 
+}
+
+message ListRequest{
+    string token = 1; //token contains current user ID 
+    string type = 2; //type of assets to retrieve
+    string stocker = 3;//Description of asset to retrieve
+}
 message ListResponse{
     message Asset {
-        string type = 1; //Asset type
+        string type = 1; //Asset id 
         string sticker = 2; //Asset sticker -  desription tag
         bytes body = 3; //Asset body
     }
     repeated Asset assets = 1;//Array of user's assets
+}
+
+message DeleteRequest{
+    string token = 1; //Auth token
+    int64 asset_id = 2; //ID of asset to delete
+
+}
+
+message DeleteResponse{
+    int64 asset_id = 1; //Updated asset id
+    bool success = 2; //delete operation result
 }

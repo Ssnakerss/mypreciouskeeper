@@ -14,14 +14,15 @@ import (
 	"github.com/brianvoe/gofakeit"
 )
 
-func TestRegisterLogin_Login_HappyPath(t *testing.T) {
+// Teting Register and Login case
+func TestRegisterLogin_SuccessCase(t *testing.T) {
 	ctx, st := suite.New(t) // Создаём Suite
 
-	// TODO: Подготовить данные для тестовых запросов (случайные)
+	// Generate fake email  and password for test
 	email := gofakeit.Email()
 	pass := gofakeit.Password(true, true, true, true, false, 10)
 
-	// TODO: Сделать нужные запросы
+	// Creating client and make Register and Login request
 	respReg, err := st.AClient.Register(ctx, &grpcserver.RegisterRequest{
 		Email: email,
 		Pass:  pass,
@@ -37,12 +38,10 @@ func TestRegisterLogin_Login_HappyPath(t *testing.T) {
 	require.NoError(t, err)
 	t.Log(respLogin)
 
-	// TODO: Проверить результаты
+	//Checking received token
 	token := respLogin.GetToken()
 	require.NotEmpty(t, token)
 
-	// Отмечаем время, в которое бы выполнен логин.
-	// Это понадобится для проверки TTL токена
 	loginTime := time.Now()
 
 	// Парсим и валидируем токен
@@ -63,5 +62,62 @@ func TestRegisterLogin_Login_HappyPath(t *testing.T) {
 
 	// Проверяем, что TTL токена примерно соответствует нашим ожиданиям.
 	assert.InDelta(t, loginTime.Add(time.Hour*24).Unix(), claims["exp"].(float64), 5)
+}
 
+func TestRegisterLogin_FailCase(t *testing.T) {
+	ctx, st := suite.New(t) // Создаём Suite
+
+	// Creat fake email and password for test
+	email := gofakeit.Email()
+	pass := gofakeit.Password(true, true, true, true, false, 10)
+
+	// Register fake user for futher test
+	respReg, err := st.AClient.Register(ctx, &grpcserver.RegisterRequest{
+		Email: email,
+		Pass:  pass,
+	})
+
+	require.NoError(t, err)
+	assert.NotEmpty(t, respReg.GetUserId())
+
+	//Register same user again
+	_, err = st.AClient.Register(ctx, &grpcserver.RegisterRequest{
+		Email: email,
+		Pass:  pass,
+	})
+	t.Log(err)
+	//Should be error -  duplicater user
+	require.Error(t, err)
+
+	//Try to login with wrong password
+	_, err = st.AClient.Login(ctx, &grpcserver.LoginRequest{
+		Email: email,
+		Pass:  "wrong pass",
+	})
+	t.Log(err)
+	require.Error(t, err)
+
+	//Try to login with empty password
+	_, err = st.AClient.Login(ctx, &grpcserver.LoginRequest{
+		Email: email,
+		Pass:  "",
+	})
+	t.Log(err)
+	require.Error(t, err)
+
+	//Try to login with empty email
+	_, err = st.AClient.Login(ctx, &grpcserver.LoginRequest{
+		Email: "",
+		Pass:  "wrong pass",
+	})
+	t.Log(err)
+	require.Error(t, err)
+
+	//Try to login with both empty
+	_, err = st.AClient.Login(ctx, &grpcserver.LoginRequest{
+		Email: "",
+		Pass:  "",
+	})
+	t.Log(err)
+	require.Error(t, err)
 }

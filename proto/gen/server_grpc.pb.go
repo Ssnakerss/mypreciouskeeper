@@ -170,12 +170,15 @@ const (
 	Asset_Create_FullMethodName = "/grpcserver.Asset/Create"
 	Asset_Get_FullMethodName    = "/grpcserver.Asset/Get"
 	Asset_List_FullMethodName   = "/grpcserver.Asset/List"
+	Asset_Update_FullMethodName = "/grpcserver.Asset/Update"
+	Asset_Delete_FullMethodName = "/grpcserver.Asset/Delete"
 )
 
 // AssetClient is the client API for Asset service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
+// ------------------------------------------------------------------
 // Asset service for work with user's asset - create, get and list up
 type AssetClient interface {
 	// Create new asset record
@@ -184,6 +187,10 @@ type AssetClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
 	// List up assets of current user
 	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
+	// Update asset information
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
+	// Delete asset by id
+	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 }
 
 type assetClient struct {
@@ -224,10 +231,31 @@ func (c *assetClient) List(ctx context.Context, in *ListRequest, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *assetClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateResponse)
+	err := c.cc.Invoke(ctx, Asset_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assetClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteResponse)
+	err := c.cc.Invoke(ctx, Asset_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AssetServer is the server API for Asset service.
 // All implementations must embed UnimplementedAssetServer
 // for forward compatibility.
 //
+// ------------------------------------------------------------------
 // Asset service for work with user's asset - create, get and list up
 type AssetServer interface {
 	// Create new asset record
@@ -236,6 +264,10 @@ type AssetServer interface {
 	Get(context.Context, *GetRequest) (*GetResponse, error)
 	// List up assets of current user
 	List(context.Context, *ListRequest) (*ListResponse, error)
+	// Update asset information
+	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
+	// Delete asset by id
+	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	mustEmbedUnimplementedAssetServer()
 }
 
@@ -254,6 +286,12 @@ func (UnimplementedAssetServer) Get(context.Context, *GetRequest) (*GetResponse,
 }
 func (UnimplementedAssetServer) List(context.Context, *ListRequest) (*ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedAssetServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedAssetServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedAssetServer) mustEmbedUnimplementedAssetServer() {}
 func (UnimplementedAssetServer) testEmbeddedByValue()               {}
@@ -330,6 +368,42 @@ func _Asset_List_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Asset_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Asset_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServer).Update(ctx, req.(*UpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Asset_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssetServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Asset_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssetServer).Delete(ctx, req.(*DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Asset_ServiceDesc is the grpc.ServiceDesc for Asset service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -348,6 +422,14 @@ var Asset_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _Asset_List_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _Asset_Update_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _Asset_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

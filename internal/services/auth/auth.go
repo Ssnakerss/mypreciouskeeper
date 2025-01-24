@@ -38,6 +38,7 @@ func New(l *slog.Logger, u UserStorage, tokenTTL time.Duration) *Auth {
 // Register creates new user with email and password
 // First check if same email exists - returns error
 // if not - create new user, password replaced with hash
+// gRPC mapping  -  Register
 func (a Auth) RegisterUser(ctx context.Context,
 	email string,
 	pass string,
@@ -78,6 +79,7 @@ func (a Auth) RegisterUser(ctx context.Context,
 // Login authorize user by email and password
 // first get user from storage by email
 // than compare password with hash from storage and return user if correct
+// gRPC mapping  -  Login
 func (a Auth) Login(ctx context.Context, email string, pass string) (token string, err error) {
 	who := "Auth.Login"
 	l := a.l.With(slog.String("who", who), slog.String("email", email))
