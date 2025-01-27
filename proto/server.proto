@@ -81,19 +81,20 @@ message UpdateRequest {
 
 message UpdateResponse{
     int64 asset_id = 1; //Updated asset id
-    bool success = 2; //was operation success 
 }
+   
 
 message ListRequest{
     string token = 1; //token contains current user ID 
     string type = 2; //type of assets to retrieve
-    string stocker = 3;//Description of asset to retrieve
+    string sticker = 3;//Description of asset to retrieve
 }
 message ListResponse{
     message Asset {
-        string type = 1; //Asset id 
-        string sticker = 2; //Asset sticker -  desription tag
-        bytes body = 3; //Asset body
+        int64 asset_id = 1;//Asset id
+        string type = 2; //Asset type
+        string sticker = 3; //Asset sticker -  desription tag
+        bytes body = 4; //Asset body
     }
     repeated Asset assets = 1;//Array of user's assets
 }
@@ -106,5 +107,5 @@ message DeleteRequest{
 
 message DeleteResponse{
     int64 asset_id = 1; //Updated asset id
-    bool success = 2; //delete operation result
 }
+  

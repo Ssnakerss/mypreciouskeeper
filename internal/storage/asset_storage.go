@@ -27,12 +27,15 @@ func (s *DBStorage) CreateAsset(pctx context.Context,
 }
 
 // GetAsset get asset record from mpk_assets table
-func (s DBStorage) GetAsset(pctx context.Context, assetID int64) (data []byte, err error) {
-	sql := `select a_body from public.mpk_assets where id = $1`
+func (s DBStorage) GetAsset(
+	pctx context.Context,
+	userID int64,
+	assetID int64) (data []byte, err error) {
+	sql := `select a_body from public.mpk_assets where a_user_id = $1 and id = $2`
 	ctx, cancel := context.WithTimeout(pctx, s.timeout)
 	defer cancel()
 
-	err = s.DB.QueryRowContext(ctx, sql, assetID).Scan(&data)
+	err = s.DB.QueryRowContext(ctx, sql, userID, assetID).Scan(&data)
 	if err != nil {
 		return nil, err
 	}

@@ -10,7 +10,7 @@ import (
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/services/auth"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/services"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/storage"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	grpclogging "github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
@@ -54,9 +54,14 @@ func New(l *slog.Logger, port int) *Server {
 	}
 
 	//TO-DO get duration from config
-	a := auth.New(l, db, lib.JWTDuration)
-
-	RegisterGRPC(gRPCServer, *a)
+	//Create authorization service and register it to gRPC server
+	a := services.NewAuthService(l, db, lib.JWTDuration)
+	aAPI := NewServerAuthAPI(a)
+	aAPI.RegisterGRPC(gRPCServer)
+	//Create asset service and register it to gRPC server
+	as := services.NewAssetService(l, db)
+	asAPI := NewServerAssetAPI(as)
+	asAPI.RegisterGRPC(gRPCServer)
 
 	return &Server{
 		l:    l,

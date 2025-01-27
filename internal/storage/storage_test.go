@@ -66,7 +66,7 @@ func TestDBStorage_saveGetAsset(t *testing.T) {
 		t.Fatalf("save asset error: %v", err)
 	}
 
-	data, err := db.GetAsset(context.Background(), id)
+	data, err := db.GetAsset(context.Background(), 1, id)
 	if err != nil {
 		t.Fatalf("get asset error: %v", err)
 	}

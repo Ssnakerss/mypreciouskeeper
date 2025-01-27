@@ -5,18 +5,18 @@ import (
 	"errors"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	"github.com/golang-jwt/jwt"
 )
 
-func RegisterGRPC(gRPCServer *grpc.Server, a Auth) {
-	grpcserver.RegisterAuthServer(gRPCServer, &serverAPI{auth: a})
-}
-
 // AUth interface for authorization business logic
-type Auth interface {
+type AuthService interface {
 	Login(
 		ctx context.Context,
 		email string,
@@ -30,20 +30,30 @@ type Auth interface {
 	) (userID int64, err error)
 }
 
-type serverAPI struct {
+type serverAuthAPI struct {
 	grpcserver.UnimplementedAuthServer
-	auth Auth
+	authService AuthService
+}
+
+func NewServerAuthAPI(a AuthService) *serverAuthAPI {
+	return &serverAuthAPI{
+		authService: a,
+	}
+}
+
+func (s *serverAuthAPI) RegisterGRPC(gRPCServer *grpc.Server) {
+	grpcserver.RegisterAuthServer(gRPCServer, s)
 }
 
 // Login serve gRPC calls -  check email and password, call app Login func and return token
-func (s *serverAPI) Login(
+func (s *serverAuthAPI) Login(
 	ctx context.Context,
 	in *grpcserver.LoginRequest,
 ) (*grpcserver.LoginResponse, error) {
 	if in.Email == "" || in.Pass == "" {
 		return nil, status.Error(codes.InvalidArgument, "email and password required")
 	}
-	token, err := s.auth.Login(ctx, in.Email, in.Pass)
+	token, err := s.authService.Login(ctx, in.Email, in.Pass)
 	if err != nil {
 		if errors.Is(err, apperrs.ErrInvalidCredentials) {
 			return nil, status.Error(codes.Unauthenticated, err.Error())
@@ -55,7 +65,7 @@ func (s *serverAPI) Login(
 }
 
 // Register serve gRPC calls - check email and password, call app Register func and return userID
-func (s *serverAPI) Register(
+func (s *serverAuthAPI) Register(
 	ctx context.Context,
 	in *grpcserver.RegisterRequest,
 ) (*grpcserver.RegisterResponse, error) {
@@ -63,7 +73,7 @@ func (s *serverAPI) Register(
 	if in.Email == "" || in.Pass == "" {
 		return nil, status.Error(codes.InvalidArgument, "email and password required")
 	}
-	userID, err := s.auth.RegisterUser(ctx, in.Email, in.Pass)
+	userID, err := s.authService.RegisterUser(ctx, in.Email, in.Pass)
 	if err != nil {
 		if errors.Is(err, apperrs.ErrUserAlreadyExists) {
 			return nil, status.Error(codes.AlreadyExists, err.Error())
@@ -71,4 +81,23 @@ func (s *serverAPI) Register(
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 	return &grpcserver.RegisterResponse{UserId: userID}, nil
+}
+
+// verifyJWTPayload verify JWT token and extract User info
+func verifyJWTPayload(token string) (*models.User, error) {
+	tokenParsed, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+		return []byte(lib.AppSecret), nil
+	})
+	if err != nil {
+		return nil, apperrs.ErrInvalidToken
+	}
+	claims, ok := tokenParsed.Claims.(jwt.MapClaims)
+	if !ok {
+		return nil, apperrs.ErrInvalidToken
+	}
+
+	return &models.User{
+		ID:    claims["user_id"].(int64),
+		Email: claims["email"].(string),
+	}, nil
 }

@@ -7,8 +7,8 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-// TO-DO - make more efficient
 const (
+	// TO-DO - get app secret from config
 	AppSecret   = "poor secret"
 	JWTDuration = time.Hour * 24
 )

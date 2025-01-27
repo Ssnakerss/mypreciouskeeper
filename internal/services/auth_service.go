@@ -1,4 +1,4 @@
-package auth
+package services
 
 import (
 	"context"
@@ -20,15 +20,15 @@ type UserStorage interface {
 	Close() error
 }
 
-type Auth struct {
+type AuthService struct {
 	l        *slog.Logger
 	u        UserStorage
 	tokenTTL time.Duration
 }
 
 // New creates a new instance of auth
-func New(l *slog.Logger, u UserStorage, tokenTTL time.Duration) *Auth {
-	return &Auth{
+func NewAuthService(l *slog.Logger, u UserStorage, tokenTTL time.Duration) *AuthService {
+	return &AuthService{
 		l:        l,
 		u:        u,
 		tokenTTL: tokenTTL,
@@ -39,13 +39,13 @@ func New(l *slog.Logger, u UserStorage, tokenTTL time.Duration) *Auth {
 // First check if same email exists - returns error
 // if not - create new user, password replaced with hash
 // gRPC mapping  -  Register
-func (a Auth) RegisterUser(ctx context.Context,
+func (a AuthService) RegisterUser(ctx context.Context,
 	email string,
 	pass string,
 ) (usrID int64, err error) {
 	//who - current function name
 	//for logging purpose to identify which function is calling
-	who := "Auth.Register"
+	who := "AuthService.Register"
 	l := a.l.With(slog.String("who", who), slog.String("email", email))
 	l.Info("registering new user")
 
@@ -80,8 +80,8 @@ func (a Auth) RegisterUser(ctx context.Context,
 // first get user from storage by email
 // than compare password with hash from storage and return user if correct
 // gRPC mapping  -  Login
-func (a Auth) Login(ctx context.Context, email string, pass string) (token string, err error) {
-	who := "Auth.Login"
+func (a AuthService) Login(ctx context.Context, email string, pass string) (token string, err error) {
+	who := "AuthService.Login"
 	l := a.l.With(slog.String("who", who), slog.String("email", email))
 	l.Info("logging in user")
 
