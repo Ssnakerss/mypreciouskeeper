@@ -38,7 +38,8 @@ func New(l *slog.Logger, port int) *Server {
 
 	loggingOpts := []logging.Option{
 		grpclogging.WithLogOnEvents(
-			grpclogging.PayloadReceived, grpclogging.PayloadSent,
+			grpclogging.PayloadReceived,
+			grpclogging.PayloadSent,
 		),
 	}
 

@@ -13,11 +13,14 @@ import (
 type AssetService interface {
 	Create(
 		ctx context.Context,
-		userID int64,
-		atype string,
-		asticker string,
-		abody []byte,
+		asset *models.Asset,
 	) (aid int64, err error)
+
+	Update(
+		ctx context.Context,
+		asset *models.Asset,
+	) error
+
 	Get(
 		ctx context.Context,
 		userID int64,
@@ -31,14 +34,6 @@ type AssetService interface {
 		asticker string,
 	) ([]*models.Asset, error)
 
-	Update(
-		ctx context.Context,
-		userID int64,
-		aid int64,
-		atype string,
-		asticker string,
-		abody []byte,
-	) error
 	Delete(
 		ctx context.Context,
 		userID int64,
@@ -69,12 +64,19 @@ func (s *serverAssetAPI) Create(ctx context.Context, req *grpcserver.CreateReque
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "Invalid token")
 	}
+	asset := &models.Asset{
+		UserID:  user.ID,
+		Type:    req.Type,
+		Sticker: req.Sticker,
+		Body:    req.Body,
+	}
 
 	//Create asset
-	aid, err := s.assetService.Create(ctx, user.ID, req.Type, req.Sticker, req.Body)
+	aid, err := s.assetService.Create(ctx, asset)
 	if err != nil {
 		return nil, err
 	}
+
 	return &grpcserver.CreateResponse{AssetId: aid}, err
 }
 
@@ -134,7 +136,14 @@ func (s *serverAssetAPI) Update(ctx context.Context, req *grpcserver.UpdateReque
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "Invalid token")
 	}
-	err = s.assetService.Update(ctx, user.ID, req.AssetId, req.Type, req.Sticker, req.Body)
+	asset := &models.Asset{
+		ID:      req.AssetId,
+		UserID:  user.ID,
+		Type:    req.Type,
+		Sticker: req.Sticker,
+		Body:    req.Body,
+	}
+	err = s.assetService.Update(ctx, asset)
 	if err != nil {
 		return nil, status.Errorf(codes.NotFound, "Asset not found")
 	}

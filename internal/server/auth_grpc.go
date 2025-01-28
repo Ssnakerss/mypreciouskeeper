@@ -85,19 +85,23 @@ func (s *serverAuthAPI) Register(
 
 // verifyJWTPayload verify JWT token and extract User info
 func verifyJWTPayload(token string) (*models.User, error) {
+
 	tokenParsed, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
 		return []byte(lib.AppSecret), nil
 	})
+
 	if err != nil {
 		return nil, apperrs.ErrInvalidToken
 	}
+
 	claims, ok := tokenParsed.Claims.(jwt.MapClaims)
 	if !ok {
 		return nil, apperrs.ErrInvalidToken
 	}
+	//TO-DO checking for expired token
 
 	return &models.User{
-		ID:    claims["user_id"].(int64),
-		Email: claims["email"].(string),
+		ID:    int64(claims["id"].(float64)),
+		Email: claims["username"].(string),
 	}, nil
 }

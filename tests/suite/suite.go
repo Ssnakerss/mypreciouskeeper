@@ -15,7 +15,8 @@ import (
 type Suite struct {
 	*testing.T
 	// Cfg     *config.Config
-	AClient grpcserver.AuthClient
+	AClient     grpcserver.AuthClient
+	AssetClient grpcserver.AssetClient
 }
 
 func New(t *testing.T) (context.Context, *Suite) {
@@ -35,7 +36,7 @@ func New(t *testing.T) (context.Context, *Suite) {
 	grpcAddress := net.JoinHostPort("localhost", "44044") // strconv.Itoa(cfg.GRPC.Port))
 
 	// Создаем клиент
-	cc, err := grpc.DialContext(context.Background(),
+	cc, err := grpc.NewClient(
 		grpcAddress,
 		// Используем insecure-коннект для тестов
 		grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -44,11 +45,13 @@ func New(t *testing.T) (context.Context, *Suite) {
 	}
 
 	authClient := grpcserver.NewAuthClient(cc)
+	assetClient := grpcserver.NewAssetClient(cc)
 
 	return ctx, &Suite{
 		T: t,
 		// Cfg:     cfg,
-		AClient: authClient,
+		AClient:     authClient,
+		AssetClient: assetClient,
 	}
 
 }

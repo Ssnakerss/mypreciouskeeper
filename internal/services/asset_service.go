@@ -9,11 +9,11 @@ import (
 
 type AssetStorage interface {
 	CreateAsset(ctx context.Context, asset *models.Asset) (int64, error)
-	GetAsset(ctx context.Context, userid int64, aid int64) (*models.Asset, error)
+	UpdateAsset(ctx context.Context, asset *models.Asset) error
 
+	GetAsset(ctx context.Context, userid int64, aid int64) (*models.Asset, error)
 	ListAssets(ctx context.Context, userid int64, atype string, asticker string) ([]*models.Asset, error)
 
-	UpdateAsset(ctx context.Context, asset *models.Asset) error
 	DeleteAsset(ctx context.Context, userid int64, aid int64) error
 }
 
@@ -33,22 +33,18 @@ func NewAssetService(l *slog.Logger, s AssetStorage) *AssetService {
 // gRPC mapping -  Create
 func (a *AssetService) Create(
 	ctx context.Context,
-	userID int64,
-	atype string,
-	asticker string,
-	abody []byte,
+	asset *models.Asset,
 ) (ad int64, err error) {
 	//who - current function name
 	//for logging purpose to identify which function is calling
 	who := "AssetService.Create"
 	l := a.l.With(slog.String("who", who),
-		slog.String("type", atype),
-		slog.String("sticker", asticker),
+		slog.String("type", asset.Type),
+		slog.String("sticker", asset.Sticker),
 	)
 	l.Info("registering new asset")
-	newAsset := &models.Asset{UserID: userID, Type: atype, Sticker: asticker, Body: abody}
 
-	return a.s.CreateAsset(ctx, newAsset)
+	return a.s.CreateAsset(ctx, asset)
 }
 
 // Get asset data from storage
@@ -91,22 +87,18 @@ func (a *AssetService) List(
 // gRPC mapping - Update
 func (a *AssetService) Update(
 	ctx context.Context,
-	userID int64,
-	aid int64,
-	atype string,
-	asticker string,
-	abody []byte,
+	asset *models.Asset,
 ) error {
 	//who - current function name
 	//for logging purpose to identify which function is calling
 	who := "AssetService.Update"
 	l := a.l.With(slog.String("who", who),
-		slog.Int64("id", aid),
-		slog.String("type", atype),
-		slog.String("sticker", asticker),
+		slog.Int64("id", asset.ID),
+		slog.String("type", asset.Type),
+		slog.String("sticker", asset.Sticker),
 	)
 	l.Info("updating asset data by id")
-	return a.s.UpdateAsset(ctx, &models.Asset{UserID: userID, ID: aid, Type: atype, Sticker: asticker, Body: abody})
+	return a.s.UpdateAsset(ctx, asset)
 
 }
 

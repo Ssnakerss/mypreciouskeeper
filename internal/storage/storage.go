@@ -48,6 +48,7 @@ func (s *DBStorage) Prepare(pctx context.Context) error {
     u_pass_hash text COLLATE pg_catalog."default" NOT NULL,
 	u_created_at timestamp with time zone NOT NULL DEFAULT now(),
     u_updated_at timestamp with time zone NOT NULL DEFAULT now(),
+	
     CONSTRAINT mpk_users_pkey PRIMARY KEY (id),
 	CONSTRAINT mpk_users_unq UNIQUE (u_email)
 );
@@ -62,6 +63,9 @@ CREATE TABLE IF NOT EXISTS public.mpk_assets
     a_body bytea NOT NULL,
 	a_created_at timestamp with time zone NOT NULL DEFAULT now(),
     a_updated_at timestamp with time zone NOT NULL DEFAULT now(),
+	a_deleted_yn "char" NOT NULL DEFAULT 'N'::"char",
+    a_deleted_at timestamp with time zone,
+	
     CONSTRAINT mpk_assets_pkey PRIMARY KEY (id)
 );
 CREATE INDEX IF NOT EXISTS mpk_assets_idx ON public.mpk_assets (a_user_id)
