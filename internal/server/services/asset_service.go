@@ -4,7 +4,7 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 )
 
 type AssetStorage interface {

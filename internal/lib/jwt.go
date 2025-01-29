@@ -3,7 +3,7 @@ package lib
 import (
 	"time"
 
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/golang-jwt/jwt"
 )
 

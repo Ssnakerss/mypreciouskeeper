@@ -69,6 +69,8 @@ message GetResponse {
     string type = 2; //Asset type
     string sticker = 3; //Asset sticker -  desription tag
     bytes body = 4; //Asset body 
+    int64 created_at = 5; //Asset create time - Unix time 
+    int64 updated_at = 6; //Asset update time - Unix time 
 }
 
 message UpdateRequest {
@@ -95,6 +97,8 @@ message ListResponse{
         string type = 2; //Asset type
         string sticker = 3; //Asset sticker -  desription tag
         bytes body = 4; //Asset body
+        int64 created_at = 5; //Asset create time - Unix time 
+        int64 updated_at = 6; //Asset update time - Unix time 
     }
     repeated Asset assets = 1;//Array of user's assets
 }

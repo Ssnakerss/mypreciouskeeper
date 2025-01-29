@@ -7,7 +7,7 @@ import (
 	"errors"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 )
 
 // CreaeatAsset insert asset record into mpk_assets table
@@ -43,7 +43,8 @@ func (s *DBStorage) UpdateAsset(ctx context.Context, asset *models.Asset) (err e
 	query := `UPDATE public.mpk_assets SET 
 			a_type = $1,
 			a_sticker = $2,
-			a_body = $3 
+			a_body = $3,
+			a_updated_at = now()
 		WHERE 
 			a_user_id = $4 
 			AND id = $5
@@ -80,7 +81,9 @@ func (s DBStorage) GetAsset(
 	query := `SELECT 
 				a_type,
 				a_sticker,   
-				a_body 
+				a_body, 
+				a_created_at,
+				a_updated_at
 			FROM public.mpk_assets 
 			WHERE 
 				a_user_id = $1 
@@ -90,7 +93,7 @@ func (s DBStorage) GetAsset(
 	ctx, cancel := context.WithTimeout(pctx, s.timeout)
 	defer cancel()
 
-	err = s.DB.QueryRowContext(ctx, query, userID, assetID).Scan(&asset.Type, &asset.Sticker, &asset.Body)
+	err = s.DB.QueryRowContext(ctx, query, userID, assetID).Scan(&asset.Type, &asset.Sticker, &asset.Body, &asset.CreatedAt, &asset.UpdatedAt)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, apperrs.ErrAssetNotFound
@@ -106,11 +109,22 @@ func (s *DBStorage) ListAssets(ctx context.Context,
 	userID int64,
 	atype string,
 	asticker string) (assets []*models.Asset, err error) {
+	var params []any
+	params = append(params, userID)
+	if atype != "" {
+		params = append(params, atype)
+	}
+	if asticker != "" {
+		params = append(params, "%"+asticker+"%")
+	}
+
 	query := `SELECT 
 				id, 
 				a_type,
 				a_sticker,   
-				a_body 
+				a_body,
+				a_created_at,
+				a_updated_at 
 			FROM public.mpk_assets 
 			WHERE 
 				a_deleted_yn = 'N'
@@ -135,15 +149,6 @@ func (s *DBStorage) ListAssets(ctx context.Context,
 	ctx, cancel := context.WithTimeout(ctx, s.timeout)
 	defer cancel()
 
-	var params []any
-	params = append(params, userID)
-	if atype != "" {
-		params = append(params, atype)
-	}
-	if asticker != "" {
-		params = append(params, "%"+asticker+"%")
-	}
-
 	rows, err := s.DB.QueryContext(ctx, query, params...)
 	if err != nil {
 		return nil, err
@@ -154,7 +159,7 @@ func (s *DBStorage) ListAssets(ctx context.Context,
 		asset := &models.Asset{
 			UserID: userID,
 		}
-		err = rows.Scan(&asset.ID, &asset.Type, &asset.Sticker, &asset.Body)
+		err = rows.Scan(&asset.ID, &asset.Type, &asset.Sticker, &asset.Body, &asset.CreatedAt, &asset.UpdatedAt)
 		if err != nil {
 			return nil, err
 		}

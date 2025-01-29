@@ -10,8 +10,8 @@ import (
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/services"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/storage"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/server/services"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/server/storage"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	grpclogging "github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/recovery"
@@ -20,6 +20,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// Server is a main struct for server application
 type Server struct {
 	l    *slog.Logger
 	gRPC *grpc.Server
@@ -93,6 +94,7 @@ func (s *Server) MustRun() {
 	}
 }
 
+// Shutdown perform graceful shutdown of gRPC server
 func (s *Server) Shutdown() {
 	s.l.Info("server shuting down ....")
 	s.gRPC.GracefulStop()

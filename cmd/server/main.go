@@ -5,9 +5,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/Ssnakerss/mypreciouskeeper/internal/config"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/server"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/server/config"
+	server "github.com/Ssnakerss/mypreciouskeeper/internal/server/grpc"
 )
 
 func main() {

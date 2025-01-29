@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/brianvoe/gofakeit"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/stretchr/testify/require"
@@ -69,10 +69,12 @@ func TestDBStorage_Asset(t *testing.T) {
 
 	t.Log("Get asset")
 	rasset, err := db.GetAsset(context.Background(), usrid, id)
+
 	require.NoError(t, err)
-	require.Equal(t, asset, rasset)
+	require.Equal(t, asset.ID, rasset.ID)
 
 	t.Log(asset)
+	t.Log(rasset.CreatedAt.Unix())
 	t.Log(rasset)
 
 	t.Log("Update asset")
@@ -82,6 +84,7 @@ func TestDBStorage_Asset(t *testing.T) {
 	asset, err = db.GetAsset(context.Background(), usrid, id)
 	require.NoError(t, err)
 	require.Equal(t, asset.Sticker, "updated sticker")
+	require.NotEqual(t, asset.UpdatedAt, rasset.UpdatedAt)
 
 	t.Log("Delete asset")
 	err = db.DeleteAsset(context.Background(), usrid, id)

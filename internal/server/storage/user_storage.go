@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 )
 
 // CreateUSer insert user record into mpk_users table

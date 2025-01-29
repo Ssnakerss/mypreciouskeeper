@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -94,10 +94,12 @@ func (s *serverAssetAPI) Get(ctx context.Context, req *grpcserver.GetRequest) (*
 		return nil, status.Errorf(codes.NotFound, "Asset not found")
 	}
 	return &grpcserver.GetResponse{
-		AssetId: asset.ID,
-		Type:    asset.Type,
-		Sticker: asset.Sticker,
-		Body:    asset.Body,
+		AssetId:   asset.ID,
+		Type:      asset.Type,
+		Sticker:   asset.Sticker,
+		Body:      asset.Body,
+		CreatedAt: asset.CreatedAt.Unix(),
+		UpdatedAt: asset.UpdatedAt.Unix(),
 	}, nil
 }
 
@@ -116,10 +118,12 @@ func (s *serverAssetAPI) List(ctx context.Context, req *grpcserver.ListRequest) 
 	rassets := []*grpcserver.ListResponse_Asset{}
 	for _, a := range assets {
 		rassets = append(rassets, &grpcserver.ListResponse_Asset{
-			AssetId: a.ID,
-			Type:    a.Type,
-			Sticker: a.Sticker,
-			Body:    a.Body,
+			AssetId:   a.ID,
+			Type:      a.Type,
+			Sticker:   a.Sticker,
+			Body:      a.Body,
+			CreatedAt: a.CreatedAt.Unix(),
+			UpdatedAt: a.UpdatedAt.Unix(),
 		})
 
 	}

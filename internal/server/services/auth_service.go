@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"golang.org/x/crypto/bcrypt"
 )
 

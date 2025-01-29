@@ -5,8 +5,8 @@ import (
 	"errors"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -85,7 +85,6 @@ func (s *serverAuthAPI) Register(
 
 // verifyJWTPayload verify JWT token and extract User info
 func verifyJWTPayload(token string) (*models.User, error) {
-
 	tokenParsed, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
 		return []byte(lib.AppSecret), nil
 	})

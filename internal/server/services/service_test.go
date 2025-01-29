@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Ssnakerss/mypreciouskeeper/internal/domain/models"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/storage"
 	"github.com/brianvoe/gofakeit"
 	"github.com/stretchr/testify/require"
@@ -56,7 +56,6 @@ func TestServices_Auth(t *testing.T) {
 func TestServices_Asset(t *testing.T) {
 	dsn := os.Getenv("POSTGRE_DSN")
 	require.NotEmpty(t, dsn)
-	// dsn := "postgres://orchestra:orchestra12qwaszx@pg-ext.os.serk.lan:5103/orchestra?sslmode=disable"
 	db, err := storage.New(context.Background(), dsn, time.Second*3)
 	require.NoError(t, err)
 
