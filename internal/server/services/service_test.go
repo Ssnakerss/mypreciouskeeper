@@ -8,7 +8,7 @@ import (
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/storage"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/server/storage"
 	"github.com/brianvoe/gofakeit"
 	"github.com/stretchr/testify/require"
 )

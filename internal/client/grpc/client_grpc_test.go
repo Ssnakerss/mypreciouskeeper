@@ -21,7 +21,7 @@ func Test_gRPCClient_Register(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		c       *gRPCClient
+		c       *GRPCClient
 		args    args
 		wantErr bool
 	}{
@@ -98,7 +98,7 @@ func Test_gRPCClient_Login(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		c       *gRPCClient
+		c       *GRPCClient
 		args    args
 		wantErr bool
 	}{

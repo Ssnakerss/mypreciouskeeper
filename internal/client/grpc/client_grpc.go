@@ -12,14 +12,14 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-type gRPCClient struct {
+type GRPCClient struct {
 	AuthClient  grpcserver.AuthClient
 	AssetClient grpcserver.AssetClient
 	token       string
 }
 
 // NewGRPCClient create client with Auth and Asset Endpoints from gRPC server
-func NewGRPCClient(grpcAddress string) *gRPCClient {
+func NewGRPCClient(grpcAddress string) *GRPCClient {
 	//TO-DO: server address from  config
 	// grpcAddress := net.JoinHostPort("localhost", "44044")
 
@@ -32,14 +32,14 @@ func NewGRPCClient(grpcAddress string) *gRPCClient {
 	authClient := grpcserver.NewAuthClient(cc)
 	assetClient := grpcserver.NewAssetClient(cc)
 
-	return &gRPCClient{
+	return &GRPCClient{
 		AuthClient:  authClient,
 		AssetClient: assetClient,
 	}
 }
 
 // Login to remote server with email and password and receive auth token
-func (c *gRPCClient) Login(email string, pass string) (token string, err error) {
+func (c *GRPCClient) Login(email string, pass string) (token string, err error) {
 	loginResp, err := c.AuthClient.Login(context.Background(), &grpcserver.LoginRequest{
 		Email: email,
 		Pass:  pass,
@@ -52,7 +52,7 @@ func (c *gRPCClient) Login(email string, pass string) (token string, err error) 
 }
 
 // Register to remote server with email and password and receive userid
-func (c *gRPCClient) Register(email string, pass string) (userid int64, err error) {
+func (c *GRPCClient) Register(email string, pass string) (userid int64, err error) {
 	registerResp, err := c.AuthClient.Register(context.Background(), &grpcserver.RegisterRequest{
 		Email: email,
 		Pass:  pass,
@@ -65,7 +65,7 @@ func (c *gRPCClient) Register(email string, pass string) (userid int64, err erro
 }
 
 // CreateAsset send Create requestAssetRequest to remote server with auth token and receive asset id
-func (c *gRPCClient) CreateAsset(asset *models.Asset) (assetId int64, err error) {
+func (c *GRPCClient) CreateAsset(asset *models.Asset) (assetId int64, err error) {
 	if c.token == "" {
 		return -1, apperrs.ErrEmptyToken
 	}
@@ -82,7 +82,7 @@ func (c *gRPCClient) CreateAsset(asset *models.Asset) (assetId int64, err error)
 }
 
 // GetAsset send Get requestAssetRequest to remote server with auth token and receive asset
-func (c *gRPCClient) GetAsset(assetId int64) (asset *models.Asset, err error) {
+func (c *GRPCClient) GetAsset(assetId int64) (asset *models.Asset, err error) {
 	if c.token == "" {
 		return nil, apperrs.ErrEmptyToken
 	}
