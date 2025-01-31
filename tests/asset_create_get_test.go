@@ -1,8 +1,10 @@
 package tests
 
 import (
+	"encoding/json"
 	"testing"
 
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
 	"github.com/Ssnakerss/mypreciouskeeper/tests/suite"
 	"github.com/brianvoe/gofakeit"
@@ -39,11 +41,17 @@ func Test_Asset_Create(t *testing.T) {
 	t.Log(token)
 
 	t.Log("Test creating asset")
+	memo := models.Memo{
+		Text: gofakeit.Sentence(100),
+	}
+	body, err := json.Marshal(memo)
+	require.NoError(t, err)
+
 	respAssetCreate, err := st.AssetClient.Create(ctx, &grpcserver.CreateRequest{
 		Token:   token,
-		Type:    "TEXT",
+		Type:    "MEMO",
 		Sticker: "ITEM FROM GRPC TEST",
-		Body:    []byte(gofakeit.Sentence(1000)),
+		Body:    body,
 	})
 	require.NoError(t, err)
 	t.Log(respAssetCreate)
@@ -59,11 +67,16 @@ func Test_Asset_Create(t *testing.T) {
 	t.Log("Test batch asset create and get")
 
 	for i := 0; i < 10; i++ {
+		memo := models.Memo{
+			Text: gofakeit.Sentence(100),
+		}
+		body, err := json.Marshal(memo)
+		require.NoError(t, err)
 		respAssetCreate, err := st.AssetClient.Create(ctx, &grpcserver.CreateRequest{
 			Token:   token,
-			Type:    "TEXT",
+			Type:    "MEMO",
 			Sticker: "ITEM FROM GRPC TEST" + gofakeit.Sentence(1),
-			Body:    []byte(gofakeit.Sentence(100)),
+			Body:    body,
 		})
 		require.NoError(t, err)
 		t.Log(respAssetCreate)

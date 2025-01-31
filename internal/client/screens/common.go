@@ -94,6 +94,13 @@ func passwordValidator(s string) error {
 	return nil
 }
 
+func stickerValidator(s string) error {
+	if s == "" {
+		return fmt.Errorf("please input some sticker, please .....")
+	}
+	return nil
+}
+
 // Loop through inputs and call Validation func on each
 func validate(inputs []textinput.Model) (errMsg string) {
 	// Validation

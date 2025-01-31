@@ -14,10 +14,11 @@ func RootScreen() rootScreenModel {
 	// if client.App.AuthToken == "" {
 	// 	rootModel = AuthMenuScreen()
 	// } else {
-	// 	rootModel = ActionMenuScreen()
+	// 	// rootModel = ActionMenuScreen()
+	// 	rootModel = CreateMemoScreen()
 	// }
 
-	rootModel = CreateLoginPassScreen()
+	rootModel = CreateList()
 
 	return rootScreenModel{
 		model: rootModel,

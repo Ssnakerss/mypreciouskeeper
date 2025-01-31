@@ -4,9 +4,9 @@ import (
 	grpcClient "github.com/Ssnakerss/mypreciouskeeper/internal/client/grpc"
 )
 
-var App *ClietApp
+var App *ClientApp
 
-type ClietApp struct {
+type ClientApp struct {
 	GRPC      *grpcClient.GRPCClient
 	AuthToken string
 	UserID    int64
@@ -15,8 +15,8 @@ type ClietApp struct {
 
 func NewClientApp(
 	gRPCAddress string,
-) *ClietApp {
-	return &ClietApp{
+) *ClientApp {
+	return &ClientApp{
 		GRPC: grpcClient.NewGRPCClient(gRPCAddress),
 	}
 }

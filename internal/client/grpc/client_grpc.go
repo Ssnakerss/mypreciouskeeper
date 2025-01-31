@@ -99,3 +99,24 @@ func (c *GRPCClient) GetAsset(assetId int64) (asset *models.Asset, err error) {
 		UpdatedAt: time.Unix(getAssetResp.UpdatedAt, 0),
 	}, nil
 }
+
+func (c *GRPCClient) List(assetType string) (assets []*models.Asset, err error) {
+	assetList, err := c.AssetClient.List(context.Background(), &grpcserver.ListRequest{
+		Token: c.token,
+		Type:  assetType,
+	})
+	if err != nil {
+		return nil, err
+	}
+	for _, asset := range assetList.Assets {
+		assets = append(assets, &models.Asset{
+			ID:        asset.AssetId,
+			Type:      asset.Type,
+			Sticker:   asset.Sticker,
+			Body:      asset.Body,
+			CreatedAt: time.Unix(asset.CreatedAt, 0),
+			UpdatedAt: time.Unix(asset.UpdatedAt, 0),
+		})
+	}
+	return assets, nil
+}
