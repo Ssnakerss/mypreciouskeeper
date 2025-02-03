@@ -1,6 +1,7 @@
 package screens
 
 import (
+	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -11,14 +12,11 @@ type rootScreenModel struct {
 func RootScreen() rootScreenModel {
 	var rootModel tea.Model
 
-	// if client.App.AuthToken == "" {
-	// 	rootModel = AuthMenuScreen()
-	// } else {
-	// 	// rootModel = ActionMenuScreen()
-	// 	rootModel = CreateMemoScreen()
-	// }
-
-	rootModel = CreateList()
+	if client.App.AuthToken == "" {
+		rootModel = AuthMenuScreen()
+	} else {
+		rootModel = CreateActionsMenuScreen()
+	}
 
 	return rootScreenModel{
 		model: rootModel,

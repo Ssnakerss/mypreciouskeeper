@@ -22,7 +22,10 @@ func main() {
 	//TO-DO - appy config params
 	//Initial global singleton for App
 
-	if _, err := tea.NewProgram(initialScreen).Run(); err != nil {
+	if _, err := tea.NewProgram(
+		initialScreen,
+	//tea.WithAltScreen()
+	).Run(); err != nil {
 		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}

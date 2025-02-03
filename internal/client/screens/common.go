@@ -13,7 +13,8 @@ import (
 
 //Styles
 
-const listHeight = 14
+const defaultHeight = 20
+const defaultWidth = 30
 
 type (
 	errMsg error

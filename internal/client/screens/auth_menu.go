@@ -16,7 +16,7 @@ func AuthMenuScreen() AuthMenuModel {
 
 	const defaultWidth = 20
 
-	l := list.New(items, itemDelegate{}, defaultWidth, listHeight)
+	l := list.New(items, itemDelegate{}, defaultWidth, defaultHeight)
 	l.Title = "MY PRECIOUS KEEPER"
 	l.Styles.Title = titleStyle
 	l.Styles.PaginationStyle = paginationStyle

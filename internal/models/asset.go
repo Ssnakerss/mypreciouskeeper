@@ -2,6 +2,15 @@ package models
 
 import "time"
 
+//Assets types
+
+const (
+	AssetTypeCredentials = "CRED"
+	AssetTypeCard        = "CARD"
+	AssetTypeMemo        = "MEMO"
+	AssetTypeFile        = "FILE"
+)
+
 //Asset general struct for work with storage and transport
 type Asset struct {
 	ID     int64

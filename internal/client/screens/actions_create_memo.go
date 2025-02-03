@@ -4,11 +4,14 @@ package screens
 // from the Bubbles component library.
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"os"
 	"strings"
 
+	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/charmbracelet/bubbles/cursor"
 	"github.com/charmbracelet/bubbles/textarea"
 	"github.com/charmbracelet/bubbles/textinput"
@@ -16,7 +19,7 @@ import (
 	"github.com/muesli/termenv"
 )
 
-type createLoginPassScreen struct {
+type memoScreen struct {
 	focusIndex int
 	textInputs []textinput.Model
 	cursorMode cursor.Mode
@@ -27,46 +30,34 @@ type createLoginPassScreen struct {
 	success string
 }
 
-func CreateLoginPassScreen() createLoginPassScreen {
+func CreateMemoScreen() memoScreen {
 	ti := textarea.New()
-	ti.Placeholder = "Add a stiker here ..."
+	ti.Placeholder = "Your memo here  ..."
 
-	m := createLoginPassScreen{
-		textInputs: make([]textinput.Model, 2),
+	m := memoScreen{
+		textInputs: make([]textinput.Model, 1),
 		textarea:   ti,
 	}
 
-	var t textinput.Model
-	for i := range m.textInputs {
-		t = textinput.New()
-		t.Cursor.Style = cursorStyle
-		t.CharLimit = 32
+	t := textinput.New()
+	t.Cursor.Style = cursorStyle
+	t.CharLimit = 32
+	t.Placeholder = "Sticker"
+	t.Focus()
+	t.PromptStyle = focusedStyle
+	t.TextStyle = focusedStyle
+	t.Validate = stickerValidator
 
-		switch i {
-		case 0:
-			t.Placeholder = "Login"
-			t.Focus()
-			t.PromptStyle = focusedStyle
-			t.TextStyle = focusedStyle
-			t.Validate = emailValidator
+	m.textInputs[0] = t
 
-		case 1:
-			t.Placeholder = "Password"
-			t.CharLimit = 64
-			t.EchoMode = textinput.EchoPassword
-			t.EchoCharacter = '*'
-			t.Validate = passwordValidator
-		}
-
-		m.textInputs[i] = t
-	}
 	return m
 }
 
-func (m createLoginPassScreen) Init() tea.Cmd {
+func (m memoScreen) Init() tea.Cmd {
 	return textinput.Blink
 }
-func (m createLoginPassScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+
+func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	output := termenv.NewOutput(os.Stdout)
 
 	var cmds []tea.Cmd
@@ -75,23 +66,22 @@ func (m createLoginPassScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.Type {
-		case tea.KeyEsc:
-			screen := RootScreen()
-			return screen, screen.Init()
+		//Quit the program
 		case tea.KeyCtrlC:
 			output.ClearScreen()
 			return m, tea.Quit
-		}
-
-		switch msg.String() {
-		case "tab":
+			//Return to previous screen - Action menu
+		case tea.KeyEsc, tea.KeyCtrlQ:
+			screen_y := CreateActionsMenuScreen()
+			return RootScreen().SwitchScreen(&screen_y)
+		case tea.KeyTab:
 			if m.textarea.Focused() {
 				m.textarea.Blur()
-				m.focusIndex = 0
-
-				m.textInputs[0].Focus()
-				m.textInputs[0].PromptStyle = focusedStyle
-				m.textInputs[0].TextStyle = focusedStyle
+				idx := len(m.textInputs) - 1
+				m.focusIndex = idx
+				m.textInputs[idx].Focus()
+				m.textInputs[idx].PromptStyle = focusedStyle
+				m.textInputs[idx].TextStyle = focusedStyle
 
 			} else {
 				m.textarea.Focus()
@@ -101,14 +91,14 @@ func (m createLoginPassScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.textInputs[m.focusIndex].TextStyle = noStyle
 
 			}
-		case "enter", "up", "down":
+		case tea.KeyEnter, tea.KeyUp, tea.KeyDown:
 			if m.textarea.Focused() {
+				//For textarea enter is just a new row
 				m.textarea, cmd = m.textarea.Update(msg)
 				cmds = append(cmds, cmd)
 				return m, tea.Batch(cmds...)
 			} else {
 				s := msg.String()
-
 				//Handle Enter event on the button
 				if s == "enter" && m.focusIndex == len(m.textInputs) {
 					errMsg := validate(m.textInputs)
@@ -120,18 +110,35 @@ func (m createLoginPassScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					} else {
 						m.err = nil
 					}
-					//Try Login via gRPC
-					// client.App.AuthToken, err = client.App.GRPC.Login(m.textInputs[0].Value(), m.textInputs[1].Value())
-					// if err != nil {
-					// 	m.focusIndex = 1
-					// 	m.err = fmt.Errorf("Login error: %v", err)
-					// } else {
-					// 	m.success = "Login successful"
-					// 	client.App.UserName = m.textInputs[0].Value()
-					// 	m.err = nil
-					// }
+					//Parsing asset to json
+					memo := models.Memo{
+						Text: m.textarea.Value(),
+					}
+					body, err := json.Marshal(memo)
+					if err != nil {
+						m.err = fmt.Errorf("JSON error: %v", err)
+						return m, nil
+					}
+					asset := &models.Asset{
+						Type:    models.AssetTypeMemo,
+						Sticker: m.textInputs[0].Value(),
+						Body:    body,
+					}
 
-					m.success = m.textarea.Value()
+					// Create new asset on server
+					asset.ID, err = client.App.GRPC.CreateAsset(asset)
+
+					if err != nil {
+						m.focusIndex = 0
+						m.err = fmt.Errorf("Asset create error: %v", err)
+					} else {
+						//Clear inputs
+						m.focusIndex = 0
+						m.textarea.SetValue("")
+						m.textInputs[0].SetValue("")
+						m.success = "Create successful"
+						m.err = nil
+					}
 				}
 
 				//Cycle through text inputs
@@ -162,6 +169,7 @@ func (m createLoginPassScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				return m, tea.Batch(cmds...)
 			}
 		default:
+			// Processing text inputs
 			if m.textarea.Focused() {
 				cmd = m.textarea.Focus()
 				cmds = append(cmds, cmd)
@@ -181,7 +189,7 @@ func (m createLoginPassScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, cmd
 }
 
-func (m *createLoginPassScreen) updateInputs(msg tea.Msg) tea.Cmd {
+func (m *memoScreen) updateInputs(msg tea.Msg) tea.Cmd {
 	cmds := make([]tea.Cmd, len(m.textInputs))
 
 	for i := range m.textInputs {
@@ -190,9 +198,10 @@ func (m *createLoginPassScreen) updateInputs(msg tea.Msg) tea.Cmd {
 
 	return tea.Batch(cmds...)
 }
-func (m createLoginPassScreen) View() string {
+
+func (m memoScreen) View() string {
 	var b strings.Builder
-	b.WriteString(addKey.Render(fmt.Sprintf("Login")))
+	b.WriteString(addKey.Render(fmt.Sprintf("New")))
 	fmt.Fprintf(&b, "\n\n")
 
 	for i := range m.textInputs {
@@ -207,9 +216,9 @@ func (m createLoginPassScreen) View() string {
 		m.textarea.View(),
 	)
 
-	button := blurredButton.Render("[Login]")
+	button := blurredButton.Render("[Create]")
 	if m.focusIndex == len(m.textInputs) {
-		button = focusedButton.Render("[Login]")
+		button = focusedButton.Render("[Create]")
 	}
 
 	fmt.Fprintf(&b, "\n%s\n\n", button)
