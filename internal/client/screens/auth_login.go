@@ -87,7 +87,7 @@ func (m screenLogin) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.err = nil
 				}
 				//Try Login via gRPC
-				client.App.AuthToken, err = client.App.GRPC.Login(m.textInputs[0].Value(), m.textInputs[1].Value())
+				client.App.AuthToken, err = client.App.AuthService.Login(m.textInputs[0].Value(), m.textInputs[1].Value())
 				if err != nil {
 					m.focusIndex = 1
 					m.err = fmt.Errorf("Login error: %v", err)

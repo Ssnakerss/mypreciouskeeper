@@ -100,7 +100,7 @@ func (m screenRegister) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					return m, nil
 				}
 
-				client.App.UserID, err = client.App.GRPC.Register(m.textInputs[0].Value(), m.textInputs[1].Value())
+				client.App.UserID, err = client.App.AuthService.Register(m.textInputs[0].Value(), m.textInputs[1].Value())
 
 				if err != nil {
 					m.focusIndex = 1

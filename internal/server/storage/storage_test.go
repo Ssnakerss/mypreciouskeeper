@@ -9,7 +9,7 @@ import (
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/brianvoe/gofakeit"
-	_ "github.com/jackc/pgx/v5/stdlib"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/require"
 )
 
@@ -25,7 +25,11 @@ func TestDBStorage_User(t *testing.T) {
 
 	//Testing user creation
 	t.Log("testing create user")
-	usr, err := db.CreateUser(context.Background(), email, "abc")
+	user := &models.User{
+		Email:    email,
+		PassHash: "abc",
+	}
+	usr, err := db.CreateUser(context.Background(), user)
 	require.NoError(t, err)
 
 	//Testing user get
@@ -41,7 +45,7 @@ func TestDBStorage_User(t *testing.T) {
 
 	//Testing duplicate user creation
 	t.Log("testing duplicate user creation")
-	usr, err = db.CreateUser(context.Background(), email, "abc")
+	usr, err = db.CreateUser(context.Background(), user)
 	t.Log(err)
 	require.Equal(t, apperrs.ErrUserAlreadyExists, err)
 }
@@ -64,11 +68,11 @@ func TestDBStorage_Asset(t *testing.T) {
 	}
 
 	t.Log("Create asset")
-	id, err := db.CreateAsset(context.Background(), asset)
+	asset, err = db.CreateAsset(context.Background(), asset)
 	require.NoError(t, err)
 
 	t.Log("Get asset")
-	rasset, err := db.GetAsset(context.Background(), usrid, id)
+	rasset, err := db.GetAsset(context.Background(), usrid, asset.ID)
 
 	require.NoError(t, err)
 	require.Equal(t, asset.ID, rasset.ID)
@@ -81,17 +85,17 @@ func TestDBStorage_Asset(t *testing.T) {
 	rasset.Sticker = "updated sticker"
 	err = db.UpdateAsset(context.Background(), rasset)
 	require.NoError(t, err)
-	asset, err = db.GetAsset(context.Background(), usrid, id)
+	asset, err = db.GetAsset(context.Background(), usrid, asset.ID)
 	require.NoError(t, err)
 	require.Equal(t, asset.Sticker, "updated sticker")
 	require.NotEqual(t, asset.UpdatedAt, rasset.UpdatedAt)
 
 	t.Log("Delete asset")
-	err = db.DeleteAsset(context.Background(), usrid, id)
+	err = db.DeleteAsset(context.Background(), usrid, asset.ID)
 	require.NoError(t, err)
 
 	t.Log("Get deleted asset")
-	rasset, err = db.GetAsset(context.Background(), usrid, id)
+	rasset, err = db.GetAsset(context.Background(), usrid, asset.ID)
 	require.Equal(t, apperrs.ErrAssetNotFound, err)
 
 	t.Log("Update deleted asset")
@@ -138,5 +142,4 @@ func TestDBStorage_Asset(t *testing.T) {
 	assets, err = db.ListAssets(context.Background(), usrid, "", "another")
 	require.NoError(t, err)
 	require.Equal(t, 1, len(assets))
-
 }

@@ -21,6 +21,8 @@ type Asset struct {
 	Body      []byte
 	CreatedAt time.Time
 	UpdatedAt time.Time
+	DeletedYN string
+	DeletedAt time.Time
 }
 
 //Credential struct to store credentials precious

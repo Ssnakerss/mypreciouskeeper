@@ -16,6 +16,7 @@ type GRPCClient struct {
 	AuthClient  grpcserver.AuthClient
 	AssetClient grpcserver.AssetClient
 	token       string
+	Conn        *grpc.ClientConn
 }
 
 // NewGRPCClient create client with Auth and Asset Endpoints from gRPC server
@@ -23,14 +24,14 @@ func NewGRPCClient(grpcAddress string) *GRPCClient {
 	//TO-DO: server address from  config
 	// grpcAddress := net.JoinHostPort("localhost", "44044")
 
-	cc, err := grpc.NewClient(
+	Conn, err := grpc.NewClient(
 		grpcAddress,
 		grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("grpc server connection failed: %v", err)
 	}
-	authClient := grpcserver.NewAuthClient(cc)
-	assetClient := grpcserver.NewAssetClient(cc)
+	authClient := grpcserver.NewAuthClient(Conn)
+	assetClient := grpcserver.NewAssetClient(Conn)
 
 	return &GRPCClient{
 		AuthClient:  authClient,

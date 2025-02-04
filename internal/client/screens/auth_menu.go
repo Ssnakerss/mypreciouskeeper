@@ -14,8 +14,6 @@ func AuthMenuScreen() AuthMenuModel {
 		item{title: "Login", alias: "login"},
 	}
 
-	const defaultWidth = 20
-
 	l := list.New(items, itemDelegate{}, defaultWidth, defaultHeight)
 	l.Title = "MY PRECIOUS KEEPER"
 	l.Styles.Title = titleStyle
@@ -44,16 +42,8 @@ func (m AuthMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m, nil
 
 	case tea.KeyMsg:
-		switch msg.String() {
-		case "q", "esc":
-			m.quitting = true
-			m.output.ClearScreen()
-
-			return m, tea.Quit
-		}
-
 		switch msg.Type {
-		case tea.KeyCtrlC:
+		case tea.KeyCtrlC, tea.KeyEsc:
 			m.quitting = true
 			m.output.ClearScreen()
 

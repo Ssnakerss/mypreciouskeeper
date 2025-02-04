@@ -25,7 +25,7 @@ type ListView struct {
 var footer string
 
 func CreateListScreen() ListView {
-	assetList, _ := client.App.GRPC.List("")
+	assetList, _ := client.App.AssetService.List("")
 	Items := []list.Item{}
 	for _, asset := range assetList {
 		Items = append(Items,

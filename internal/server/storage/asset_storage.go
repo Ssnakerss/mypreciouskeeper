@@ -14,7 +14,7 @@ import (
 // Convert data to hexade string before insert
 func (s *DBStorage) CreateAsset(pctx context.Context,
 	asset *models.Asset,
-) (assetID int64, err error) {
+) (*models.Asset, error) {
 
 	//TO-DO - benchmark compresssion and decompression
 	// abody, err = lib.Compress(abody)
@@ -29,13 +29,13 @@ func (s *DBStorage) CreateAsset(pctx context.Context,
 		) VALUES ($1, $2, $3, $4) RETURNING id`
 	ctx, cancel := context.WithTimeout(pctx, s.timeout)
 	defer cancel()
-	err = s.DB.QueryRowContext(ctx, query,
+	err := s.DB.QueryRowContext(ctx, query,
 		asset.UserID,
 		asset.Type,
 		asset.Sticker,
 		`\x`+hex.EncodeToString(asset.Body)).Scan(&asset.ID)
 
-	return asset.ID, err
+	return asset, err
 }
 
 // UpdateAsset update asset record into mpk_assets table by id and user_id

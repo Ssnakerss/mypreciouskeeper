@@ -10,8 +10,8 @@ import (
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/server/services"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/server/storage"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/services"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	grpclogging "github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/recovery"

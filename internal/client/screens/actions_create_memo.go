@@ -126,7 +126,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 
 					// Create new asset on server
-					asset.ID, err = client.App.GRPC.CreateAsset(asset)
+					asset.ID, err = client.App.AssetService.CreateAsset(asset)
 
 					if err != nil {
 						m.focusIndex = 0

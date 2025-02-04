@@ -14,7 +14,7 @@ type AssetService interface {
 	Create(
 		ctx context.Context,
 		asset *models.Asset,
-	) (aid int64, err error)
+	) (*models.Asset, error)
 
 	Update(
 		ctx context.Context,
@@ -77,7 +77,7 @@ func (s *serverAssetAPI) Create(ctx context.Context, req *grpcserver.CreateReque
 		return nil, err
 	}
 
-	return &grpcserver.CreateResponse{AssetId: aid}, err
+	return &grpcserver.CreateResponse{AssetId: aid.ID}, err
 }
 
 // Get retrive asset by id and user id from storage
