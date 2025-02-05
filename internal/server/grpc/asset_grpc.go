@@ -57,7 +57,9 @@ func (s *serverAssetAPI) RegisterGRPC(gRPCServer *grpc.Server) {
 }
 
 // Crate asset record in storage and return asset id
-func (s *serverAssetAPI) Create(ctx context.Context, req *grpcserver.CreateRequest) (*grpcserver.CreateResponse, error) {
+func (s *serverAssetAPI) Create(
+	ctx context.Context,
+	req *grpcserver.CreateRequest) (*grpcserver.CreateResponse, error) {
 	//Verify authorization token
 	user, err := verifyJWTPayload(req.GetToken())
 
@@ -81,7 +83,9 @@ func (s *serverAssetAPI) Create(ctx context.Context, req *grpcserver.CreateReque
 }
 
 // Get retrive asset by id and user id from storage
-func (s *serverAssetAPI) Get(ctx context.Context, req *grpcserver.GetRequest) (*grpcserver.GetResponse, error) {
+func (s *serverAssetAPI) Get(
+	ctx context.Context,
+	req *grpcserver.GetRequest) (*grpcserver.GetResponse, error) {
 	//Verify authorization token
 	user, err := verifyJWTPayload(req.GetToken())
 
@@ -104,7 +108,9 @@ func (s *serverAssetAPI) Get(ctx context.Context, req *grpcserver.GetRequest) (*
 }
 
 // List return assets from storage selected by user id, type and sticker
-func (s *serverAssetAPI) List(ctx context.Context, req *grpcserver.ListRequest) (*grpcserver.ListResponse, error) {
+func (s *serverAssetAPI) List(
+	ctx context.Context,
+	req *grpcserver.ListRequest) (*grpcserver.ListResponse, error) {
 	//Verify authorization token
 	user, err := verifyJWTPayload(req.GetToken())
 
@@ -133,7 +139,9 @@ func (s *serverAssetAPI) List(ctx context.Context, req *grpcserver.ListRequest) 
 }
 
 // Update asset in storage by asset id and user id with new body and type and sticker
-func (s *serverAssetAPI) Update(ctx context.Context, req *grpcserver.UpdateRequest) (*grpcserver.UpdateResponse, error) {
+func (s *serverAssetAPI) Update(
+	ctx context.Context,
+	req *grpcserver.UpdateRequest) (*grpcserver.UpdateResponse, error) {
 	//Verify authorization token
 	user, err := verifyJWTPayload(req.GetToken())
 
@@ -158,7 +166,9 @@ func (s *serverAssetAPI) Update(ctx context.Context, req *grpcserver.UpdateReque
 }
 
 // Delete asset from storage by asset id and user id
-func (s *serverAssetAPI) Delete(ctx context.Context, req *grpcserver.DeleteRequest) (*grpcserver.DeleteResponse, error) {
+func (s *serverAssetAPI) Delete(
+	ctx context.Context,
+	req *grpcserver.DeleteRequest) (*grpcserver.DeleteResponse, error) {
 	//Verify authorization token
 	user, err := verifyJWTPayload(req.GetToken())
 

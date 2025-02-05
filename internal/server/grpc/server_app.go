@@ -48,14 +48,14 @@ func New(l *slog.Logger, port int) *Server {
 		recovery.UnaryServerInterceptor(recoveryOpts...),
 		grpclogging.UnaryServerInterceptor(logger.InterceptorLogger(l), loggingOpts...),
 	))
-	//TO-DO get dsn from config
+	//TODO get dsn from config
 	dsn := "postgres://orchestra:orchestra12qwaszx@pg-ext.os.serk.lan:5103/orchestra?sslmode=disable"
 	db, err := storage.New(context.Background(), dsn, time.Second*3)
 	if err != nil {
 		log.Fatal("db connection failed: ", err)
 	}
 
-	//TO-DO get duration from config
+	//TODO get duration from config
 	//Create authorization service and register it to gRPC server
 	a := services.NewAuthService(l, db, lib.JWTDuration)
 	aAPI := NewServerAuthAPI(a)

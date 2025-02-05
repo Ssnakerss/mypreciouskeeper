@@ -1,0 +1,7 @@
+time=2025-02-05T16:59:20.073+03:00 level=INFO msg="server starting ..." who=server/main
+time=2025-02-05T16:59:48.080+03:00 level=INFO msg="trying remote regsiter" who=server/main
+time=2025-02-05T16:59:48.106+03:00 level=ERROR msg="remote regsiter" who=server/main error="rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing: dial tcp [::1]:44044: connectex: No connection could be made because the target machine actively refused it.\""
+time=2025-02-05T16:59:48.107+03:00 level=INFO msg="trying local regsiter" who=server/main
+time=2025-02-05T16:59:48.107+03:00 level=INFO msg="registering new user" who=server/main who=AuthService.Register email=w@w.w
+time=2025-02-05T16:59:48.108+03:00 level=DEBUG msg=22222 who=server/main who=AuthService.Register email=w@w.w error=<nil>
+time=2025-02-05T16:59:48.108+03:00 level=DEBUG msg=33333 who=server/main who=AuthService.Register email=w@w.w errrorrr=<nil>

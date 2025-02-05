@@ -12,7 +12,7 @@ type rootScreenModel struct {
 func RootScreen() rootScreenModel {
 	var rootModel tea.Model
 
-	if client.App.AuthToken == "" {
+	if client.App.Workmode == "" {
 		rootModel = AuthMenuScreen()
 	} else {
 		rootModel = CreateActionsMenuScreen()

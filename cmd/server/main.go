@@ -14,7 +14,7 @@ func main() {
 
 	cfg := config.Load()
 
-	l := logger.Setup(cfg.Env)
+	l := logger.Setup(cfg.Env, os.Stdout)
 	l = l.With("who", "server/main")
 	l.Info("server starting ...")
 

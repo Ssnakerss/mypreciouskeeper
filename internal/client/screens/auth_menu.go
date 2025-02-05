@@ -51,13 +51,11 @@ func (m AuthMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		case tea.KeyEnter:
 			item, ok := m.list.SelectedItem().(item)
-
 			if ok {
 				if item.alias == "register" {
 					screen_y := ScreenRegister()
 					return RootScreen().SwitchScreen(&screen_y)
 				}
-
 				if item.alias == "login" {
 					screen_y := ScreenLogin()
 					return RootScreen().SwitchScreen(&screen_y)

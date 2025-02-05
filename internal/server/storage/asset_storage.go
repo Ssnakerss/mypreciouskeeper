@@ -16,7 +16,7 @@ func (s *DBStorage) CreateAsset(pctx context.Context,
 	asset *models.Asset,
 ) (*models.Asset, error) {
 
-	//TO-DO - benchmark compresssion and decompression
+	//TODO - benchmark compresssion and decompression
 	// abody, err = lib.Compress(abody)
 
 	//Postgres bytea support insert HEX encoded data

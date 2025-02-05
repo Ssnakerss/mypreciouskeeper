@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	// TO-DO - get app secret from config
+	// TODO - get app secret from config
 	AppSecret   = "poor secret"
 	JWTDuration = time.Hour * 24
 )

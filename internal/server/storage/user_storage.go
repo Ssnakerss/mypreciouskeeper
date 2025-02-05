@@ -42,7 +42,7 @@ func (s DBStorage) GetUser(pctx context.Context, uemail string) (usr *models.Use
 	err = s.DB.QueryRowContext(ctx, sql, uemail).Scan(&usr.ID, &usr.Email, &usr.PassHash)
 	if err != nil {
 		if errors.Is(err, imsql.ErrNoRows) {
-			return usr, nil
+			return nil, apperrs.ErrUserNotFound
 		}
 		return nil, err
 	}

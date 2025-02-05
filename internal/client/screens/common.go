@@ -33,8 +33,10 @@ var (
 
 	errorText   = lipgloss.NewStyle().Padding(0, 2).Bold(true).Foreground(lipgloss.Color("#FF7575"))
 	successText = lipgloss.NewStyle().Padding(0, 2).Bold(true).Foreground(lipgloss.Color("#00FF21"))
-	addKey      = lipgloss.NewStyle().MarginTop(1).MarginLeft(2).Foreground(lipgloss.Color("0")).Background(lipgloss.Color("#FFFFFF")).Padding(0, 5, 0, 5)
-	viewStyle   = lipgloss.NewStyle().Padding(0, 2)
+	warningText = lipgloss.NewStyle().Padding(0, 2).Bold(true).Foreground(lipgloss.Color("#FFFF00"))
+
+	addKey    = lipgloss.NewStyle().MarginTop(1).MarginLeft(2).Foreground(lipgloss.Color("0")).Background(lipgloss.Color("#FFFFFF")).Padding(0, 5, 0, 5)
+	viewStyle = lipgloss.NewStyle().Padding(0, 2)
 )
 
 var (

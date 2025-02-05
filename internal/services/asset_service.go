@@ -9,11 +9,10 @@ import (
 
 type AssetStorage interface {
 	CreateAsset(ctx context.Context, asset *models.Asset) (*models.Asset, error)
-	UpdateAsset(ctx context.Context, asset *models.Asset) error
-
 	GetAsset(ctx context.Context, userid int64, aid int64) (*models.Asset, error)
 	ListAssets(ctx context.Context, userid int64, atype string, asticker string) ([]*models.Asset, error)
 
+	UpdateAsset(ctx context.Context, asset *models.Asset) error
 	DeleteAsset(ctx context.Context, userid int64, aid int64) error
 }
 

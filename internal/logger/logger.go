@@ -2,8 +2,8 @@ package logger
 
 import (
 	"context"
+	"io"
 	"log/slog"
-	"os"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 )
@@ -15,20 +15,20 @@ const (
 )
 
 // Setup logger with specific log level basing on environment env variable
-func Setup(env string) *slog.Logger {
+func Setup(env string, output io.Writer) *slog.Logger {
 	var log *slog.Logger
 	switch env {
 	case envLocal:
 		log = slog.New(
-			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
+			slog.NewTextHandler(output, &slog.HandlerOptions{Level: slog.LevelDebug}),
 		)
 	case envDev:
 		log = slog.New(
-			slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
+			slog.NewJSONHandler(output, &slog.HandlerOptions{Level: slog.LevelDebug}),
 		)
 	case envProd:
 		log = slog.New(
-			slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}),
+			slog.NewJSONHandler(output, &slog.HandlerOptions{Level: slog.LevelInfo}),
 		)
 	}
 	return log

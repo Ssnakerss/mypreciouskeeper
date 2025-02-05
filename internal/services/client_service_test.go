@@ -28,7 +28,7 @@ func TestServices_AuthSQLite(t *testing.T) {
 	require.Empty(t, errString)
 
 	//Logger setup
-	l := logger.Setup("local")
+	l := logger.Setup("local", os.Stdout)
 
 	authService := NewAuthService(l, db, time.Hour*3)
 	require.NotNil(t, authService)
@@ -37,7 +37,7 @@ func TestServices_AuthSQLite(t *testing.T) {
 	pass := gofakeit.Password(true, true, true, true, false, 10)
 
 	t.Log("Testing user register")
-	_, err = authService.RegisterUser(context.Background(), email, pass)
+	_, err = authService.Register(context.Background(), email, pass)
 	require.NoError(t, err)
 
 	t.Log("Testing existing user login")
@@ -46,7 +46,7 @@ func TestServices_AuthSQLite(t *testing.T) {
 
 	//Fail cases
 	t.Log("Testing same user register")
-	_, err = authService.RegisterUser(context.Background(), email, pass)
+	_, err = authService.Register(context.Background(), email, pass)
 	t.Log(err)
 	require.Error(t, err)
 
@@ -82,7 +82,7 @@ func TestServices_AssetSQLite(t *testing.T) {
 	t.Log(errString)
 	require.Empty(t, errString)
 
-	l := logger.Setup("local")
+	l := logger.Setup("local", os.Stdout)
 	assetService := NewAssetService(l, db)
 	require.NotNil(t, assetService)
 	authService := NewAuthService(l, db, time.Hour*3)
@@ -92,7 +92,7 @@ func TestServices_AssetSQLite(t *testing.T) {
 	pass := gofakeit.Password(true, true, true, true, false, 10)
 
 	t.Log("Testing user register")
-	userID, err := authService.RegisterUser(context.Background(), email, pass)
+	userID, err := authService.Register(context.Background(), email, pass)
 	require.NoError(t, err)
 
 	bodyStr := gofakeit.Sentence(1)

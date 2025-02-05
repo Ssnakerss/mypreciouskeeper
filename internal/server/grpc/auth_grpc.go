@@ -23,7 +23,7 @@ type AuthService interface {
 		pass string,
 	) (token string, err error)
 
-	RegisterUser(
+	Register(
 		ctx context.Context,
 		email string,
 		pass string,
@@ -73,7 +73,7 @@ func (s *serverAuthAPI) Register(
 	if in.Email == "" || in.Pass == "" {
 		return nil, status.Error(codes.InvalidArgument, "email and password required")
 	}
-	userID, err := s.authService.RegisterUser(ctx, in.Email, in.Pass)
+	userID, err := s.authService.Register(ctx, in.Email, in.Pass)
 	if err != nil {
 		if errors.Is(err, apperrs.ErrUserAlreadyExists) {
 			return nil, status.Error(codes.AlreadyExists, err.Error())
@@ -97,7 +97,7 @@ func verifyJWTPayload(token string) (*models.User, error) {
 	if !ok {
 		return nil, apperrs.ErrInvalidToken
 	}
-	//TO-DO checking for expired token
+	//TODO checking for expired token
 
 	return &models.User{
 		ID:    int64(claims["id"].(float64)),

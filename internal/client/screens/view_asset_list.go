@@ -1,6 +1,8 @@
 package screens
 
 import (
+	"context"
+
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/charmbracelet/bubbles/list"
@@ -25,7 +27,7 @@ type ListView struct {
 var footer string
 
 func CreateListScreen() ListView {
-	assetList, _ := client.App.AssetService.List("")
+	assetList, _ := client.App.List(context.Background(), "")
 	Items := []list.Item{}
 	for _, asset := range assetList {
 		Items = append(Items,

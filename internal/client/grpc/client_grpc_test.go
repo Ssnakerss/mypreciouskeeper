@@ -1,6 +1,7 @@
 package grpcClient
 
 import (
+	"context"
 	"encoding/json"
 	"net"
 	"testing"
@@ -73,7 +74,7 @@ func Test_gRPCClient_Register(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			_, err := tt.c.Register(tt.args.email, tt.args.pass)
+			_, err := tt.c.Register(context.Background(), tt.args.email, tt.args.pass)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("gRPCClient.Register() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -93,7 +94,7 @@ func Test_gRPCClient_Login(t *testing.T) {
 	email := gofakeit.Email()
 	pass := gofakeit.Password(true, true, true, false, false, 10)
 	//Register first
-	_, err := cl.Register(email, pass)
+	_, err := cl.Register(context.Background(), email, pass)
 	require.NoError(t, err)
 
 	tests := []struct {
@@ -159,7 +160,7 @@ func Test_gRPCClient_Login(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			_, err := tt.c.Login(tt.args.email, tt.args.pass)
+			_, err := tt.c.Login(context.Background(), tt.args.email, tt.args.pass)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("gRPCClient.Login() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -175,11 +176,11 @@ func Test_gRPCClient_AssetCreateGet(t *testing.T) {
 	email := gofakeit.Email()
 	pass := gofakeit.Password(true, true, true, false, false, 10)
 	//Register first
-	userid, err := cl.Register(email, pass)
+	userid, err := cl.Register(context.Background(), email, pass)
 	require.NoError(t, err)
 	t.Log("userid: ", userid)
 	//Login
-	_, err = cl.Login(email, pass)
+	_, err = cl.Login(context.Background(), email, pass)
 	require.NoError(t, err)
 
 	card := models.Card{
@@ -197,12 +198,13 @@ func Test_gRPCClient_AssetCreateGet(t *testing.T) {
 		Body:    body,
 	}
 	//Creating asset
-	assetId, err := cl.CreateAsset(asset)
+	asset, err = cl.Create(context.Background(), asset)
 	require.NoError(t, err)
-	t.Log("asset id: ", assetId)
+	t.Log("asset id: ", asset.ID)
 
 	//Getting asset by id
-	getAsset, err := cl.GetAsset(assetId)
+	//User id is for compatibiility, actual value taken from  JWT for gRPC
+	getAsset, err := cl.Get(context.Background(), -1, asset.ID)
 	require.NoError(t, err)
 	t.Log(getAsset)
 

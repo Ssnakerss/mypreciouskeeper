@@ -4,6 +4,7 @@ package screens
 // from the Bubbles component library.
 
 import (
+	"context"
 	"fmt"
 
 	"os"
@@ -17,11 +18,13 @@ import (
 )
 
 type screenLogin struct {
-	focusIndex int
-	textInputs []textinput.Model
-	cursorMode cursor.Mode
-	err        error
-	success    string
+	focusIndex       int
+	textInputs       []textinput.Model
+	cursorMode       cursor.Mode
+	err              error
+	success          string
+	warning          string
+	connectionStatus string
 }
 
 func ScreenLogin() screenLogin {
@@ -77,6 +80,8 @@ func (m screenLogin) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			var err error
 			s := msg.String()
 			if s == "enter" && m.focusIndex == len(m.textInputs) {
+				m.success = ""
+				m.warning = ""
 				errMsg := validate(m.textInputs)
 				if errMsg != "" {
 					//Validation fails - return
@@ -87,18 +92,24 @@ func (m screenLogin) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					m.err = nil
 				}
 				//Try Login via gRPC
-				client.App.AuthToken, err = client.App.AuthService.Login(m.textInputs[0].Value(), m.textInputs[1].Value())
+				_, err = client.App.Login(
+					context.Background(),
+					m.textInputs[0].Value(),
+					m.textInputs[1].Value(),
+				)
 				if err != nil {
 					m.focusIndex = 1
 					m.err = fmt.Errorf("Login error: %v", err)
 				} else {
-					m.success = "Login successful"
+					if client.App.Workmode == client.LOCAL {
+						m.warning = "Local login successful"
+					} else {
+						m.success = "Remote login successful"
+					}
 					client.App.UserName = m.textInputs[0].Value()
 					m.err = nil
-
 				}
 			}
-
 			// Cycle indexes
 			if s == "up" || s == "shift+tab" {
 				m.focusIndex--
@@ -149,6 +160,8 @@ func (m *screenLogin) updateInputs(msg tea.Msg) tea.Cmd {
 
 	return tea.Batch(cmds...)
 }
+
+// Render screen view
 func (m screenLogin) View() string {
 	var b strings.Builder
 	b.WriteString(addKey.Render(fmt.Sprintf("Login")))
@@ -173,6 +186,15 @@ func (m screenLogin) View() string {
 	}
 	if m.success != "" {
 		fmt.Fprintf(&b, "\n%s\n", successText.Render(m.success))
+	}
+	if m.warning != "" {
+		fmt.Fprintf(&b, "\n%s\n", warningText.Render(m.warning))
+	}
+
+	if client.App.Workmode == client.LOCAL {
+		fmt.Fprintf(&b, "\n%s\n", warningText.Render("Local mode"))
+	} else {
+		fmt.Fprintf(&b, "\n%s\n", successText.Render("Remote mode"))
 	}
 
 	return b.String()

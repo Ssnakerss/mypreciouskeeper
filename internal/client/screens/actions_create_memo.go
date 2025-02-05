@@ -4,6 +4,7 @@ package screens
 // from the Bubbles component library.
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -126,7 +127,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 
 					// Create new asset on server
-					asset.ID, err = client.App.AssetService.CreateAsset(asset)
+					asset, err = client.App.CreateAsset(context.Background(), asset)
 
 					if err != nil {
 						m.focusIndex = 0
