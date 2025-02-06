@@ -30,6 +30,8 @@ type AuthService interface {
 		login, password string) (int64, error)
 	//TODO: implement Logout method
 	// Logout() error
+	//TODO: implement Update method
+	//Update()
 }
 
 type AssetService interface {
@@ -58,19 +60,26 @@ type AssetService interface {
 		aid int64) error
 }
 
+type PingService interface {
+	Ping(ctx context.Context) (int64, error)
+}
+
 var App *ClientApp
 
 type ClientApp struct {
 	//Auth and asset services -  both remote and local
 	remoteAuthService  AuthService
 	remoteAssetService AssetService
-	localAuthService   AuthService
-	localAssetService  AssetService
+
+	localAuthService  AuthService
+	localAssetService AssetService
+
+	pingService PingService
 
 	Workmode string //Workmode - LOCAL  or REMOTE  (LOCAL - local user, REMOTE - remote user)
 
 	AuthToken    string //JWT token for gRPC remote Endpoints
-	UserID       int64  //UserID when remote Login used
+	RemoteUserID int64  //UserID when remote Login used
 	LocalUsersID int64  //UserID when local Login used
 	UserName     string
 
@@ -88,6 +97,7 @@ type ClientApp struct {
 
 // NewClientApp create main app struct, initialize and assign local and remote data providers
 func NewClientApp(
+	ctx context.Context,
 	l *slog.Logger,
 	cfg *config.Config,
 ) *ClientApp {
@@ -104,90 +114,36 @@ func NewClientApp(
 	assetService := services.NewAssetService(l, db)
 
 	//Prepare remote gRPC service
-	grpc := grpcClient.NewGRPCClient(net.JoinHostPort(cfg.GRPC.Host, strconv.Itoa(cfg.GRPC.Port)))
+	myGrpc := grpcClient.NewGRPCClient(net.JoinHostPort(cfg.GRPC.Host, strconv.Itoa(cfg.GRPC.Port)))
 
 	return &ClientApp{
 		l:                  l,
 		cfg:                cfg,
-		remoteAuthService:  grpc,
-		remoteAssetService: grpc,
-		localAuthService:   authService,
-		localAssetService:  assetService,
+		remoteAuthService:  myGrpc,
+		remoteAssetService: myGrpc,
+		pingService:        myGrpc,
+
+		localAuthService:  authService,
+		localAssetService: assetService,
 	}
 }
 
-// Auth functions
-
-// Login using remote service first
-// If success - register user locally
-// If fail - try to login locally
-// If fail - return error
-func (app *ClientApp) Login(
-	ctx context.Context,
-	login, password string) (string, error) {
-	app.login = login
-	app.password = password
-	//Try login remotely
-	token, err := app.remoteAuthService.Login(ctx, login, password)
-	if err != nil {
-		//Try login locally
-		token, err = app.localAuthService.Login(ctx, login, password)
-		if err != nil {
-			//Cannot login
-			return "", err
+func (c *ClientApp) Ping(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			c.l.Info("ping process terminated")
+			return
+		default:
+			if i, err := c.pingService.Ping(ctx); err != nil {
+				c.l.Info("gRPC connection is not ready")
+				c.Workmode = LOCAL
+			} else {
+				c.Workmode = REMOTE
+				remoteTime := time.Unix(i, 0)
+				c.l.Info("gRPC connection is ready", "remote time", remoteTime)
+			}
 		}
-		//Local login success
-		//return empty  token
-		app.Workmode = LOCAL
-		return "", nil
-	} else {
-		//Remote login success
-		app.Workmode = REMOTE
-		//Try register same user locally with same login and password
-		app.LocalUsersID, err = app.localAuthService.Register(ctx, login, password)
+		time.Sleep(time.Second * 10)
 	}
-	app.AuthToken = token
-	return token, nil
-}
-
-// Register user with remote service first
-// Then register with local service
-func (app *ClientApp) Register(
-	ctx context.Context,
-	login, password string) (int64, error) {
-	//Try register remotely
-	app.l.Info("trying remote regsiter")
-	remoteUserID, err := app.remoteAuthService.Register(ctx, login, password)
-	if err != nil {
-		//Try register locally
-		app.l.Error("remote regsiter", "error", err)
-		app.l.Info("trying local regsiter")
-		localUserID, err := app.localAuthService.Register(ctx, login, password)
-		if err != nil {
-			app.l.Error("local regsiter", "error", err)
-			return 0, err
-		}
-		//Local register success
-		return localUserID, nil
-	}
-	return remoteUserID, nil
-}
-
-// Asset functions
-func (app *ClientApp) CreateAsset(
-	ctx context.Context,
-	asset *models.Asset) (*models.Asset, error) {
-	return app.remoteAssetService.Create(ctx, asset)
-}
-func (app *ClientApp) GetAsset(
-	ctx context.Context,
-	id int64) (*models.Asset, error) {
-	//TODO: check for user id
-	return app.remoteAssetService.Get(ctx, -1, id)
-}
-func (app *ClientApp) List(
-	ctx context.Context,
-	assetType string) ([]*models.Asset, error) {
-	//TODO: check for user id and asset sticker
-	return app.remoteAssetService.List(ctx, -1, assetType, "")
 }

@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 
+	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
 	"google.golang.org/grpc"
@@ -61,7 +62,7 @@ func (s *serverAssetAPI) Create(
 	ctx context.Context,
 	req *grpcserver.CreateRequest) (*grpcserver.CreateResponse, error) {
 	//Verify authorization token
-	user, err := verifyJWTPayload(req.GetToken())
+	user, err := lib.VerifyJWTPayload(req.GetToken())
 
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "Invalid token")
@@ -87,7 +88,7 @@ func (s *serverAssetAPI) Get(
 	ctx context.Context,
 	req *grpcserver.GetRequest) (*grpcserver.GetResponse, error) {
 	//Verify authorization token
-	user, err := verifyJWTPayload(req.GetToken())
+	user, err := lib.VerifyJWTPayload(req.GetToken())
 
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "Invalid token")
@@ -112,7 +113,7 @@ func (s *serverAssetAPI) List(
 	ctx context.Context,
 	req *grpcserver.ListRequest) (*grpcserver.ListResponse, error) {
 	//Verify authorization token
-	user, err := verifyJWTPayload(req.GetToken())
+	user, err := lib.VerifyJWTPayload(req.GetToken())
 
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "Invalid token")
@@ -143,7 +144,7 @@ func (s *serverAssetAPI) Update(
 	ctx context.Context,
 	req *grpcserver.UpdateRequest) (*grpcserver.UpdateResponse, error) {
 	//Verify authorization token
-	user, err := verifyJWTPayload(req.GetToken())
+	user, err := lib.VerifyJWTPayload(req.GetToken())
 
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "Invalid token")
@@ -170,7 +171,7 @@ func (s *serverAssetAPI) Delete(
 	ctx context.Context,
 	req *grpcserver.DeleteRequest) (*grpcserver.DeleteResponse, error) {
 	//Verify authorization token
-	user, err := verifyJWTPayload(req.GetToken())
+	user, err := lib.VerifyJWTPayload(req.GetToken())
 
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, "Invalid token")

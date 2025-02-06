@@ -78,7 +78,6 @@ func (m screenRegister) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			output.ClearScreen()
 			return m, tea.Quit
 		}
-
 		switch msg.String() {
 		case "tab", "shift+tab", "enter", "up", "down":
 			s := msg.String()
@@ -101,18 +100,19 @@ func (m screenRegister) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					return m, nil
 				}
 
-				client.App.UserID, err = client.App.Register(context.Background(), m.textInputs[0].Value(), m.textInputs[1].Value())
+				_, err = client.App.Register(context.Background(), m.textInputs[0].Value(), m.textInputs[1].Value())
 
 				if err != nil {
+					m.success = ""
 					m.focusIndex = 1
 					m.err = fmt.Errorf("Register error: %v", err)
 				} else {
+					m.err = nil
 					m.success = "Register successful"
 					m.err = nil
 					// screen := RootScreen()
 					// return RootScreen().SwitchScreen(&screen)
 				}
-
 			}
 
 			// Cycle indexes
@@ -192,6 +192,9 @@ func (m screenRegister) View() string {
 	if m.success != "" {
 		fmt.Fprintf(&b, "\n%s\n", successText.Render(m.success))
 	}
+
+	//Connection status 'widget'
+	statusWidget(client.App.Workmode, &b)
 
 	return b.String()
 }

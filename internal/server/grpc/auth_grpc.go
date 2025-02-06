@@ -5,14 +5,10 @@ import (
 	"errors"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-
-	"github.com/golang-jwt/jwt"
 )
 
 // AUth interface for authorization business logic
@@ -84,23 +80,3 @@ func (s *serverAuthAPI) Register(
 }
 
 // verifyJWTPayload verify JWT token and extract User info
-func verifyJWTPayload(token string) (*models.User, error) {
-	tokenParsed, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
-		return []byte(lib.AppSecret), nil
-	})
-
-	if err != nil {
-		return nil, apperrs.ErrInvalidToken
-	}
-
-	claims, ok := tokenParsed.Claims.(jwt.MapClaims)
-	if !ok {
-		return nil, apperrs.ErrInvalidToken
-	}
-	//TODO checking for expired token
-
-	return &models.User{
-		ID:    int64(claims["id"].(float64)),
-		Email: claims["username"].(string),
-	}, nil
-}

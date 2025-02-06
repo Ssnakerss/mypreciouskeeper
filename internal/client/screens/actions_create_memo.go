@@ -232,5 +232,8 @@ func (m memoScreen) View() string {
 	}
 	fmt.Fprintf(&b, "\n\n%s\n\n", "(ctrl+c to quit)")
 
+	//Connection status 'widget'
+	statusWidget(client.App.Workmode, &b)
+
 	return b.String()
 }

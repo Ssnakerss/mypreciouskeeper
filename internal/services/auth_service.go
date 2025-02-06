@@ -2,7 +2,6 @@ package services
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"log/slog"
 	"time"
@@ -72,30 +71,19 @@ func (a AuthService) Login(
 }
 
 // Register creates new user with email and password
-// First check if same email exists - returns error
-// if not - create new user, password replaced with hash
+// USer has unique email address
+// Uniq is provided by storage engine to prevent duplicate email
 // gRPC mapping  -  Register
 func (a AuthService) Register(
 	ctx context.Context,
 	email string,
 	pass string,
-) (usrID int64, err error) {
+) (int64, error) {
 	//who - current function name
 	//for logging purpose to identify which function is calling
 	who := "AuthService.Register"
 	l := a.l.With(slog.String("who", who), slog.String("email", email))
 	l.Info("registering new user")
-
-	//check if user already exist
-	if usr, errr := a.u.GetUser(ctx, email); errr == nil {
-		return usr.ID, apperrs.ErrUserAlreadyExists
-	}
-	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	if !errors.Is(err, apperrs.ErrUserNotFound) {
-		l.Error("failed to get user", logger.Err(err))
-		return -1, err
-	}
 
 	//generating hash for password
 	passHash, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
@@ -104,17 +92,18 @@ func (a AuthService) Register(
 	}
 
 	//Saving new user to storage
-	user := &models.User{
+	newUser := &models.User{
 		Email:     email,
 		PassHash:  string(passHash),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
-	usr, err := a.u.CreateUser(ctx, user)
+	l.Info("creating new user", "user", newUser)
+	newUser, err = a.u.CreateUser(ctx, newUser)
 	if err != nil {
 		l.Error("failed to create new user", logger.Err(err))
 		return -1, err
 	}
 
-	return usr.ID, nil
+	return newUser.ID, nil
 }

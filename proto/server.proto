@@ -7,7 +7,7 @@ option go_package="mypreciouskeeper/grpcserver";
 //Auth service for managing account creation and login
 service Auth {
     //Register new user
-    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Register(RegisterRequest) returns (RegisterResponse);
     //Login authorize user and returns auth token if success
     rpc Login(LoginRequest) returns (LoginResponse);
 }
@@ -32,11 +32,22 @@ message LoginResponse{
     string token = 1; //Auth token after success login
 }
 
+//Ping service
+service Ping {
+    rpc Ping(PingRequest) returns (PingResponse);
+}
+message PingRequest{
+
+}
+message PingResponse {
+    int64 resp = 1; 
+}
+ 
 //------------------------------------------------------------------
 //Asset service for work with user's asset - create, get and list up 
 service Asset{
     //Create new asset record
-    rpc Create (CreateRequest) returns (CreateResponse);
+    rpc Create(CreateRequest) returns (CreateResponse);
     //Get asset 
     rpc Get(GetRequest) returns (GetResponse);
     //List up assets of current user

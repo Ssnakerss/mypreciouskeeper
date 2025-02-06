@@ -64,6 +64,9 @@ func New(l *slog.Logger, port int) *Server {
 	as := services.NewAssetService(l, db)
 	asAPI := NewServerAssetAPI(as)
 	asAPI.RegisterGRPC(gRPCServer)
+	//Create ping service and register it to gRPC server
+	ps := NewServerPingAPI()
+	ps.RegisterGRPC(gRPCServer)
 
 	return &Server{
 		l:    l,

@@ -11,15 +11,13 @@ import (
 type GRPCClient struct {
 	AuthClient  grpcserver.AuthClient
 	AssetClient grpcserver.AssetClient
+	PingClient  grpcserver.PingClient
 	token       string
 	Conn        *grpc.ClientConn
 }
 
 // NewGRPCClient create client with Auth and Asset Endpoints from gRPC server
 func NewGRPCClient(grpcAddress string) *GRPCClient {
-	//TODO: server address from  config
-	// grpcAddress := net.JoinHostPort("localhost", "44044")
-
 	Conn, err := grpc.NewClient(
 		grpcAddress,
 		grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -28,9 +26,11 @@ func NewGRPCClient(grpcAddress string) *GRPCClient {
 	}
 	authClient := grpcserver.NewAuthClient(Conn)
 	assetClient := grpcserver.NewAssetClient(Conn)
+	pingClient := grpcserver.NewPingClient(Conn)
 
 	return &GRPCClient{
 		AuthClient:  authClient,
 		AssetClient: assetClient,
+		PingClient:  pingClient,
 	}
 }

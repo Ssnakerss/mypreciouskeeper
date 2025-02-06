@@ -17,6 +17,7 @@ type Suite struct {
 	// Cfg     *config.Config
 	AClient     grpcserver.AuthClient
 	AssetClient grpcserver.AssetClient
+	PingClient  grpcserver.PingClient
 }
 
 func New(t *testing.T) (context.Context, *Suite) {
@@ -46,12 +47,14 @@ func New(t *testing.T) (context.Context, *Suite) {
 
 	authClient := grpcserver.NewAuthClient(cc)
 	assetClient := grpcserver.NewAssetClient(cc)
+	pingClient := grpcserver.NewPingClient(cc)
 
 	return ctx, &Suite{
 		T: t,
 		// Cfg:     cfg,
 		AClient:     authClient,
 		AssetClient: assetClient,
+		PingClient:  pingClient,
 	}
 
 }

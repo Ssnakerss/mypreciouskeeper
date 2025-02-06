@@ -5,6 +5,7 @@ import (
 	"io"
 	"strings"
 
+	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
@@ -75,6 +76,15 @@ func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list
 	}
 
 	fmt.Fprint(w, fn(str))
+}
+
+// Widget
+func statusWidget(workMode string, b *strings.Builder) {
+	if workMode == client.LOCAL {
+		fmt.Fprintf(b, "\n%s", warningText.Render("Local mode"))
+	} else {
+		fmt.Fprintf(b, "\n%s", successText.Render("Remote mode"))
+	}
 }
 
 // Validators

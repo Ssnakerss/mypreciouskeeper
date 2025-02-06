@@ -3,13 +3,14 @@ package lib
 import (
 	"time"
 
+	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/golang-jwt/jwt"
 )
 
 const (
 	// TODO - get app secret from config
-	AppSecret   = "poor secret"
+	AppSecret   = "f3e58332-a779-4b0c-bb82-5f5ee5673228"
 	JWTDuration = time.Hour * 24
 )
 
@@ -27,4 +28,25 @@ func NewJWT(user *models.User, duration time.Duration) (tokenString string, err 
 		return "", err
 	}
 	return tokenString, nil
+}
+
+// VerifyJWTPayload verify token payload and extract user data from  it
+func VerifyJWTPayload(token string) (*models.User, error) {
+	tokenParsed, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+		return []byte(AppSecret), nil
+	})
+
+	if err != nil {
+		return nil, apperrs.ErrInvalidToken
+	}
+
+	claims, ok := tokenParsed.Claims.(jwt.MapClaims)
+	if !ok {
+		return nil, apperrs.ErrInvalidToken
+	}
+	//TODO checking for expired token
+	return &models.User{
+		ID:    int64(claims["id"].(float64)),
+		Email: claims["username"].(string),
+	}, nil
 }

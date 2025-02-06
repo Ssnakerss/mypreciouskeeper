@@ -2,7 +2,9 @@ package screens
 
 import (
 	"os"
+	"strings"
 
+	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/muesli/termenv"
@@ -89,5 +91,11 @@ func (m CreateActionsMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m CreateActionsMenuModel) View() string {
-	return "\n" + m.list.View()
+	var b strings.Builder
+	b.WriteString(m.list.View())
+	b.WriteString("\n")
+
+	//Connection status 'widget'
+	statusWidget(client.App.Workmode, &b)
+	return b.String()
 }

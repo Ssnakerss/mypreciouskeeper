@@ -191,11 +191,8 @@ func (m screenLogin) View() string {
 		fmt.Fprintf(&b, "\n%s\n", warningText.Render(m.warning))
 	}
 
-	if client.App.Workmode == client.LOCAL {
-		fmt.Fprintf(&b, "\n%s\n", warningText.Render("Local mode"))
-	} else {
-		fmt.Fprintf(&b, "\n%s\n", successText.Render("Remote mode"))
-	}
+	//Connection status 'widget'
+	statusWidget(client.App.Workmode, &b)
 
 	return b.String()
 }

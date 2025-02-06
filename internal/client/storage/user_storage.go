@@ -5,6 +5,8 @@ import (
 	imsql "database/sql"
 	"errors"
 
+	"math/rand"
+
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/mattn/go-sqlite3"
@@ -17,15 +19,23 @@ func (s *Storage) CreateUser(pctx context.Context,
 
 	sql := `
 	INSERT INTO  mpk_users 
-	(id, u_email, u_pass_hash, u_created_at, u_updated_at) 
+	(id, u_local_id, u_email, u_pass_hash, u_created_at, u_updated_at) 
 	VALUES 
-	($1, $2, $3, $4, $5) 
+	($1, $2, $3, $4, $5, $6) 
 	`
 	ctx, cancel := context.WithTimeout(pctx, s.timeout)
 	defer cancel()
 
+	//Generate local id for user
+	//Local ID -  always negative
+	//When creating put both ID  and Local ID in user record
+	//Remote ID should be updated after user creation and remote login
+
+	userLocalId := rand.Int63() * -1
+
 	_, err := s.db.ExecContext(ctx, sql,
-		user.ID,
+		userLocalId,
+		userLocalId,
 		user.Email,
 		user.PassHash,
 		user.CreatedAt.Unix(),

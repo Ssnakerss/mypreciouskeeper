@@ -177,5 +177,8 @@ func (m credentialsScreen) View() string {
 		fmt.Fprintf(&b, "\n%s\n", successText.Render(m.success))
 	}
 
+	// Connection status 'widget'
+	statusWidget(client.App.Workmode, &b)
+
 	return b.String()
 }

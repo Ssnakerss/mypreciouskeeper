@@ -1,6 +1,9 @@
 package screens
 
 import (
+	"fmt"
+	"strings"
+
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -33,7 +36,14 @@ func (m rootScreenModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m rootScreenModel) View() string {
-	return m.model.View()
+	var b strings.Builder
+	fmt.Fprintf(&b, "%s", m.model.View())
+
+	//Connection status 'widget'
+	statusWidget(client.App.Workmode, &b)
+
+	//Return view
+	return b.String()
 }
 
 // SwitchScreen is the switcher which will switch between screens
