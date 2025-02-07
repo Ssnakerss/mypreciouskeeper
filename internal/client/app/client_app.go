@@ -88,7 +88,7 @@ type ClientApp struct {
 	login    string
 	password string
 
-	l   *slog.Logger
+	L   *slog.Logger
 	cfg *config.Config
 
 	//TODO: implement screens logic ???   how to add tea screeen into app
@@ -117,7 +117,7 @@ func NewClientApp(
 	myGrpc := grpcClient.NewGRPCClient(net.JoinHostPort(cfg.GRPC.Host, strconv.Itoa(cfg.GRPC.Port)))
 
 	return &ClientApp{
-		l:                  l,
+		L:                  l,
 		cfg:                cfg,
 		remoteAuthService:  myGrpc,
 		remoteAssetService: myGrpc,
@@ -128,22 +128,29 @@ func NewClientApp(
 	}
 }
 
-func (c *ClientApp) Ping(ctx context.Context) {
+func (c *ClientApp) Ping(
+	ctx context.Context,
+	syncCtxCancel context.CancelFunc,
+	interval int,
+) {
+	l := c.L.With("who", "ClientApp.Ping")
+
+	pingTimeTicker := time.NewTicker(time.Duration(interval) * time.Second)
 	for {
 		select {
 		case <-ctx.Done():
-			c.l.Info("ping process terminated")
+			l.Info("ping process terminated")
+			syncCtxCancel()
 			return
-		default:
+		case <-pingTimeTicker.C:
 			if i, err := c.pingService.Ping(ctx); err != nil {
-				c.l.Info("gRPC connection is not ready")
+				l.Info("gRPC connection is not ready")
 				c.Workmode = LOCAL
 			} else {
 				c.Workmode = REMOTE
 				remoteTime := time.Unix(i, 0)
-				c.l.Info("gRPC connection is ready", "remote time", remoteTime)
+				l.Info("gRPC connection is ready", "remote time", remoteTime)
 			}
 		}
-		time.Sleep(time.Second * 10)
 	}
 }

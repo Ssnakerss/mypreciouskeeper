@@ -27,6 +27,7 @@ type ListView struct {
 var footer string
 
 func CreateListScreen() ListView {
+	//REceive assets from the server to display
 	assetList, _ := client.App.List(context.Background(), "")
 	Items := []list.Item{}
 	for _, asset := range assetList {
@@ -55,7 +56,27 @@ func (m ListView) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.Type {
 		case tea.KeyEnter:
-			footer = m.list.SelectedItem().(listItem).Type
+			//Selected item - need to display details
+			//Check type and display appropriate screen
+			switch m.list.SelectedItem().(listItem).Type {
+			case models.AssetTypeMemo:
+				screen_y := CreateMemoScreen(m.list.SelectedItem().(listItem).ID)
+				return RootScreen().SwitchScreen(&screen_y)
+			// case models.AssetTypeCard:
+			// 	screen_y := CreateImageScreen(m.list.SelectedItem().(listItem).ID)
+			// 	return RootScreen().SwitchScreen(&screen_y)
+			case models.AssetTypeCredentials:
+				screen_y := CreateCredentialsScreen(m.list.SelectedItem().(listItem).ID)
+				return RootScreen().SwitchScreen(&screen_y)
+			// case models.AssetTypeCard:
+			// 	screen_y := CreateImageScreen(m.list.SelectedItem().(listItem).ID)
+			// 	return RootScreen().SwitchScreen(&screen_y)
+			// case models.AssetTypeFile:
+			// 	screen_y := CreateFileScreen(m.list.SelectedItem().(listItem).ID)
+			// 	return RootScreen().SwitchScreen(&screen_y)
+			default:
+				footer = "NOT IMPLEMENTED:" + m.list.SelectedItem().(listItem).Type
+			}
 		case tea.KeyCtrlC:
 			return m, tea.Quit
 		case tea.KeyEsc:

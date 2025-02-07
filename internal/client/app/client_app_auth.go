@@ -31,7 +31,7 @@ func (app *ClientApp) Login(
 		if err == nil {
 			app.RemoteUserID = remoteUsr.ID
 			app.UserName = remoteUsr.Email
-			app.l.Info("remote user login", "name", app.UserName, "remote id", app.RemoteUserID)
+			app.L.Info("remote user login", "name", app.UserName, "remote id", app.RemoteUserID)
 		}
 		//Remote login success
 		app.Workmode = REMOTE
@@ -49,15 +49,15 @@ func (app *ClientApp) Register(
 	ctx context.Context,
 	login, password string) (int64, error) {
 	//Try register remotely
-	app.l.Info("trying remote regsiter")
+	app.L.Info("trying remote regsiter")
 	remoteUserID, err := app.remoteAuthService.Register(ctx, login, password)
 	if err != nil {
 		//Try register locally
-		app.l.Error("remote regsiter", "error", err)
-		app.l.Info("trying local regsiter")
+		app.L.Error("remote regsiter", "error", err)
+		app.L.Info("trying local regsiter")
 		localUserID, err := app.localAuthService.Register(ctx, login, password)
 		if err != nil {
-			app.l.Error("local regsiter", "error", err)
+			app.L.Error("local regsiter", "error", err)
 			return 0, err
 		}
 		//Local register success

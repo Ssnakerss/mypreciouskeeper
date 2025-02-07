@@ -1,4 +1,0 @@
-time=2025-02-06T16:58:30.469+03:00 level=INFO msg="server starting ..." who=server/main
-time=2025-02-06T16:58:30.507+03:00 level=INFO msg="gRPC connection is not ready" who=server/main
-time=2025-02-06T16:58:40.507+03:00 level=INFO msg="gRPC connection is not ready" who=server/main
-time=2025-02-06T16:58:46.510+03:00 level=INFO msg="program terminated!!!!!!" who=server/main

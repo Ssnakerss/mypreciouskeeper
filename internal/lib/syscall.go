@@ -16,9 +16,7 @@ func SysCallProcess(
 	l *slog.Logger,
 	ff ...func(),
 ) {
-
 	defer cancel()
-
 	exit := make(chan os.Signal, 1)
 	signal.Notify(exit,
 		syscall.SIGINT,
@@ -30,14 +28,15 @@ func SysCallProcess(
 	case s := <-exit:
 		l.Info("received signal: ", "syscal", s.Signal)
 	case <-ctx.Done():
+		l.Info("base context terminated")
 	}
 
-	l.Info("shutting down")
+	l.Info("prepare for shutdown")
 	if len(ff) > 0 {
 		l.Info("performing pre-shutdown tasks")
 		for _, f := range ff {
 			f()
 		}
 	}
-	l.Info("exit procedure complete")
+	l.Info("shutdown procedure complete")
 }

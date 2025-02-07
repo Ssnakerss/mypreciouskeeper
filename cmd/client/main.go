@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"os"
@@ -10,7 +9,6 @@ import (
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/client/config"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/client/screens"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/muesli/termenv"
@@ -32,15 +30,12 @@ func main() {
 	//Base app context
 	baseCtx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	defer func() { l.Info("program terminated!!!!!!") }()
-
-	//TODO: add pre-shutdown tasks - db close etc
-	go lib.SysCallProcess(baseCtx, cancel, l)
 
 	client.App = client.NewClientApp(baseCtx, l, cfg)
-
 	//Start ping for remote service
-	go client.App.Ping(baseCtx)
+	syncCtx, syncCancel := context.WithCancel(context.Background())
+	defer syncCancel()
+	go client.App.Ping(baseCtx, syncCancel, 3)
 
 	//Setup  initial app screen
 	initialScreen := screens.RootScreen()
@@ -50,10 +45,16 @@ func main() {
 	output.ClearScreen()
 
 	//Start app with Tea screens
+	//syscal signals are handled by  Tea program
 	if _, err := tea.NewProgram(
 		initialScreen,
 	).Run(); err != nil {
-		fmt.Println("Error running program:", err)
-		os.Exit(1)
+
+		l.Error("Error running program:", logger.Err(err))
 	}
+
+	//TODO:....
+	cancel()
+	<-syncCtx.Done()
+	l.Info("app exit.")
 }

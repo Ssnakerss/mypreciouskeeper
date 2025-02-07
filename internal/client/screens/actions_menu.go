@@ -62,11 +62,11 @@ func (m CreateActionsMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 			if ok {
 				if item.alias == "create_memo" {
-					screen_y := CreateMemoScreen()
+					screen_y := CreateMemoScreen(0)
 					return RootScreen().SwitchScreen(&screen_y)
 				}
 				if item.alias == "create_cred" {
-					screen_y := CreateCredentialsScreen()
+					screen_y := CreateCredentialsScreen(0)
 					return RootScreen().SwitchScreen(&screen_y)
 				}
 				if item.alias == "create_card" {

@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"os"
 	"strings"
@@ -27,29 +28,63 @@ type memoScreen struct {
 
 	textarea textarea.Model
 
+	caption string
+	action  string //for button caption
+
 	err     error
 	success string
 }
 
-func CreateMemoScreen() memoScreen {
+func CreateMemoScreen(assetID int64) memoScreen {
+	//Default assetID - 0 means show create screen
+	//Else get asset by ID  and display it
+	var err error
+	var asset *models.Asset
 	ti := textarea.New()
-	ti.Placeholder = "Your memo here  ..."
-
-	m := memoScreen{
-		textInputs: make([]textinput.Model, 1),
-		textarea:   ti,
-	}
 
 	t := textinput.New()
 	t.Cursor.Style = cursorStyle
 	t.CharLimit = 32
-	t.Placeholder = "Sticker"
 	t.Focus()
 	t.PromptStyle = focusedStyle
 	t.TextStyle = focusedStyle
 	t.Validate = stickerValidator
 
+	m := memoScreen{
+		textInputs: make([]textinput.Model, 1),
+	}
+
+	if assetID > 0 {
+		//Get asset data
+		asset, err = client.App.GetAsset(context.Background(), assetID)
+		if err != nil {
+			m.err = err
+			ti.Placeholder = "Get error"
+			t.Placeholder = "Get error"
+			return m
+		}
+		memo := models.Memo{}
+		err = json.Unmarshal(asset.Body, &memo)
+		if err != nil {
+			m.err = err
+			ti.Placeholder = "Convert error"
+			t.Placeholder = "Convert error"
+			return m
+		}
+		t.SetValue(asset.Sticker)
+		ti.SetValue(memo.Text)
+		m.caption = "Display memo #" + strconv.FormatInt(asset.ID, 10)
+		m.action = "EDIT"
+
+	} else {
+		m.caption = "Create memo"
+		m.action = "CREATE"
+		ti.Placeholder = "Your memo here  ..."
+		t.Placeholder = "Sticker"
+	}
+
 	m.textInputs[0] = t
+	m.textarea = ti
 
 	return m
 }
@@ -111,6 +146,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					} else {
 						m.err = nil
 					}
+
 					//Parsing asset to json
 					memo := models.Memo{
 						Text: m.textarea.Value(),
@@ -125,20 +161,38 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						Sticker: m.textInputs[0].Value(),
 						Body:    body,
 					}
+					if m.action == "CREATE" {
+						// Create new asset on server
+						asset, err = client.App.CreateAsset(context.Background(), asset)
+						if err != nil {
+							m.focusIndex = 0
+							m.err = fmt.Errorf("Asset create error: %v", err)
+						} else {
+							//Clear inputs
+							m.focusIndex = 0
+							m.textarea.SetValue("")
+							m.textInputs[0].SetValue("")
+							m.success = "Create successful"
+							m.err = nil
+						}
+					} else if m.action == "UPDATE" {
+						// Update asset on server
+						// asset.ID = assetID
+						// asset, err = client.App.UpdateAsset(context.Background(), asset)
+						// if err != nil {
+						// 	m.focusIndex = 0
+						// 	m.err = fmt.Errorf("Asset update error: %v", err)
+						// } else {
+						// 	//Clear inputs
+						// 	m.focusIndex = 0
+						// 	m.textarea.SetValue("")
+						// 	m.textInputs[0].SetValue("")
+						// 	m.success = "Update successful"
+						// 	m.err = nil
+						// }
 
-					// Create new asset on server
-					asset, err = client.App.CreateAsset(context.Background(), asset)
-
-					if err != nil {
-						m.focusIndex = 0
-						m.err = fmt.Errorf("Asset create error: %v", err)
-					} else {
-						//Clear inputs
-						m.focusIndex = 0
-						m.textarea.SetValue("")
-						m.textInputs[0].SetValue("")
-						m.success = "Create successful"
-						m.err = nil
+						//TODO implement update
+						m.err = fmt.Errorf("NOT IMPLEMENTED")
 					}
 				}
 
@@ -202,7 +256,7 @@ func (m *memoScreen) updateInputs(msg tea.Msg) tea.Cmd {
 
 func (m memoScreen) View() string {
 	var b strings.Builder
-	b.WriteString(addKey.Render(fmt.Sprintf("New")))
+	b.WriteString(addKey.Render(m.caption))
 	fmt.Fprintf(&b, "\n\n")
 
 	for i := range m.textInputs {
@@ -213,16 +267,16 @@ func (m memoScreen) View() string {
 	}
 
 	fmt.Fprintf(&b,
-		"\n\n%s\n\n",
+		"\n\n%s\n",
 		m.textarea.View(),
 	)
 
-	button := blurredButton.Render("[Create]")
+	button := blurredButton.Render("[" + m.action + "]")
 	if m.focusIndex == len(m.textInputs) {
-		button = focusedButton.Render("[Create]")
+		button = focusedButton.Render("[" + m.action + "]")
 	}
 
-	fmt.Fprintf(&b, "\n%s\n\n", button)
+	fmt.Fprintf(&b, "\n%s\n", button)
 
 	if m.err != nil {
 		fmt.Fprintf(&b, "\n%s\n", errorText.Render(m.err.Error()))
@@ -230,7 +284,7 @@ func (m memoScreen) View() string {
 	if m.success != "" {
 		fmt.Fprintf(&b, "\n%s\n", successText.Render(m.success))
 	}
-	fmt.Fprintf(&b, "\n\n%s\n\n", "(ctrl+c to quit)")
+	fmt.Fprintf(&b, "\n%s\n", "-= esc - back =-")
 
 	//Connection status 'widget'
 	statusWidget(client.App.Workmode, &b)

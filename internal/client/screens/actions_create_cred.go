@@ -5,12 +5,14 @@ package screens
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"os"
 	"strings"
 
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	"github.com/charmbracelet/bubbles/cursor"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
@@ -21,40 +23,77 @@ type credentialsScreen struct {
 	focusIndex int
 	textInputs []textinput.Model
 	cursorMode cursor.Mode
-	err        error
-	success    string
+
+	caption string
+	action  string //for button caption
+
+	err     error
+	success string
 }
 
-func CreateCredentialsScreen() credentialsScreen {
+func CreateCredentialsScreen(assetID int64) credentialsScreen {
 	m := credentialsScreen{
 		textInputs: make([]textinput.Model, 3),
 	}
+	//Create new asset
+	if assetID == 0 {
+		m.caption = "Create login&pass"
+		m.action = "CREATE"
+		var t textinput.Model
+		for i := range m.textInputs {
+			t = textinput.New()
+			t.Cursor.Style = cursorStyle
+			t.CharLimit = 32
 
-	var t textinput.Model
-	for i := range m.textInputs {
-		t = textinput.New()
-		t.Cursor.Style = cursorStyle
-		t.CharLimit = 32
+			switch i {
+			case 0:
+				t.Placeholder = "Sticker"
+				t.Focus()
+				t.PromptStyle = focusedStyle
+				t.TextStyle = focusedStyle
 
-		switch i {
-		case 0:
-			t.Placeholder = "Sticker"
-			t.Focus()
-			t.PromptStyle = focusedStyle
-			t.TextStyle = focusedStyle
-			t.Validate = emailValidator
-		case 1:
-			t.Placeholder = "Login"
-			t.Validate = emailValidator
-		case 2:
-			t.Placeholder = "Password"
-			t.CharLimit = 64
-			t.EchoMode = textinput.EchoPassword
-			t.EchoCharacter = '*'
-			t.Validate = passwordValidator
+			case 1:
+				t.Placeholder = "Login"
+
+			case 2:
+				t.Placeholder = "Password"
+				t.CharLimit = 64
+				// t.EchoMode = textinput.EchoPassword
+				// t.EchoCharacter = '*'
+
+			}
+			m.textInputs[i] = t
 		}
-
-		m.textInputs[i] = t
+	} else {
+		m.caption = "Edit login&pass"
+		m.action = "UPDATE"
+		sticker := textinput.New()
+		login := textinput.New()
+		pass := textinput.New()
+		//Get asset data
+		asset, err := client.App.GetAsset(context.Background(), assetID)
+		if err != nil {
+			m.err = err
+			sticker.Placeholder = "Get error"
+			login.Placeholder = "Get error"
+			pass.Placeholder = "Get error"
+		} else {
+			cred := models.Credentials{}
+			err = json.Unmarshal(asset.Body, &cred)
+			if err != nil {
+				m.err = err
+				sticker.Placeholder = "Convert error"
+				login.Placeholder = "Convert error"
+				pass.Placeholder = "Convert error"
+			} else {
+				sticker.SetValue(asset.Sticker)
+				login.SetValue(cred.Login)
+				pass.SetValue(cred.Password)
+			}
+		}
+		m.textInputs[0] = sticker
+		m.textInputs[1] = login
+		m.textInputs[2] = pass
 	}
 	return m
 }
@@ -77,7 +116,6 @@ func (m credentialsScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		switch msg.String() {
 		case "tab", "shift+tab", "enter", "up", "down":
-			var err error
 			s := msg.String()
 			if s == "enter" && m.focusIndex == len(m.textInputs) {
 				errMsg := validate(m.textInputs)
@@ -89,15 +127,38 @@ func (m credentialsScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				} else {
 					m.err = nil
 				}
-				//Try Login via gRPC
-				client.App.AuthToken, err = client.App.Login(context.Background(), m.textInputs[0].Value(), m.textInputs[1].Value())
+				//Parsing asset to json
+				cred := models.Credentials{
+					Login:    m.textInputs[1].Value(),
+					Password: m.textInputs[2].Value(),
+				}
+				body, err := json.Marshal(cred)
 				if err != nil {
-					m.focusIndex = 1
-					m.err = fmt.Errorf("Login error: %v", err)
-				} else {
-					m.success = "Login successful"
-					client.App.UserName = m.textInputs[0].Value()
-					m.err = nil
+					m.err = fmt.Errorf("JSON error: %v", err)
+					return m, nil
+				}
+				asset := &models.Asset{
+					Type:    models.AssetTypeCredentials,
+					Sticker: m.textInputs[0].Value(),
+					Body:    body,
+				}
+				if m.action == "CREATE" {
+					// Create new asset on server
+					asset, err = client.App.CreateAsset(context.Background(), asset)
+					if err != nil {
+						m.focusIndex = 0
+						m.err = fmt.Errorf("Asset create error: %v", err)
+					} else {
+						//Clear inputs
+						for i := range m.textInputs {
+							m.textInputs[i].SetValue("")
+						}
+						m.focusIndex = 0
+						m.success = "Create successful"
+						m.err = nil
+					}
+				} else if m.action == "UPDATE" {
+					m.err = fmt.Errorf("NOT IMPLEMENTED")
 				}
 			}
 
@@ -142,6 +203,7 @@ func (m credentialsScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	return m, cmd
 }
+
 func (m *credentialsScreen) updateInputs(msg tea.Msg) tea.Cmd {
 	cmds := make([]tea.Cmd, len(m.textInputs))
 
@@ -151,9 +213,10 @@ func (m *credentialsScreen) updateInputs(msg tea.Msg) tea.Cmd {
 
 	return tea.Batch(cmds...)
 }
+
 func (m credentialsScreen) View() string {
 	var b strings.Builder
-	b.WriteString(addKey.Render(fmt.Sprintf("Login")))
+	b.WriteString(addKey.Render(m.caption))
 	fmt.Fprintf(&b, "\n\n")
 
 	for i := range m.textInputs {
@@ -163,12 +226,12 @@ func (m credentialsScreen) View() string {
 		}
 	}
 
-	button := blurredButton.Render("[Login]")
+	button := blurredButton.Render(m.action)
 	if m.focusIndex == len(m.textInputs) {
-		button = focusedButton.Render("[Login]")
+		button = focusedButton.Render(m.action)
 	}
 
-	fmt.Fprintf(&b, "\n\n%s\n\n", button)
+	fmt.Fprintf(&b, "\n%s\n", button)
 
 	if m.err != nil {
 		fmt.Fprintf(&b, "\n%s\n", errorText.Render(m.err.Error()))
