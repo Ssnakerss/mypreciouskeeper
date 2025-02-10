@@ -15,8 +15,11 @@ import (
 func (app *ClientApp) Login(
 	ctx context.Context,
 	login, password string) (string, error) {
+	//Keep logn password for  remote login
+	//If first login locally -  after  connection reestabloshed try login remotely
 	app.login = login
 	app.password = password
+
 	//Try login remotely
 	token, err := app.remoteAuthService.Login(ctx, login, password)
 	if err != nil {

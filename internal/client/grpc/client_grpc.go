@@ -20,7 +20,9 @@ type GRPCClient struct {
 func NewGRPCClient(grpcAddress string) *GRPCClient {
 	Conn, err := grpc.NewClient(
 		grpcAddress,
-		grpc.WithTransportCredentials(insecure.NewCredentials()))
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(1024*1024*500)), //50mb message size
+	)
 	if err != nil {
 		log.Fatalf("grpc server connection failed: %v", err)
 	}
@@ -32,5 +34,13 @@ func NewGRPCClient(grpcAddress string) *GRPCClient {
 		AuthClient:  authClient,
 		AssetClient: assetClient,
 		PingClient:  pingClient,
+
+		Conn: Conn,
+	}
+}
+
+func (c *GRPCClient) Close() {
+	if c.Conn != nil {
+		c.Conn.Close()
 	}
 }

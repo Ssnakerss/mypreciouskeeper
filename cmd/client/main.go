@@ -52,9 +52,9 @@ func main() {
 
 		l.Error("Error running program:", logger.Err(err))
 	}
-
 	//TODO:....
 	cancel()
 	<-syncCtx.Done()
+	client.App.Close()
 	l.Info("app exit.")
 }

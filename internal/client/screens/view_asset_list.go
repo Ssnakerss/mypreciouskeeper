@@ -62,18 +62,15 @@ func (m ListView) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			case models.AssetTypeMemo:
 				screen_y := CreateMemoScreen(m.list.SelectedItem().(listItem).ID)
 				return RootScreen().SwitchScreen(&screen_y)
-			// case models.AssetTypeCard:
-			// 	screen_y := CreateImageScreen(m.list.SelectedItem().(listItem).ID)
-			// 	return RootScreen().SwitchScreen(&screen_y)
 			case models.AssetTypeCredentials:
 				screen_y := CreateCredentialsScreen(m.list.SelectedItem().(listItem).ID)
 				return RootScreen().SwitchScreen(&screen_y)
-			// case models.AssetTypeCard:
-			// 	screen_y := CreateImageScreen(m.list.SelectedItem().(listItem).ID)
-			// 	return RootScreen().SwitchScreen(&screen_y)
-			// case models.AssetTypeFile:
-			// 	screen_y := CreateFileScreen(m.list.SelectedItem().(listItem).ID)
-			// 	return RootScreen().SwitchScreen(&screen_y)
+			case models.AssetTypeCard:
+				screen_y := CreateCardScreen(m.list.SelectedItem().(listItem).ID)
+				return RootScreen().SwitchScreen(&screen_y)
+			case models.AssetTypeFile:
+				screen_y := CreateFileScreen(m.list.SelectedItem().(listItem).ID)
+				return RootScreen().SwitchScreen(&screen_y)
 			default:
 				footer = "NOT IMPLEMENTED:" + m.list.SelectedItem().(listItem).Type
 			}

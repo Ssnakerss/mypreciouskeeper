@@ -14,6 +14,8 @@ type AssetStorage interface {
 
 	UpdateAsset(ctx context.Context, asset *models.Asset) error
 	DeleteAsset(ctx context.Context, userid int64, aid int64) error
+
+	Close() error
 }
 
 type AssetService struct {
@@ -115,4 +117,9 @@ func (a *AssetService) Delete(
 	)
 	l.Info("deleting asset data by id")
 	return a.s.DeleteAsset(ctx, userID, aid)
+}
+
+// Close closes underlying storage
+func (a *AssetService) Close() {
+	a.s.Close()
 }

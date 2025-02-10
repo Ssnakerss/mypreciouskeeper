@@ -32,6 +32,8 @@ type AuthService interface {
 	// Logout() error
 	//TODO: implement Update method
 	//Update()
+
+	Close()
 }
 
 type AssetService interface {
@@ -58,6 +60,8 @@ type AssetService interface {
 		ctx context.Context,
 		userID int64,
 		aid int64) error
+
+	Close()
 }
 
 type PingService interface {
@@ -150,7 +154,26 @@ func (c *ClientApp) Ping(
 				c.Workmode = REMOTE
 				remoteTime := time.Unix(i, 0)
 				l.Info("gRPC connection is ready", "remote time", remoteTime)
+
+				if c.AuthToken == "" {
+					l.Info("try to login remotely")
+					if token, err := c.remoteAuthService.Login(ctx, c.login, c.password); err != nil {
+						l.Error("remote login failed", "err", err)
+					} else {
+						c.AuthToken = token
+						c.RemoteUserID = i
+						l.Info("remote login success")
+					}
+				}
 			}
 		}
 	}
+}
+
+func (c *ClientApp) Close() {
+	c.remoteAssetService.Close()
+	c.remoteAssetService.Close()
+
+	c.localAssetService.Close()
+	c.localAuthService.Close()
 }

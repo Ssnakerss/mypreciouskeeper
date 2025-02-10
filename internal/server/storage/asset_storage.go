@@ -118,11 +118,13 @@ func (s *DBStorage) ListAssets(ctx context.Context,
 		params = append(params, "%"+asticker+"%")
 	}
 
+	//Body is NULL because we provide list only with descriptions
+	//Exact body  provided by GetAsset
 	query := `SELECT 
 				id, 
 				a_type,
 				a_sticker,   
-				a_body,
+				NULL as a_body,
 				a_created_at,
 				a_updated_at 
 			FROM public.mpk_assets 

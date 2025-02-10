@@ -38,7 +38,7 @@ func NewAuthService(l *slog.Logger, u UserStorage, tokenTTL time.Duration) *Auth
 // first get user from storage by email
 // than compare password with hash from storage and return user if correct
 // gRPC mapping  -  Login
-func (a AuthService) Login(
+func (a *AuthService) Login(
 	ctx context.Context,
 	email string,
 	pass string,
@@ -74,7 +74,7 @@ func (a AuthService) Login(
 // USer has unique email address
 // Uniq is provided by storage engine to prevent duplicate email
 // gRPC mapping  -  Register
-func (a AuthService) Register(
+func (a *AuthService) Register(
 	ctx context.Context,
 	email string,
 	pass string,
@@ -106,4 +106,9 @@ func (a AuthService) Register(
 	}
 
 	return newUser.ID, nil
+}
+
+// Close undelying storage
+func (a *AuthService) Close() {
+	a.u.Close()
 }

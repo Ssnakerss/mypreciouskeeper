@@ -187,8 +187,8 @@ func Test_gRPCClient_AssetCreateGet(t *testing.T) {
 		Name:     "Test Card",
 		Number:   "1234567890123456",
 		CVV:      "123",
-		ExpMonth: 12,
-		ExpYear:  2022,
+		ExpMonth: "12",
+		ExpYear:  "28",
 	}
 	body, err := json.Marshal(card)
 	require.NoError(t, err)

@@ -11,6 +11,11 @@ const (
 	AssetTypeFile        = "FILE"
 )
 
+//File asset struct omitted
+//File has sticker, name and body []byte
+//stiker and name store in one field  divided with | =>  like  "sticker|filename"
+//body store in another field like []byte
+
 //Asset general struct for work with storage and transport
 type Asset struct {
 	ID     int64
@@ -40,7 +45,7 @@ type Memo struct {
 type Card struct {
 	Number   string `json:"number"`
 	Name     string `json:"name"`
-	ExpMonth int    `json:"expmonth"`
-	ExpYear  int    `json:"expyear"`
+	ExpMonth string `json:"expmonth"`
+	ExpYear  string `json:"expyear"`
 	CVV      string `json:"cvv"`
 }

@@ -61,26 +61,20 @@ func (m CreateActionsMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			item, ok := m.list.SelectedItem().(item)
 
 			if ok {
-				if item.alias == "create_memo" {
-					screen_y := CreateMemoScreen(0)
-					return RootScreen().SwitchScreen(&screen_y)
+				var nextScreen tea.Model
+				switch item.alias {
+				case "create_memo":
+					nextScreen = CreateMemoScreen(0)
+				case "create_cred":
+					nextScreen = CreateCredentialsScreen(0)
+				case "create_card":
+					nextScreen = CreateCardScreen(0)
+				case "create_file":
+					nextScreen = CreateFileScreen(0)
+				case "view_assets":
+					nextScreen = CreateListScreen()
 				}
-				if item.alias == "create_cred" {
-					screen_y := CreateCredentialsScreen(0)
-					return RootScreen().SwitchScreen(&screen_y)
-				}
-				if item.alias == "create_card" {
-					// screen_y := CreateMemoScreen()
-					// return RootScreen().SwitchScreen(&screen_y)
-				}
-				if item.alias == "create_file" {
-					// screen_y := CreateMemoScreen()
-					// return RootScreen().SwitchScreen(&screen_y)
-				}
-				if item.alias == "view_assets" {
-					screen_y := CreateListScreen()
-					return RootScreen().SwitchScreen(&screen_y)
-				}
+				return RootScreen().SwitchScreen(nextScreen)
 			}
 		}
 	}
