@@ -14,6 +14,12 @@ import (
 	"github.com/muesli/termenv"
 )
 
+// Var for build version and build time setup by ldflags
+var (
+	Version   string
+	BuildTime string
+)
+
 func main() {
 	cfg := config.Load()
 
@@ -31,7 +37,7 @@ func main() {
 	baseCtx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	client.App = client.NewClientApp(baseCtx, l, cfg)
+	client.App = client.NewClientApp(baseCtx, l, cfg, Version, BuildTime)
 	//Start ping for remote service
 	syncCtx, syncCancel := context.WithCancel(context.Background())
 	defer syncCancel()

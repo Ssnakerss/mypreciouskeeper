@@ -1,6 +1,7 @@
 package screens
 
 import (
+	"fmt"
 	"os"
 	"strings"
 
@@ -92,6 +93,8 @@ func (m AuthMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m AuthMenuModel) View() string {
 	var b strings.Builder
 	b.WriteString(m.list.View())
+
+	fmt.Fprintf(&b, "\nVersion: %s | Bulid time: %s \n", client.App.Version, client.App.BuildTime)
 
 	//Connection status 'widget'
 	statusWidget(client.App.Workmode, &b)

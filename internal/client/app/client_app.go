@@ -95,6 +95,9 @@ type ClientApp struct {
 	L   *slog.Logger
 	cfg *config.Config
 
+	Version   string
+	BuildTime string
+
 	//TODO: implement screens logic ???   how to add tea screeen into app
 	// appScreens map[string]tea.Model
 }
@@ -104,6 +107,8 @@ func NewClientApp(
 	ctx context.Context,
 	l *slog.Logger,
 	cfg *config.Config,
+	v string, //version
+	b string, //build time
 ) *ClientApp {
 
 	//Prepare local storage and service
@@ -129,6 +134,9 @@ func NewClientApp(
 
 		localAuthService:  authService,
 		localAssetService: assetService,
+
+		Version:   v,
+		BuildTime: b,
 	}
 }
 
