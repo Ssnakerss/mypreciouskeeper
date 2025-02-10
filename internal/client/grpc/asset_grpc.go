@@ -17,12 +17,16 @@ func (c *GRPCClient) Create(
 	if c.token == "" {
 		return asset, apperrs.ErrEmptyToken
 	}
-	createAssetResp, err := c.AssetClient.Create(context.Background(), &grpcserver.CreateRequest{
-		Token:   c.token,
-		Type:    asset.Type,
-		Sticker: asset.Sticker,
-		Body:    asset.Body,
-	})
+
+	createAssetResp, err := c.AssetClient.Create(
+		context.Background(),
+		&grpcserver.CreateRequest{
+			Token:   c.token,
+			Type:    asset.Type,
+			Sticker: asset.Sticker,
+			Body:    asset.Body,
+		},
+	)
 	if err == nil {
 		asset.ID = createAssetResp.AssetId
 	}

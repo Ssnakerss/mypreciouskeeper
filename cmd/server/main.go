@@ -18,7 +18,7 @@ func main() {
 	l = l.With("who", "server/main")
 	l.Info("server starting ...")
 
-	app := server.New(l, cfg.GRPC.Port)
+	app := server.New(l, cfg)
 
 	go app.MustRun()
 

@@ -1,0 +1,523 @@
+time=2025-02-10T14:08:18.273+03:00 level=INFO msg="server starting ..." who=server/main
+time=2025-02-10T14:08:21.367+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:21.000+03:00
+time=2025-02-10T14:08:21.368+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:21.368+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:24.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:24.000+03:00
+time=2025-02-10T14:08:24.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:24.280+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:27.278+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:27.000+03:00
+time=2025-02-10T14:08:27.278+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:27.279+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:30.325+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:30.000+03:00
+time=2025-02-10T14:08:30.325+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:30.326+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:33.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:33.000+03:00
+time=2025-02-10T14:08:33.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:33.278+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:36.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:36.000+03:00
+time=2025-02-10T14:08:36.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:36.277+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:39.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:39.000+03:00
+time=2025-02-10T14:08:39.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:39.278+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:42.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:42.000+03:00
+time=2025-02-10T14:08:42.278+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:42.278+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:45.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:45.000+03:00
+time=2025-02-10T14:08:45.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:45.277+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:48.278+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:48.000+03:00
+time=2025-02-10T14:08:48.278+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:48.279+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:51.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:51.000+03:00
+time=2025-02-10T14:08:51.278+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:51.278+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:54.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:54.000+03:00
+time=2025-02-10T14:08:54.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:54.277+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:08:57.278+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:08:57.000+03:00
+time=2025-02-10T14:08:57.278+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:08:57.278+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:09:00.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:00.000+03:00
+time=2025-02-10T14:09:00.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:09:00.278+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:09:03.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:03.000+03:00
+time=2025-02-10T14:09:03.277+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:09:03.278+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:09:05.023+03:00 level=INFO msg="remote user login" who=server/main name=ivan@test.ru "remote id"=102
+time=2025-02-10T14:09:05.023+03:00 level=INFO msg="registering new user" who=server/main who=AuthService.Register email=ivan@test.ru
+time=2025-02-10T14:09:05.107+03:00 level=INFO msg="creating new user" who=server/main who=AuthService.Register email=ivan@test.ru user="&{ID:0 Email:ivan@test.ru PassHash:$2a$10$1SMMy76GUQlGsNZ9aJbPJeBvsGktc5C2ERR8nbR6K66F8RyOblC9K JWTToken: CreatedAt:2025-02-10 14:09:05.1075132 +0300 MSK m=+46.925151801 UpdatedAt:2025-02-10 14:09:05.1075132 +0300 MSK m=+46.925151801}"
+time=2025-02-10T14:09:05.108+03:00 level=ERROR msg="failed to create new user" who=server/main who=AuthService.Register email=ivan@test.ru error="user already exists"
+time=2025-02-10T14:09:06.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:06.000+03:00
+time=2025-02-10T14:09:09.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:09.000+03:00
+time=2025-02-10T14:09:12.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:12.000+03:00
+time=2025-02-10T14:09:15.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:15.000+03:00
+time=2025-02-10T14:09:18.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:18.000+03:00
+time=2025-02-10T14:09:21.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:21.000+03:00
+time=2025-02-10T14:09:24.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:24.000+03:00
+time=2025-02-10T14:09:27.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:27.000+03:00
+time=2025-02-10T14:09:30.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:30.000+03:00
+time=2025-02-10T14:09:33.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:33.000+03:00
+time=2025-02-10T14:09:36.277+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:09:36.000+03:00
+time=2025-02-10T14:09:38.440+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:09:38.441+03:00 level=INFO msg="app exit." who=server/main
+time=2025-02-10T14:10:29.146+03:00 level=INFO msg="server starting ..." who=server/main
+time=2025-02-10T14:10:39.273+03:00 level=INFO msg="remote user login" who=server/main name=ivan@test.ru "remote id"=102
+time=2025-02-10T14:10:39.273+03:00 level=INFO msg="registering new user" who=server/main who=AuthService.Register email=ivan@test.ru
+time=2025-02-10T14:10:39.362+03:00 level=INFO msg="creating new user" who=server/main who=AuthService.Register email=ivan@test.ru user="&{ID:0 Email:ivan@test.ru PassHash:$2a$10$9KRDL1dVrLeP/4V3FBcMw.0O.NEykXgGDBybw//dxcyKjFpt.I6IS JWTToken: CreatedAt:2025-02-10 14:10:39.3621004 +0300 MSK m=+10.277233901 UpdatedAt:2025-02-10 14:10:39.3621004 +0300 MSK m=+10.277233901}"
+time=2025-02-10T14:10:39.363+03:00 level=ERROR msg="failed to create new user" who=server/main who=AuthService.Register email=ivan@test.ru error="user already exists"
+time=2025-02-10T14:17:56.324+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:17:56.326+03:00 level=INFO msg="app exit." who=server/main
+time=2025-02-10T14:18:18.210+03:00 level=INFO msg="server starting ..." who=server/main
+time=2025-02-10T14:18:23.236+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:23.000+03:00
+time=2025-02-10T14:18:23.236+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:18:23.237+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:18:28.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:28.000+03:00
+time=2025-02-10T14:18:28.214+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:18:28.214+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:18:33.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:33.000+03:00
+time=2025-02-10T14:18:33.214+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:18:33.214+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:18:38.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:38.000+03:00
+time=2025-02-10T14:18:38.214+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:18:38.214+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T14:18:39.554+03:00 level=INFO msg="remote user login" who=server/main name=ivan@test.ru "remote id"=102
+time=2025-02-10T14:18:39.554+03:00 level=INFO msg="registering new user" who=server/main who=AuthService.Register email=ivan@test.ru
+time=2025-02-10T14:18:39.639+03:00 level=INFO msg="creating new user" who=server/main who=AuthService.Register email=ivan@test.ru user="&{ID:0 Email:ivan@test.ru PassHash:$2a$10$ylruicds06fJGp/MDxw/EO6QFcHKktTS9bgAy6TnfJKYsjNfGKFLu JWTToken: CreatedAt:2025-02-10 14:18:39.6393837 +0300 MSK m=+21.493980601 UpdatedAt:2025-02-10 14:18:39.6393837 +0300 MSK m=+21.493980601}"
+time=2025-02-10T14:18:39.639+03:00 level=ERROR msg="failed to create new user" who=server/main who=AuthService.Register email=ivan@test.ru error="user already exists"
+time=2025-02-10T14:18:43.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:43.000+03:00
+time=2025-02-10T14:18:48.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:48.000+03:00
+time=2025-02-10T14:18:53.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:53.000+03:00
+time=2025-02-10T14:18:58.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:18:58.000+03:00
+time=2025-02-10T14:19:03.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:03.000+03:00
+time=2025-02-10T14:19:08.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:08.000+03:00
+time=2025-02-10T14:19:13.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:13.000+03:00
+time=2025-02-10T14:19:18.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:18.000+03:00
+time=2025-02-10T14:19:23.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:23.000+03:00
+time=2025-02-10T14:19:28.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:28.000+03:00
+time=2025-02-10T14:19:33.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:33.000+03:00
+time=2025-02-10T14:19:38.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:38.000+03:00
+time=2025-02-10T14:19:43.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:43.000+03:00
+time=2025-02-10T14:19:48.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:48.000+03:00
+time=2025-02-10T14:19:53.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:53.000+03:00
+time=2025-02-10T14:19:58.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:19:58.000+03:00
+time=2025-02-10T14:20:03.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:03.000+03:00
+time=2025-02-10T14:20:08.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:08.000+03:00
+time=2025-02-10T14:20:13.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:13.000+03:00
+time=2025-02-10T14:20:18.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:18.000+03:00
+time=2025-02-10T14:20:23.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:23.000+03:00
+time=2025-02-10T14:20:28.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:28.000+03:00
+time=2025-02-10T14:20:33.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:33.000+03:00
+time=2025-02-10T14:20:38.213+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:38.000+03:00
+time=2025-02-10T14:20:43.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:43.000+03:00
+time=2025-02-10T14:20:48.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:48.000+03:00
+time=2025-02-10T14:20:53.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:53.000+03:00
+time=2025-02-10T14:20:58.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:20:58.000+03:00
+time=2025-02-10T14:21:03.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:03.000+03:00
+time=2025-02-10T14:21:08.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:08.000+03:00
+time=2025-02-10T14:21:13.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:13.000+03:00
+time=2025-02-10T14:21:18.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:18.000+03:00
+time=2025-02-10T14:21:23.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:23.000+03:00
+time=2025-02-10T14:21:28.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:28.000+03:00
+time=2025-02-10T14:21:33.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:33.000+03:00
+time=2025-02-10T14:21:38.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:38.000+03:00
+time=2025-02-10T14:21:43.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:43.000+03:00
+time=2025-02-10T14:21:48.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:48.000+03:00
+time=2025-02-10T14:21:53.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:53.000+03:00
+time=2025-02-10T14:21:58.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:21:58.000+03:00
+time=2025-02-10T14:22:03.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:03.000+03:00
+time=2025-02-10T14:22:08.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:08.000+03:00
+time=2025-02-10T14:22:13.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:13.000+03:00
+time=2025-02-10T14:22:18.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:18.000+03:00
+time=2025-02-10T14:22:23.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:23.000+03:00
+time=2025-02-10T14:22:28.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:28.000+03:00
+time=2025-02-10T14:22:33.265+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:33.000+03:00
+time=2025-02-10T14:22:38.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:38.000+03:00
+time=2025-02-10T14:22:43.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:43.000+03:00
+time=2025-02-10T14:22:48.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:48.000+03:00
+time=2025-02-10T14:22:53.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:53.000+03:00
+time=2025-02-10T14:22:58.228+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:22:58.000+03:00
+time=2025-02-10T14:23:03.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:03.000+03:00
+time=2025-02-10T14:23:08.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:08.000+03:00
+time=2025-02-10T14:23:13.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:13.000+03:00
+time=2025-02-10T14:23:18.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:18.000+03:00
+time=2025-02-10T14:23:23.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:23.000+03:00
+time=2025-02-10T14:23:28.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:28.000+03:00
+time=2025-02-10T14:23:33.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:33.000+03:00
+time=2025-02-10T14:23:38.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:38.000+03:00
+time=2025-02-10T14:23:43.214+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:43.000+03:00
+time=2025-02-10T14:23:48.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:48.000+03:00
+time=2025-02-10T14:23:53.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:53.000+03:00
+time=2025-02-10T14:23:58.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:23:58.000+03:00
+time=2025-02-10T14:24:03.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:03.000+03:00
+time=2025-02-10T14:24:08.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:08.000+03:00
+time=2025-02-10T14:24:13.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:13.000+03:00
+time=2025-02-10T14:24:18.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:18.000+03:00
+time=2025-02-10T14:24:23.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:23.000+03:00
+time=2025-02-10T14:24:28.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:28.000+03:00
+time=2025-02-10T14:24:33.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:33.000+03:00
+time=2025-02-10T14:24:38.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:38.000+03:00
+time=2025-02-10T14:24:43.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:43.000+03:00
+time=2025-02-10T14:24:48.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:48.000+03:00
+time=2025-02-10T14:24:53.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:53.000+03:00
+time=2025-02-10T14:24:58.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:24:58.000+03:00
+time=2025-02-10T14:25:03.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:03.000+03:00
+time=2025-02-10T14:25:08.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:08.000+03:00
+time=2025-02-10T14:25:13.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:13.000+03:00
+time=2025-02-10T14:25:18.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:18.000+03:00
+time=2025-02-10T14:25:23.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:23.000+03:00
+time=2025-02-10T14:25:28.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:28.000+03:00
+time=2025-02-10T14:25:33.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:33.000+03:00
+time=2025-02-10T14:25:38.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:38.000+03:00
+time=2025-02-10T14:25:43.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:43.000+03:00
+time=2025-02-10T14:25:48.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:48.000+03:00
+time=2025-02-10T14:25:53.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:53.000+03:00
+time=2025-02-10T14:25:58.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:25:58.000+03:00
+time=2025-02-10T14:26:03.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:03.000+03:00
+time=2025-02-10T14:26:08.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:08.000+03:00
+time=2025-02-10T14:26:13.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:13.000+03:00
+time=2025-02-10T14:26:18.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:18.000+03:00
+time=2025-02-10T14:26:23.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:23.000+03:00
+time=2025-02-10T14:26:28.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:28.000+03:00
+time=2025-02-10T14:26:33.215+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:33.000+03:00
+time=2025-02-10T14:26:38.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:38.000+03:00
+time=2025-02-10T14:26:43.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:43.000+03:00
+time=2025-02-10T14:26:48.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:48.000+03:00
+time=2025-02-10T14:26:53.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:53.000+03:00
+time=2025-02-10T14:26:58.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:26:58.000+03:00
+time=2025-02-10T14:27:03.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:03.000+03:00
+time=2025-02-10T14:27:08.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:08.000+03:00
+time=2025-02-10T14:27:13.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:13.000+03:00
+time=2025-02-10T14:27:18.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:18.000+03:00
+time=2025-02-10T14:27:23.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:23.000+03:00
+time=2025-02-10T14:27:28.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:28.000+03:00
+time=2025-02-10T14:27:33.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:33.000+03:00
+time=2025-02-10T14:27:38.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:38.000+03:00
+time=2025-02-10T14:27:43.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:43.000+03:00
+time=2025-02-10T14:27:48.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:48.000+03:00
+time=2025-02-10T14:27:53.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:53.000+03:00
+time=2025-02-10T14:27:58.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:27:58.000+03:00
+time=2025-02-10T14:28:03.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:03.000+03:00
+time=2025-02-10T14:28:08.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:08.000+03:00
+time=2025-02-10T14:28:13.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:13.000+03:00
+time=2025-02-10T14:28:18.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:18.000+03:00
+time=2025-02-10T14:28:23.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:23.000+03:00
+time=2025-02-10T14:28:28.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:28.000+03:00
+time=2025-02-10T14:28:33.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:33.000+03:00
+time=2025-02-10T14:28:38.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:38.000+03:00
+time=2025-02-10T14:28:43.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:43.000+03:00
+time=2025-02-10T14:28:48.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:48.000+03:00
+time=2025-02-10T14:28:53.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:53.000+03:00
+time=2025-02-10T14:28:58.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:28:58.000+03:00
+time=2025-02-10T14:29:03.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:03.000+03:00
+time=2025-02-10T14:29:08.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:08.000+03:00
+time=2025-02-10T14:29:13.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:13.000+03:00
+time=2025-02-10T14:29:18.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:18.000+03:00
+time=2025-02-10T14:29:23.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:23.000+03:00
+time=2025-02-10T14:29:28.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:28.000+03:00
+time=2025-02-10T14:29:33.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:33.000+03:00
+time=2025-02-10T14:29:38.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:38.000+03:00
+time=2025-02-10T14:29:43.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:43.000+03:00
+time=2025-02-10T14:29:48.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:48.000+03:00
+time=2025-02-10T14:29:53.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:53.000+03:00
+time=2025-02-10T14:29:58.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:29:58.000+03:00
+time=2025-02-10T14:30:03.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:03.000+03:00
+time=2025-02-10T14:30:08.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:08.000+03:00
+time=2025-02-10T14:30:13.216+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:13.000+03:00
+time=2025-02-10T14:30:18.237+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:18.000+03:00
+time=2025-02-10T14:30:23.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:23.000+03:00
+time=2025-02-10T14:30:28.231+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:28.000+03:00
+time=2025-02-10T14:30:33.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:33.000+03:00
+time=2025-02-10T14:30:38.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:38.000+03:00
+time=2025-02-10T14:30:43.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:43.000+03:00
+time=2025-02-10T14:30:48.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:48.000+03:00
+time=2025-02-10T14:30:53.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:53.000+03:00
+time=2025-02-10T14:30:58.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:30:58.000+03:00
+time=2025-02-10T14:31:03.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:03.000+03:00
+time=2025-02-10T14:31:08.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:08.000+03:00
+time=2025-02-10T14:31:13.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:13.000+03:00
+time=2025-02-10T14:31:18.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:18.000+03:00
+time=2025-02-10T14:31:23.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:23.000+03:00
+time=2025-02-10T14:31:28.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:28.000+03:00
+time=2025-02-10T14:31:33.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:33.000+03:00
+time=2025-02-10T14:31:38.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:38.000+03:00
+time=2025-02-10T14:31:43.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:43.000+03:00
+time=2025-02-10T14:31:48.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:48.000+03:00
+time=2025-02-10T14:31:53.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:53.000+03:00
+time=2025-02-10T14:31:58.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:31:58.000+03:00
+time=2025-02-10T14:32:03.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:03.000+03:00
+time=2025-02-10T14:32:08.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:08.000+03:00
+time=2025-02-10T14:32:13.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:13.000+03:00
+time=2025-02-10T14:32:18.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:18.000+03:00
+time=2025-02-10T14:32:23.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:23.000+03:00
+time=2025-02-10T14:32:28.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:28.000+03:00
+time=2025-02-10T14:32:33.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:33.000+03:00
+time=2025-02-10T14:32:38.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:38.000+03:00
+time=2025-02-10T14:32:43.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:43.000+03:00
+time=2025-02-10T14:32:48.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:48.000+03:00
+time=2025-02-10T14:32:53.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:53.000+03:00
+time=2025-02-10T14:32:58.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:32:58.000+03:00
+time=2025-02-10T14:33:03.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:03.000+03:00
+time=2025-02-10T14:33:08.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:08.000+03:00
+time=2025-02-10T14:33:13.217+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:13.000+03:00
+time=2025-02-10T14:33:18.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:18.000+03:00
+time=2025-02-10T14:33:23.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:23.000+03:00
+time=2025-02-10T14:33:28.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:28.000+03:00
+time=2025-02-10T14:33:33.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:33.000+03:00
+time=2025-02-10T14:33:38.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:38.000+03:00
+time=2025-02-10T14:33:43.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:43.000+03:00
+time=2025-02-10T14:33:48.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:48.000+03:00
+time=2025-02-10T14:33:53.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:53.000+03:00
+time=2025-02-10T14:33:58.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:33:58.000+03:00
+time=2025-02-10T14:34:03.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:03.000+03:00
+time=2025-02-10T14:34:08.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:08.000+03:00
+time=2025-02-10T14:34:13.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:13.000+03:00
+time=2025-02-10T14:34:18.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:18.000+03:00
+time=2025-02-10T14:34:23.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:23.000+03:00
+time=2025-02-10T14:34:28.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:28.000+03:00
+time=2025-02-10T14:34:33.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:33.000+03:00
+time=2025-02-10T14:34:38.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:38.000+03:00
+time=2025-02-10T14:34:43.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:43.000+03:00
+time=2025-02-10T14:34:48.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:48.000+03:00
+time=2025-02-10T14:34:53.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:53.000+03:00
+time=2025-02-10T14:34:58.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:34:58.000+03:00
+time=2025-02-10T14:35:03.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:03.000+03:00
+time=2025-02-10T14:35:08.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:08.000+03:00
+time=2025-02-10T14:35:13.218+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:13.000+03:00
+time=2025-02-10T14:35:18.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:18.000+03:00
+time=2025-02-10T14:35:23.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:23.000+03:00
+time=2025-02-10T14:35:28.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:28.000+03:00
+time=2025-02-10T14:35:33.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:33.000+03:00
+time=2025-02-10T14:35:38.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:38.000+03:00
+time=2025-02-10T14:35:43.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:43.000+03:00
+time=2025-02-10T14:35:48.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:48.000+03:00
+time=2025-02-10T14:35:53.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:53.000+03:00
+time=2025-02-10T14:35:58.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:35:58.000+03:00
+time=2025-02-10T14:36:03.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:03.000+03:00
+time=2025-02-10T14:36:08.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:08.000+03:00
+time=2025-02-10T14:36:13.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:13.000+03:00
+time=2025-02-10T14:36:18.219+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:18.000+03:00
+time=2025-02-10T14:36:23.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:23.000+03:00
+time=2025-02-10T14:36:28.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:28.000+03:00
+time=2025-02-10T14:36:33.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:33.000+03:00
+time=2025-02-10T14:36:38.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:38.000+03:00
+time=2025-02-10T14:36:43.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:43.000+03:00
+time=2025-02-10T14:36:48.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:48.000+03:00
+time=2025-02-10T14:36:53.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:53.000+03:00
+time=2025-02-10T14:36:58.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:36:58.000+03:00
+time=2025-02-10T14:37:03.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:03.000+03:00
+time=2025-02-10T14:37:08.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:08.000+03:00
+time=2025-02-10T14:37:13.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:13.000+03:00
+time=2025-02-10T14:37:18.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:18.000+03:00
+time=2025-02-10T14:37:23.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:23.000+03:00
+time=2025-02-10T14:37:28.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:28.000+03:00
+time=2025-02-10T14:37:33.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:33.000+03:00
+time=2025-02-10T14:37:38.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:38.000+03:00
+time=2025-02-10T14:37:43.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:43.000+03:00
+time=2025-02-10T14:37:48.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:48.000+03:00
+time=2025-02-10T14:37:53.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:53.000+03:00
+time=2025-02-10T14:37:58.220+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:37:58.000+03:00
+time=2025-02-10T14:38:03.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:03.000+03:00
+time=2025-02-10T14:38:08.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:08.000+03:00
+time=2025-02-10T14:38:13.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:13.000+03:00
+time=2025-02-10T14:38:18.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:18.000+03:00
+time=2025-02-10T14:38:23.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:23.000+03:00
+time=2025-02-10T14:38:28.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:28.000+03:00
+time=2025-02-10T14:38:33.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:33.000+03:00
+time=2025-02-10T14:38:38.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:38.000+03:00
+time=2025-02-10T14:38:43.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:43.000+03:00
+time=2025-02-10T14:38:48.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:48.000+03:00
+time=2025-02-10T14:38:53.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:53.000+03:00
+time=2025-02-10T14:38:58.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:38:58.000+03:00
+time=2025-02-10T14:39:03.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:03.000+03:00
+time=2025-02-10T14:39:08.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:08.000+03:00
+time=2025-02-10T14:39:13.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:13.000+03:00
+time=2025-02-10T14:39:18.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:18.000+03:00
+time=2025-02-10T14:39:23.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:23.000+03:00
+time=2025-02-10T14:39:28.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:28.000+03:00
+time=2025-02-10T14:39:33.221+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:33.000+03:00
+time=2025-02-10T14:39:38.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:38.000+03:00
+time=2025-02-10T14:39:43.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:43.000+03:00
+time=2025-02-10T14:39:48.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:48.000+03:00
+time=2025-02-10T14:39:53.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:53.000+03:00
+time=2025-02-10T14:39:58.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:39:58.000+03:00
+time=2025-02-10T14:40:03.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:03.000+03:00
+time=2025-02-10T14:40:08.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:08.000+03:00
+time=2025-02-10T14:40:13.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:13.000+03:00
+time=2025-02-10T14:40:18.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:18.000+03:00
+time=2025-02-10T14:40:23.222+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:23.000+03:00
+time=2025-02-10T14:40:28.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:28.000+03:00
+time=2025-02-10T14:40:33.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:33.000+03:00
+time=2025-02-10T14:40:38.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:38.000+03:00
+time=2025-02-10T14:40:43.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:43.000+03:00
+time=2025-02-10T14:40:48.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:48.000+03:00
+time=2025-02-10T14:40:53.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:53.000+03:00
+time=2025-02-10T14:40:58.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:40:58.000+03:00
+time=2025-02-10T14:41:03.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:03.000+03:00
+time=2025-02-10T14:41:08.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:08.000+03:00
+time=2025-02-10T14:41:13.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:13.000+03:00
+time=2025-02-10T14:41:18.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:18.000+03:00
+time=2025-02-10T14:41:23.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:23.000+03:00
+time=2025-02-10T14:41:28.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:28.000+03:00
+time=2025-02-10T14:41:33.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:33.000+03:00
+time=2025-02-10T14:41:38.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:38.000+03:00
+time=2025-02-10T14:41:43.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:43.000+03:00
+time=2025-02-10T14:41:48.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:48.000+03:00
+time=2025-02-10T14:41:53.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:53.000+03:00
+time=2025-02-10T14:41:58.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:41:58.000+03:00
+time=2025-02-10T14:42:03.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:03.000+03:00
+time=2025-02-10T14:42:08.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:08.000+03:00
+time=2025-02-10T14:42:13.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:13.000+03:00
+time=2025-02-10T14:42:18.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:18.000+03:00
+time=2025-02-10T14:42:23.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:23.000+03:00
+time=2025-02-10T14:42:28.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:28.000+03:00
+time=2025-02-10T14:42:33.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:33.000+03:00
+time=2025-02-10T14:42:38.223+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:38.000+03:00
+time=2025-02-10T14:42:43.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:43.000+03:00
+time=2025-02-10T14:42:48.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:48.000+03:00
+time=2025-02-10T14:42:53.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:53.000+03:00
+time=2025-02-10T14:42:58.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:42:58.000+03:00
+time=2025-02-10T14:43:03.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:03.000+03:00
+time=2025-02-10T14:43:08.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:08.000+03:00
+time=2025-02-10T14:43:13.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:13.000+03:00
+time=2025-02-10T14:43:18.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:18.000+03:00
+time=2025-02-10T14:43:23.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:23.000+03:00
+time=2025-02-10T14:43:28.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:28.000+03:00
+time=2025-02-10T14:43:33.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:33.000+03:00
+time=2025-02-10T14:43:38.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:38.000+03:00
+time=2025-02-10T14:43:43.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:43.000+03:00
+time=2025-02-10T14:43:48.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:48.000+03:00
+time=2025-02-10T14:43:53.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:53.000+03:00
+time=2025-02-10T14:43:58.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:43:58.000+03:00
+time=2025-02-10T14:44:03.224+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:03.000+03:00
+time=2025-02-10T14:44:08.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:08.000+03:00
+time=2025-02-10T14:44:13.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:13.000+03:00
+time=2025-02-10T14:44:18.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:18.000+03:00
+time=2025-02-10T14:44:23.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:23.000+03:00
+time=2025-02-10T14:44:28.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:28.000+03:00
+time=2025-02-10T14:44:33.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:33.000+03:00
+time=2025-02-10T14:44:38.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:38.000+03:00
+time=2025-02-10T14:44:43.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:43.000+03:00
+time=2025-02-10T14:44:48.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:48.000+03:00
+time=2025-02-10T14:44:53.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:53.000+03:00
+time=2025-02-10T14:44:58.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:44:58.000+03:00
+time=2025-02-10T14:45:03.225+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:03.000+03:00
+time=2025-02-10T14:45:08.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:08.000+03:00
+time=2025-02-10T14:45:13.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:13.000+03:00
+time=2025-02-10T14:45:18.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:18.000+03:00
+time=2025-02-10T14:45:23.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:23.000+03:00
+time=2025-02-10T14:45:28.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:28.000+03:00
+time=2025-02-10T14:45:33.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:33.000+03:00
+time=2025-02-10T14:45:38.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:38.000+03:00
+time=2025-02-10T14:45:43.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:43.000+03:00
+time=2025-02-10T14:45:48.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:48.000+03:00
+time=2025-02-10T14:45:53.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:53.000+03:00
+time=2025-02-10T14:45:58.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:45:58.000+03:00
+time=2025-02-10T14:46:03.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:03.000+03:00
+time=2025-02-10T14:46:08.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:08.000+03:00
+time=2025-02-10T14:46:13.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:13.000+03:00
+time=2025-02-10T14:46:18.228+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:18.000+03:00
+time=2025-02-10T14:46:23.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:23.000+03:00
+time=2025-02-10T14:46:28.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:28.000+03:00
+time=2025-02-10T14:46:33.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:33.000+03:00
+time=2025-02-10T14:46:38.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:38.000+03:00
+time=2025-02-10T14:46:43.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:43.000+03:00
+time=2025-02-10T14:46:48.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:48.000+03:00
+time=2025-02-10T14:46:53.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:53.000+03:00
+time=2025-02-10T14:46:58.226+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:46:58.000+03:00
+time=2025-02-10T14:47:03.228+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:03.000+03:00
+time=2025-02-10T14:47:08.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:08.000+03:00
+time=2025-02-10T14:47:13.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:13.000+03:00
+time=2025-02-10T14:47:18.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:18.000+03:00
+time=2025-02-10T14:47:23.228+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:23.000+03:00
+time=2025-02-10T14:47:28.249+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:28.000+03:00
+time=2025-02-10T14:47:33.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:33.000+03:00
+time=2025-02-10T14:47:38.228+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:38.000+03:00
+time=2025-02-10T14:47:43.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:43.000+03:00
+time=2025-02-10T14:47:48.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:48.000+03:00
+time=2025-02-10T14:47:53.227+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:53.000+03:00
+time=2025-02-10T14:47:58.228+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T14:47:58.000+03:00
+time=2025-02-10T14:47:58.493+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
+time=2025-02-10T14:47:58.493+03:00 level=INFO msg="app exit." who=server/main
+time=2025-02-10T15:16:22.343+03:00 level=INFO msg="server starting ..." who=server/main
+time=2025-02-10T15:16:27.427+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:16:27.000+03:00
+time=2025-02-10T15:16:27.427+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:16:27.427+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:16:32.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:16:32.000+03:00
+time=2025-02-10T15:16:32.347+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:16:32.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:16:37.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:16:37.000+03:00
+time=2025-02-10T15:16:37.347+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:16:37.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:16:42.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:16:42.000+03:00
+time=2025-02-10T15:16:42.347+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:16:42.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:16:47.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:16:47.000+03:00
+time=2025-02-10T15:16:47.347+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:16:47.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:16:52.346+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:16:52.000+03:00
+time=2025-02-10T15:16:52.346+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:16:52.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:16:57.391+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:16:57.000+03:00
+time=2025-02-10T15:16:57.392+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:16:57.405+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:17:02.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:02.000+03:00
+time=2025-02-10T15:17:02.348+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:17:02.348+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:17:07.346+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:07.000+03:00
+time=2025-02-10T15:17:07.346+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:17:07.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:17:12.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:12.000+03:00
+time=2025-02-10T15:17:12.347+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:17:12.348+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:17:17.346+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:17.000+03:00
+time=2025-02-10T15:17:17.346+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:17:17.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:17:22.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:22.000+03:00
+time=2025-02-10T15:17:22.347+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:17:22.348+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:17:27.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:27.000+03:00
+time=2025-02-10T15:17:27.347+03:00 level=INFO msg="try to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:17:27.347+03:00 level=ERROR msg="remote login failed" who=server/main who=ClientApp.Ping err="rpc error: code = InvalidArgument desc = email and password required"
+time=2025-02-10T15:17:31.498+03:00 level=INFO msg="remote user login" who=server/main name=ivan@test.ru "remote id"=102
+time=2025-02-10T15:17:31.498+03:00 level=INFO msg="registering new user" who=server/main who=AuthService.Register email=ivan@test.ru
+time=2025-02-10T15:17:31.574+03:00 level=INFO msg="creating new user" who=server/main who=AuthService.Register email=ivan@test.ru user="&{ID:0 Email:ivan@test.ru PassHash:$2a$10$to7Za5OhwVCVcJXyzYIdpOcY48DDDAPQvmX0ockQi.wLuIpg6C5r. JWTToken: CreatedAt:2025-02-10 15:17:31.5747795 +0300 MSK m=+69.286636101 UpdatedAt:2025-02-10 15:17:31.5747795 +0300 MSK m=+69.286636101}"
+time=2025-02-10T15:17:31.574+03:00 level=ERROR msg="failed to create new user" who=server/main who=AuthService.Register email=ivan@test.ru error="user already exists"
+time=2025-02-10T15:17:32.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:32.000+03:00
+time=2025-02-10T15:17:37.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:37.000+03:00
+time=2025-02-10T15:17:42.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:42.000+03:00
+time=2025-02-10T15:17:47.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:47.000+03:00
+time=2025-02-10T15:17:52.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:52.000+03:00
+time=2025-02-10T15:17:57.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:17:57.000+03:00
+time=2025-02-10T15:18:02.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:02.000+03:00
+time=2025-02-10T15:18:07.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:07.000+03:00
+time=2025-02-10T15:18:12.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:12.000+03:00
+time=2025-02-10T15:18:17.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:17.000+03:00
+time=2025-02-10T15:18:22.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:22.000+03:00
+time=2025-02-10T15:18:27.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:27.000+03:00
+time=2025-02-10T15:18:32.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:32.000+03:00
+time=2025-02-10T15:18:37.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:37.000+03:00
+time=2025-02-10T15:18:42.349+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:42.000+03:00
+time=2025-02-10T15:18:47.351+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:47.000+03:00
+time=2025-02-10T15:18:52.397+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:52.000+03:00
+time=2025-02-10T15:18:57.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:18:57.000+03:00
+time=2025-02-10T15:19:02.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:02.000+03:00
+time=2025-02-10T15:19:07.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:07.000+03:00
+time=2025-02-10T15:19:12.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:12.000+03:00
+time=2025-02-10T15:19:17.347+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:17.000+03:00
+time=2025-02-10T15:19:22.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:22.000+03:00
+time=2025-02-10T15:19:27.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:27.000+03:00
+time=2025-02-10T15:19:32.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:32.000+03:00
+time=2025-02-10T15:19:37.349+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:37.000+03:00
+time=2025-02-10T15:19:42.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:42.000+03:00
+time=2025-02-10T15:19:47.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:47.000+03:00
+time=2025-02-10T15:19:52.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:52.000+03:00
+time=2025-02-10T15:19:57.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:19:57.000+03:00
+time=2025-02-10T15:20:02.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:20:02.000+03:00
+time=2025-02-10T15:20:07.349+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:20:07.000+03:00
+time=2025-02-10T15:20:12.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:20:12.000+03:00
+time=2025-02-10T15:20:17.349+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:20:17.000+03:00
+time=2025-02-10T15:20:22.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:20:22.000+03:00
+time=2025-02-10T15:20:27.348+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-10T15:20:27.000+03:00
+time=2025-02-10T15:20:27.398+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
+time=2025-02-10T15:20:27.399+03:00 level=INFO msg="app exit." who=server/main

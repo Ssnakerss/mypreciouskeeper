@@ -8,8 +8,8 @@ import (
 	"net"
 	"time"
 
-	"github.com/Ssnakerss/mypreciouskeeper/internal/lib"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
+	"github.com/Ssnakerss/mypreciouskeeper/internal/server/config"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/server/storage"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/services"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
@@ -28,8 +28,7 @@ type Server struct {
 }
 
 // New creates an instance of server with logger and gRPC server
-func New(l *slog.Logger, port int) *Server {
-
+func New(l *slog.Logger, cfg *config.Config) *Server {
 	recoveryOpts := []recovery.Option{
 		recovery.WithRecoveryHandler(func(p interface{}) (err error) {
 			l.Error("panic", slog.Any("panic", p))
@@ -44,20 +43,21 @@ func New(l *slog.Logger, port int) *Server {
 		),
 	}
 
-	gRPCServer := grpc.NewServer(grpc.ChainUnaryInterceptor(
-		recovery.UnaryServerInterceptor(recoveryOpts...),
-		grpclogging.UnaryServerInterceptor(logger.InterceptorLogger(l), loggingOpts...),
-	))
-	//TODO get dsn from config
-	dsn := "postgres://orchestra:orchestra12qwaszx@pg-ext.os.serk.lan:5103/orchestra?sslmode=disable"
+	gRPCServer := grpc.NewServer(
+		grpc.ChainUnaryInterceptor(
+			recovery.UnaryServerInterceptor(recoveryOpts...),
+			grpclogging.UnaryServerInterceptor(logger.InterceptorLogger(l), loggingOpts...),
+		),
+	)
+
+	dsn := cfg.ConString
 	db, err := storage.New(context.Background(), dsn, time.Second*3)
 	if err != nil {
 		log.Fatal("db connection failed: ", err)
 	}
 
-	//TODO get duration from config
 	//Create authorization service and register it to gRPC server
-	a := services.NewAuthService(l, db, lib.JWTDuration)
+	a := services.NewAuthService(l, db, cfg.TokenTTL)
 	aAPI := NewServerAuthAPI(a)
 	aAPI.RegisterGRPC(gRPCServer)
 	//Create asset service and register it to gRPC server
@@ -71,7 +71,7 @@ func New(l *slog.Logger, port int) *Server {
 	return &Server{
 		l:    l,
 		gRPC: gRPCServer,
-		port: port,
+		port: cfg.GRPC.Port,
 	}
 }
 

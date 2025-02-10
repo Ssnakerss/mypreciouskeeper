@@ -20,8 +20,13 @@ type GRPCClient struct {
 func NewGRPCClient(grpcAddress string) *GRPCClient {
 	Conn, err := grpc.NewClient(
 		grpcAddress,
+		//TODO: Asset create error: rpc error: code = ResourceExhausted desc = grpc: received message larger than max (40123519 vs. 4194304)
+		// Why MaxCall ne rabotaet???
+		grpc.WithDefaultCallOptions(
+			grpc.MaxCallRecvMsgSize(1024*1024*50),
+			grpc.MaxCallSendMsgSize(1024*1024*50),
+		), //50mb message size
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(1024*1024*500)), //50mb message size
 	)
 	if err != nil {
 		log.Fatalf("grpc server connection failed: %v", err)

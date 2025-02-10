@@ -172,7 +172,15 @@ func (m fileScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						m.err = nil
 					}
 				} else if m.action == "UPDATE" {
-					m.err = fmt.Errorf("NOT IMPLEMENTED")
+					// Update asset on server
+					asset.ID = m.asset.ID
+					err = client.App.UpdateAsset(context.Background(), asset)
+					if err != nil {
+						m.focusIndex = 0
+						m.err = fmt.Errorf("Asset update error: %v", err)
+						m.success = "Update successful"
+						m.err = nil
+					}
 				}
 			}
 			if s == "enter" && m.focusIndex == len(m.textInputs)+1 {

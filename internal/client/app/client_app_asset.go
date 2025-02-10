@@ -24,3 +24,9 @@ func (app *ClientApp) List(
 	//TODO: check for user id and asset sticker
 	return app.remoteAssetService.List(ctx, -1, assetType, "")
 }
+
+func (app *ClientApp) UpdateAsset(
+	ctx context.Context,
+	asset *models.Asset) error {
+	return app.remoteAssetService.Update(ctx, asset)
+}

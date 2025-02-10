@@ -35,7 +35,7 @@ func main() {
 	//Start ping for remote service
 	syncCtx, syncCancel := context.WithCancel(context.Background())
 	defer syncCancel()
-	go client.App.Ping(baseCtx, syncCancel, 3)
+	go client.App.Ping(baseCtx, syncCancel, 5)
 
 	//Setup  initial app screen
 	initialScreen := screens.RootScreen()

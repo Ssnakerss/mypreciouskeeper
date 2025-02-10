@@ -29,6 +29,8 @@ type cardScreen struct {
 
 	err     error
 	success string
+
+	asset *models.Asset
 }
 
 func CreateCardScreen(assetID int64) cardScreen {
@@ -37,6 +39,7 @@ func CreateCardScreen(assetID int64) cardScreen {
 		//Sticker + Name, number, expire month/year,CVV
 		textInputs: make([]textinput.Model, 6),
 	}
+	var err error
 	//Create new asset
 	if assetID == 0 {
 		m.caption = "Create card"
@@ -97,20 +100,20 @@ func CreateCardScreen(assetID int64) cardScreen {
 		cvv.CharLimit = 3
 
 		//Get asset data
-		asset, err := client.App.GetAsset(context.Background(), assetID)
+		m.asset, err = client.App.GetAsset(context.Background(), assetID)
 		if err != nil {
 			m.err = err
 			number.Placeholder = "Get error"
 			name.Placeholder = "Get error"
 		} else {
 			card := models.Card{}
-			err = json.Unmarshal(asset.Body, &card)
+			err = json.Unmarshal(m.asset.Body, &card)
 			if err != nil {
 				m.err = err
 				number.Placeholder = "Convert error"
 				name.Placeholder = "Convert error"
 			} else {
-				sticker.SetValue(asset.Sticker)
+				sticker.SetValue(m.asset.Sticker)
 				number.SetValue(card.Number)
 				name.SetValue(card.Name)
 				month.SetValue(card.ExpMonth)
@@ -192,7 +195,15 @@ func (m cardScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						m.err = nil
 					}
 				} else if m.action == "UPDATE" {
-					m.err = fmt.Errorf("NOT IMPLEMENTED")
+					// Update asset on server
+					asset.ID = m.asset.ID
+					err = client.App.UpdateAsset(context.Background(), asset)
+					if err != nil {
+						m.focusIndex = 0
+						m.err = fmt.Errorf("Asset update error: %v", err)
+						m.success = "Update successful"
+						m.err = nil
+					}
 				}
 			}
 

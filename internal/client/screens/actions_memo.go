@@ -33,13 +33,15 @@ type memoScreen struct {
 
 	err     error
 	success string
+
+	asset *models.Asset
 }
 
 func CreateMemoScreen(assetID int64) memoScreen {
 	//Default assetID - 0 means show create screen
 	//Else get asset by ID  and display it
 	var err error
-	var asset *models.Asset
+
 	ti := textarea.New()
 
 	t := textinput.New()
@@ -60,7 +62,7 @@ func CreateMemoScreen(assetID int64) memoScreen {
 		t.Placeholder = "Sticker"
 	} else {
 		//Get asset data
-		asset, err = client.App.GetAsset(context.Background(), assetID)
+		m.asset, err = client.App.GetAsset(context.Background(), assetID)
 		if err != nil {
 			m.err = err
 			ti.Placeholder = "Get error"
@@ -68,17 +70,17 @@ func CreateMemoScreen(assetID int64) memoScreen {
 			return m
 		}
 		memo := models.Memo{}
-		err = json.Unmarshal(asset.Body, &memo)
+		err = json.Unmarshal(m.asset.Body, &memo)
 		if err != nil {
 			m.err = err
 			ti.Placeholder = "Convert error"
 			t.Placeholder = "Convert error"
 			return m
 		}
-		t.SetValue(asset.Sticker)
+		t.SetValue(m.asset.Sticker)
 		ti.SetValue(memo.Text)
-		m.caption = "Display memo #" + strconv.FormatInt(asset.ID, 10)
-		m.action = "EDIT"
+		m.caption = "Display memo #" + strconv.FormatInt(m.asset.ID, 10)
+		m.action = "UPDATE"
 	}
 
 	m.textInputs[0] = t
@@ -161,7 +163,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 					if m.action == "CREATE" {
 						// Create new asset on server
-						asset, err = client.App.CreateAsset(context.Background(), asset)
+						m.asset, err = client.App.CreateAsset(context.Background(), asset)
 						if err != nil {
 							m.focusIndex = 0
 							m.err = fmt.Errorf("Asset create error: %v", err)
@@ -175,22 +177,15 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						}
 					} else if m.action == "UPDATE" {
 						// Update asset on server
-						// asset.ID = assetID
-						// asset, err = client.App.UpdateAsset(context.Background(), asset)
-						// if err != nil {
-						// 	m.focusIndex = 0
-						// 	m.err = fmt.Errorf("Asset update error: %v", err)
-						// } else {
-						// 	//Clear inputs
-						// 	m.focusIndex = 0
-						// 	m.textarea.SetValue("")
-						// 	m.textInputs[0].SetValue("")
-						// 	m.success = "Update successful"
-						// 	m.err = nil
-						// }
+						asset.ID = m.asset.ID
+						err = client.App.UpdateAsset(context.Background(), asset)
+						if err != nil {
+							m.focusIndex = 0
+							m.err = fmt.Errorf("Asset update error: %v", err)
+							m.success = "Update successful"
+							m.err = nil
+						}
 
-						//TODO implement update
-						m.err = fmt.Errorf("NOT IMPLEMENTED")
 					}
 				}
 
@@ -282,7 +277,15 @@ func (m memoScreen) View() string {
 	if m.success != "" {
 		fmt.Fprintf(&b, "\n%s\n", successText.Render(m.success))
 	}
-	fmt.Fprintf(&b, "\n%s\n", "-= esc - back =-")
+	fmt.Fprintf(&b, "\n%s\n", "esc - back")
+
+	if m.err != nil {
+		fmt.Fprintf(&b, "\n%s\n", errorText.Render(m.err.Error()))
+	}
+
+	if m.success != "" {
+		fmt.Fprintf(&b, "\n%s\n", successText.Render(m.success))
+	}
 
 	//Connection status 'widget'
 	statusWidget(client.App.Workmode, &b)
