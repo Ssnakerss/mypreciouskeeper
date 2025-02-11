@@ -12,11 +12,10 @@ func TestEncryptAES(t *testing.T) {
 	t.Log(data)
 	key := gofakeit.Sentence(1)
 	t.Log(key)
-	bkey := []byte(key)
-	encrypted, err := EncryptAES([]byte(data), bkey)
+	encrypted, err := EncryptAES(key, data)
 	require.NoError(t, err)
 	t.Log(encrypted)
-	decrypted, err := DecryptAES(encrypted, bkey)
+	decrypted, err := DecryptAES(key, encrypted)
 	require.NoError(t, err)
 	t.Log(decrypted)
 
