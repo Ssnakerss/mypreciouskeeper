@@ -2,8 +2,11 @@ package services
 
 import (
 	"context"
+	"errors"
 	"log/slog"
+	"time"
 
+	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 )
 
@@ -81,7 +84,31 @@ func (a *AssetService) List(
 	)
 	l.Info("getting asset data by id")
 	return a.s.ListAssets(ctx, userID, atype, asticker)
+}
 
+// ListLatest for sync service - return recently  updated record
+// Dummy to meet SyncService interface requirements
+// TODO - implement
+func (c *AssetService) ListLatest(
+	ctx context.Context,
+	userID int64,
+	lastUpdated time.Time,
+) (assets []*models.Asset, err error) {
+	return nil, errors.New("not implemented")
+}
+
+// Update to latest asset data in storage
+// Now - update all new asset
+// TODO  -  check local update/create time
+func (c *AssetService) UpdateToLatest(ctx context.Context,
+	asset *models.Asset,
+) (int, error) {
+	err := c.Update(ctx, asset)
+	if errors.Is(err, apperrs.ErrAssetNotFound) {
+		//Update failed, tryung to create
+		_, err = c.Create(ctx, asset)
+	}
+	return 0, err
 }
 
 // Update asset information in storage

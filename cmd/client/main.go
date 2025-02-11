@@ -2,12 +2,10 @@ package main
 
 import (
 	"context"
-	"log"
 
 	"os"
 
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
-	"github.com/Ssnakerss/mypreciouskeeper/internal/client/config"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/client/screens"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
 	tea "github.com/charmbracelet/bubbletea"
@@ -21,27 +19,13 @@ var (
 )
 
 func main() {
-	cfg := config.Load()
-
-	file, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	l := logger.Setup(cfg.Env, file)
-	l = l.With("who", "server/main")
-	l.Info("server starting ...")
 
 	//Base app context
 	baseCtx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	client.App = client.NewClientApp(baseCtx, l, cfg, Version, BuildTime)
-	//Start ping for remote service
-	syncCtx, syncCancel := context.WithCancel(context.Background())
-	defer syncCancel()
-	go client.App.Ping(baseCtx, syncCancel, 5)
+	//run app
+	client.Run(baseCtx, Version, BuildTime)
 
 	//Setup  initial app screen
 	initialScreen := screens.RootScreen()
@@ -55,12 +39,12 @@ func main() {
 	if _, err := tea.NewProgram(
 		initialScreen,
 	).Run(); err != nil {
-
-		l.Error("Error running program:", logger.Err(err))
+		client.App.L.Error("Error running program:", logger.Err(err))
 	}
-	//TODO:....
+
+	client.App.L.Info("prepare to stop")
 	cancel()
-	<-syncCtx.Done()
-	client.App.Close()
-	l.Info("app exit.")
+	client.App.Stop()
+	client.App.L.Info("bye-bye")
+
 }

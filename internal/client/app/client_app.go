@@ -37,21 +37,26 @@ type AuthService interface {
 }
 
 type AssetService interface {
+	//Create asset
 	Create(
 		ctx context.Context,
 		asset *models.Asset,
 	) (*models.Asset, error)
+	//Get asset by id and userid
 	Get(
 		ctx context.Context,
 		userID int64,
 		aid int64,
 	) (*models.Asset, error)
+	//List all assets by userid and with like Type and Sticker
 	List(
 		ctx context.Context,
 		userID int64,
 		atype string,
 		asticker string,
 	) ([]*models.Asset, error)
+
+	//Update asset
 	Update(
 		ctx context.Context,
 		asset *models.Asset,
@@ -79,6 +84,7 @@ type ClientApp struct {
 	localAssetService AssetService
 
 	pingService PingService
+	SyncClient  *SyncClient
 
 	Workmode string //Workmode - LOCAL  or REMOTE  (LOCAL - local user, REMOTE - remote user)
 
@@ -97,6 +103,10 @@ type ClientApp struct {
 
 	Version   string
 	BuildTime string
+
+	//Context to sync goroutines
+	SyncCtx       context.Context
+	SyncCtxCancel context.CancelFunc
 
 	//TODO: implement screens logic ???   how to add tea screeen into app
 	// appScreens map[string]tea.Model
@@ -125,6 +135,9 @@ func NewClientApp(
 	//Prepare remote gRPC service
 	myGrpc := grpcClient.NewGRPCClient(net.JoinHostPort(cfg.GRPC.Host, strconv.Itoa(cfg.GRPC.Port)))
 
+	//Setup sync
+	syncClient := NewSyncClient(ctx, myGrpc, assetService)
+
 	return &ClientApp{
 		L:                  l,
 		cfg:                cfg,
@@ -134,6 +147,8 @@ func NewClientApp(
 
 		localAuthService:  authService,
 		localAssetService: assetService,
+
+		SyncClient: syncClient,
 
 		Version:   v,
 		BuildTime: b,
@@ -163,8 +178,9 @@ func (c *ClientApp) Ping(
 				remoteTime := time.Unix(i, 0)
 				l.Info("gRPC connection is ready", "remote time", remoteTime)
 
-				if c.AuthToken == "" {
-					l.Info("try to login remotely")
+				//Restore remote login if user initially logged in locally
+				if c.AuthToken == "" && c.login != "" && c.password != "" {
+					l.Info("trying to login remotely")
 					if token, err := c.remoteAuthService.Login(ctx, c.login, c.password); err != nil {
 						l.Error("remote login failed", "err", err)
 					} else {
@@ -173,15 +189,16 @@ func (c *ClientApp) Ping(
 						l.Info("remote login success")
 					}
 				}
+				//Starting Sync process
+				if c.RemoteUserID > 0 {
+					updatedrecord, err := c.SyncClient.Sync(ctx, c.RemoteUserID)
+					if err != nil {
+						l.Error("Sync failed", "err", err)
+					} else {
+						l.Info("Sync success", "updated records", updatedrecord)
+					}
+				}
 			}
 		}
 	}
-}
-
-func (c *ClientApp) Close() {
-	c.remoteAssetService.Close()
-	c.remoteAssetService.Close()
-
-	c.localAssetService.Close()
-	c.localAuthService.Close()
 }

@@ -4,6 +4,8 @@ import (
 	"context"
 	"time"
 
+	"errors"
+
 	"github.com/Ssnakerss/mypreciouskeeper/internal/apperrs"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
 	grpcserver "github.com/Ssnakerss/mypreciouskeeper/proto/gen"
@@ -83,6 +85,46 @@ func (c *GRPCClient) List(
 	return assets, nil
 }
 
+// ListLatest for sync service - return recently  updated record
+// TODO - implement time filtering on server side
+func (c *GRPCClient) ListLatest(
+	ctx context.Context,
+	userID int64,
+	lastUpdated time.Time,
+) (assets []*models.Asset, err error) {
+	//Get all assets of current user
+	//Not efficient - need to implement server side filtering
+	assetList, err := c.AssetClient.List(context.Background(), &grpcserver.ListRequest{
+		Token: c.token,
+	})
+	if err != nil {
+		return nil, err
+	}
+	for _, asset := range assetList.Assets {
+		//Check update time and if later - add to list
+		if asset.UpdatedAt > lastUpdated.Unix() {
+			assets = append(assets, &models.Asset{
+				ID:        asset.AssetId,
+				Type:      asset.Type,
+				Sticker:   asset.Sticker,
+				Body:      asset.Body,
+				CreatedAt: time.Unix(asset.CreatedAt, 0),
+				UpdatedAt: time.Unix(asset.UpdatedAt, 0),
+			})
+		}
+	}
+	return assets, nil
+}
+
+// Dummy to meet SyncService interface requirements
+// TODO - implement
+func (c *GRPCClient) UpdateToLatest(ctx context.Context,
+	asset *models.Asset,
+) (int, error) {
+	return 0, errors.New("not implemented")
+}
+
+// Delete asset on server side
 func (c *GRPCClient) Delete(
 	ctx context.Context,
 	userID int64,
@@ -91,6 +133,7 @@ func (c *GRPCClient) Delete(
 	return err
 }
 
+// Update asset onserver side
 func (c *GRPCClient) Update(ctx context.Context, asset *models.Asset) error {
 	_, err := c.AssetClient.Update(context.Background(), &grpcserver.UpdateRequest{
 		Token:   c.token,

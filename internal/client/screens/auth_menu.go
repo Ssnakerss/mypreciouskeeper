@@ -67,9 +67,7 @@ func (m AuthMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyCtrlC, tea.KeyEsc:
 			m.quitting = true
 			m.output.ClearScreen()
-
 			return m, tea.Quit
-
 		case tea.KeyEnter:
 			item, ok := m.list.SelectedItem().(item)
 			if ok {

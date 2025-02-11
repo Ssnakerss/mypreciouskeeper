@@ -1,23 +1,109 @@
-time=2025-02-10T15:49:47.853+03:00 level=INFO msg="server starting ..." who=server/main
-time=2025-02-10T15:49:52.959+03:00 level=INFO msg="gRPC connection is not ready" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:49:55.765+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:49:55.765+03:00 level=INFO msg="app exit." who=server/main
-time=2025-02-10T15:50:38.798+03:00 level=INFO msg="server starting ..." who=server/main
-time=2025-02-10T15:50:43.821+03:00 level=INFO msg="gRPC connection is not ready" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:50:48.802+03:00 level=INFO msg="gRPC connection is not ready" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:50:52.288+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:50:52.289+03:00 level=INFO msg="app exit." who=server/main
-time=2025-02-10T15:53:22.251+03:00 level=INFO msg="server starting ..." who=server/main
-time=2025-02-10T15:53:27.273+03:00 level=INFO msg="gRPC connection is not ready" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:53:31.109+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:53:31.109+03:00 level=INFO msg="app exit." who=server/main
-time=2025-02-10T15:53:57.916+03:00 level=INFO msg="server starting ..." who=server/main
-time=2025-02-10T15:54:02.933+03:00 level=INFO msg="gRPC connection is not ready" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:54:04.198+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
-time=2025-02-10T15:54:04.199+03:00 level=INFO msg="app exit." who=server/main
-time=2025-02-10T16:04:16.846+03:00 level=INFO msg="server starting ..." who=server/main
-time=2025-02-10T16:04:21.425+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
-time=2025-02-10T16:04:21.425+03:00 level=INFO msg="app exit." who=server/main
-time=2025-02-10T16:06:39.423+03:00 level=INFO msg="server starting ..." who=server/main
-time=2025-02-10T16:06:42.667+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
-time=2025-02-10T16:06:42.667+03:00 level=INFO msg="app exit." who=server/main
+time=2025-02-11T15:27:09.026+03:00 level=INFO msg="server starting ..." who=server/main
+time=2025-02-11T15:27:09.035+03:00 level=INFO msg="starting ping seriver" who=server/main
+time=2025-02-11T15:27:09.035+03:00 level=INFO msg="app started" who=server/main
+time=2025-02-11T15:27:14.157+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:14.000+03:00
+time=2025-02-11T15:27:19.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:19.000+03:00
+time=2025-02-11T15:27:24.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:24.000+03:00
+time=2025-02-11T15:27:24.713+03:00 level=INFO msg="remote user login" who=server/main name=ivan@test.ru "remote id"=105
+time=2025-02-11T15:27:24.713+03:00 level=INFO msg="registering new user" who=server/main who=AuthService.Register email=ivan@test.ru
+time=2025-02-11T15:27:24.829+03:00 level=INFO msg="creating new user" who=server/main who=AuthService.Register email=ivan@test.ru user="&{ID:0 Email:ivan@test.ru PassHash:$2a$10$bOsvKU/o9Sgf04Lnmu7OHuQTtrxNGHJyRd3rIZlqreMETTs4yVuuy JWTToken: CreatedAt:2025-02-11 15:27:24.8295491 +0300 MSK m=+15.916877401 UpdatedAt:2025-02-11 15:27:24.8295491 +0300 MSK m=+15.916877401}"
+time=2025-02-11T15:27:24.830+03:00 level=ERROR msg="failed to create new user" who=server/main who=AuthService.Register email=ivan@test.ru error="user already exists"
+time=2025-02-11T15:27:29.035+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:29.000+03:00
+time=2025-02-11T15:27:29.049+03:00 level=INFO msg="updating asset data by id" who=server/main who=AssetService.Update id=138 type=MEMO sticker="New MEMO"
+time=2025-02-11T15:27:29.050+03:00 level=INFO msg="registering new asset" who=server/main who=AssetService.Create type=MEMO sticker="New MEMO"
+time=2025-02-11T15:27:29.209+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=1
+time=2025-02-11T15:27:34.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:34.000+03:00
+time=2025-02-11T15:27:34.043+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:27:39.035+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:39.000+03:00
+time=2025-02-11T15:27:39.044+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:27:44.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:44.000+03:00
+time=2025-02-11T15:27:44.052+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:27:49.037+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:49.000+03:00
+time=2025-02-11T15:27:49.042+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:27:54.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:54.000+03:00
+time=2025-02-11T15:27:54.042+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:27:59.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:27:59.000+03:00
+time=2025-02-11T15:27:59.046+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:28:04.038+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:28:04.000+03:00
+time=2025-02-11T15:28:04.047+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:28:09.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:28:09.000+03:00
+time=2025-02-11T15:28:09.042+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:28:14.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:28:14.000+03:00
+time=2025-02-11T15:28:14.087+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:28:19.036+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:28:19.000+03:00
+time=2025-02-11T15:28:19.045+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:28:19.650+03:00 level=INFO msg="prepare to stop" who=server/main
+time=2025-02-11T15:28:19.650+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
+time=2025-02-11T15:28:19.651+03:00 level=INFO msg="app exit." who=server/main
+time=2025-02-11T15:28:19.651+03:00 level=INFO msg=bye-bye who=server/main
+time=2025-02-11T15:29:00.566+03:00 level=INFO msg="server starting ..." who=server/main
+time=2025-02-11T15:29:00.575+03:00 level=INFO msg="starting ping seriver" who=server/main
+time=2025-02-11T15:29:00.576+03:00 level=INFO msg="app started" who=server/main
+time=2025-02-11T15:29:05.597+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:05.000+03:00
+time=2025-02-11T15:29:10.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:10.000+03:00
+time=2025-02-11T15:29:10.577+03:00 level=INFO msg="trying to login remotely" who=server/main who=ClientApp.Ping
+time=2025-02-11T15:29:10.658+03:00 level=INFO msg="remote user login" who=server/main name=ivan@test.ru "remote id"=105
+time=2025-02-11T15:29:10.658+03:00 level=INFO msg="registering new user" who=server/main who=AuthService.Register email=ivan@test.ru
+time=2025-02-11T15:29:10.672+03:00 level=INFO msg="remote login success" who=server/main who=ClientApp.Ping
+time=2025-02-11T15:29:10.681+03:00 level=INFO msg="updating asset data by id" who=server/main who=AssetService.Update id=138 type=MEMO sticker="New MEMO"
+time=2025-02-11T15:29:10.681+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=1
+time=2025-02-11T15:29:10.750+03:00 level=INFO msg="creating new user" who=server/main who=AuthService.Register email=ivan@test.ru user="&{ID:0 Email:ivan@test.ru PassHash:$2a$10$1WkFjKuSct1Qf56zr72LJunblDMYc64fFEeiRN/pP0rXHil1XTs/y JWTToken: CreatedAt:2025-02-11 15:29:10.7500959 +0300 MSK m=+10.254870601 UpdatedAt:2025-02-11 15:29:10.7500959 +0300 MSK m=+10.254870601}"
+time=2025-02-11T15:29:10.751+03:00 level=ERROR msg="failed to create new user" who=server/main who=AuthService.Register email=ivan@test.ru error="user already exists"
+time=2025-02-11T15:29:15.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:15.000+03:00
+time=2025-02-11T15:29:15.583+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:29:20.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:20.000+03:00
+time=2025-02-11T15:29:20.584+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:29:25.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:25.000+03:00
+time=2025-02-11T15:29:25.584+03:00 level=INFO msg="updating asset data by id" who=server/main who=AssetService.Update id=138 type=MEMO sticker="New MEMO"
+time=2025-02-11T15:29:25.729+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=1
+time=2025-02-11T15:29:30.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:30.000+03:00
+time=2025-02-11T15:29:30.592+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:29:35.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:35.000+03:00
+time=2025-02-11T15:29:35.585+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:29:40.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:40.000+03:00
+time=2025-02-11T15:29:40.584+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:29:45.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:45.000+03:00
+time=2025-02-11T15:29:45.585+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:29:50.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:50.000+03:00
+time=2025-02-11T15:29:50.584+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:29:55.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:29:55.000+03:00
+time=2025-02-11T15:29:55.586+03:00 level=INFO msg="updating asset data by id" who=server/main who=AssetService.Update id=138 type=MEMO sticker="New MEMO!!!!!"
+time=2025-02-11T15:29:55.796+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=1
+time=2025-02-11T15:30:00.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:00.000+03:00
+time=2025-02-11T15:30:00.587+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:05.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:05.000+03:00
+time=2025-02-11T15:30:05.584+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:10.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:10.000+03:00
+time=2025-02-11T15:30:10.585+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:15.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:15.000+03:00
+time=2025-02-11T15:30:15.584+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:20.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:20.000+03:00
+time=2025-02-11T15:30:20.583+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:25.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:25.000+03:00
+time=2025-02-11T15:30:25.586+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:30.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:30.000+03:00
+time=2025-02-11T15:30:30.585+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:35.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:35.000+03:00
+time=2025-02-11T15:30:35.583+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:40.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:40.000+03:00
+time=2025-02-11T15:30:40.584+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:45.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:45.000+03:00
+time=2025-02-11T15:30:45.583+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:50.577+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:50.000+03:00
+time=2025-02-11T15:30:50.585+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:30:55.579+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:30:55.000+03:00
+time=2025-02-11T15:30:55.585+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:31:00.579+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:31:00.000+03:00
+time=2025-02-11T15:31:00.587+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:31:05.578+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:31:05.000+03:00
+time=2025-02-11T15:31:05.584+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:31:10.579+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:31:10.000+03:00
+time=2025-02-11T15:31:10.590+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:31:15.579+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:31:15.000+03:00
+time=2025-02-11T15:31:15.589+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:31:20.579+03:00 level=INFO msg="gRPC connection is ready" who=server/main who=ClientApp.Ping "remote time"=2025-02-11T15:31:20.000+03:00
+time=2025-02-11T15:31:20.586+03:00 level=INFO msg="Sync success" who=server/main who=ClientApp.Ping "updated records"=0
+time=2025-02-11T15:31:21.686+03:00 level=INFO msg="prepare to stop" who=server/main
+time=2025-02-11T15:31:21.686+03:00 level=INFO msg="ping process terminated" who=server/main who=ClientApp.Ping
+time=2025-02-11T15:31:21.687+03:00 level=INFO msg="app exit." who=server/main
+time=2025-02-11T15:31:21.687+03:00 level=INFO msg=bye-bye who=server/main

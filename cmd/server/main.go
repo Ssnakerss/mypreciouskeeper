@@ -6,8 +6,8 @@ import (
 	"syscall"
 
 	"github.com/Ssnakerss/mypreciouskeeper/internal/logger"
+	server "github.com/Ssnakerss/mypreciouskeeper/internal/server/app"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/server/config"
-	server "github.com/Ssnakerss/mypreciouskeeper/internal/server/grpc"
 )
 
 func main() {
