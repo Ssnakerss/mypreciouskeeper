@@ -47,7 +47,18 @@ func (m rootScreenModel) View() string {
 }
 
 // SwitchScreen is the switcher which will switch between screens
-func (m rootScreenModel) SwitchScreen(model tea.Model) (tea.Model, tea.Cmd) {
+func (m rootScreenModel) SwitchScreen(
+	model tea.Model,
+	assetType string,
+) (tea.Model, tea.Cmd) {
+	if assetType != "" {
+		//check is master password already set
+		if string(client.App.GetMasterPass()) == "" {
+			//if not - redirect to input screen
+			model = ScreenMasterPass()
+		}
+	}
+
 	m.model = model
 	//Return .Init() to initialize the screen
 	return m.model, m.model.Init()

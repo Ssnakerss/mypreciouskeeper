@@ -10,13 +10,14 @@ import (
 func TestEncryptAES(t *testing.T) {
 	data := gofakeit.Sentence(10)
 	t.Log(data)
-	key := gofakeit.Sentence(1)
+	key := "" //gofakeit.Sentence(1)
 	t.Log(key)
-	encrypted, err := EncryptAES(key, data)
+	bkey := []byte(key)
+	encrypted, err := EncryptAES(bkey, []byte(data))
 	require.NoError(t, err)
-	t.Log(encrypted)
-	decrypted, err := DecryptAES(key, encrypted)
+	decrypted, err := DecryptAES(bkey, encrypted)
 	require.NoError(t, err)
 	t.Log(decrypted)
+	require.Equal(t, data, string(decrypted))
 
 }

@@ -4,80 +4,58 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
-	"encoding/base64"
-	"encoding/hex"
+	"crypto/sha256"
 	"fmt"
 	"io"
 )
 
-// func EncryptAES(data []byte, key []byte) ([]byte, error) {
-// 	aesblock, err := aes.NewCipher(key)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	res := make([]byte, aesblock.BlockSize())
-// 	aesblock.Encrypt(res, data)
-// 	return res, nil
-// }
+// generateFixedKey uses SHA-256 to fix key length (32 байта).
+func generateFixedKey(key []byte) []byte {
+	hash := sha256.Sum256(key)
+	return hash[:]
+}
 
-// func DecryptAES(data []byte, key []byte) ([]byte, error) {
-// 	aesblock, err := aes.NewCipher(key)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	res := make([]byte, aesblock.BlockSize())
-// 	aesblock.Decrypt(res, data)
-// 	return res, nil
-// }
+// encryptAES encrypr data with  key.
+func EncryptAES(key []byte, plaintextBytes []byte) ([]byte, error) {
+	fixedKey := generateFixedKey(key)
 
-func EncryptAES(keyString string, stringToEncrypt string) (string, error) {
-	// convert key to bytes
-	key, _ := hex.DecodeString(keyString)
-	plaintext := []byte(stringToEncrypt)
-
-	//Create a new Cipher Block from the key
-	block, err := aes.NewCipher(key)
+	block, err := aes.NewCipher(fixedKey)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	// The IV needs to be unique, but not secure. Therefore it's common to
-	// include it at the beginning of the ciphertext.
-	ciphertext := make([]byte, aes.BlockSize+len(plaintext))
+	ciphertext := make([]byte, aes.BlockSize+len(plaintextBytes))
 	iv := ciphertext[:aes.BlockSize]
+
+	// Generate a random IV
 	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
-		return "", err
+		return nil, err
 	}
 
 	stream := cipher.NewCFBEncrypter(block, iv)
-	stream.XORKeyStream(ciphertext[aes.BlockSize:], plaintext)
+	stream.XORKeyStream(ciphertext[aes.BlockSize:], plaintextBytes)
 
-	// convert to base64
-	return base64.URLEncoding.EncodeToString(ciphertext), nil
+	return ciphertext, nil
 }
 
-// decrypt from base64 to decrypted string
-func DecryptAES(keyString string, stringToDecrypt string) (string, error) {
-	key, _ := hex.DecodeString(keyString)
-	ciphertext, _ := base64.URLEncoding.DecodeString(stringToDecrypt)
+// decryptAES decrypt data with  key.
+func DecryptAES(key []byte, ciphertext []byte) ([]byte, error) {
+	fixedKey := generateFixedKey(key)
 
-	block, err := aes.NewCipher(key)
+	block, err := aes.NewCipher(fixedKey)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	// The IV needs to be unique, but not secure. Therefore it's common to
-	// include it at the beginning of the ciphertext.
 	if len(ciphertext) < aes.BlockSize {
-		return "", err
+		return nil, fmt.Errorf("ciphertext too short")
 	}
+
 	iv := ciphertext[:aes.BlockSize]
 	ciphertext = ciphertext[aes.BlockSize:]
 
 	stream := cipher.NewCFBDecrypter(block, iv)
-
-	// XORKeyStream can work in-place if the two arguments are the same.
 	stream.XORKeyStream(ciphertext, ciphertext)
 
-	return fmt.Sprintf("%s", ciphertext), nil
+	return ciphertext, nil
 }

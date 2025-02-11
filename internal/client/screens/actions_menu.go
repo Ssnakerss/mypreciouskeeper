@@ -17,6 +17,7 @@ func CreateActionsMenuScreen() CreateActionsMenuModel {
 		item{title: "Card", alias: "create_card"},
 		item{title: "File", alias: "create_file"},
 		item{title: "View assets", alias: "view_assets"},
+		item{title: "Set master password", alias: "set_master_password"},
 	}
 
 	l := list.New(items, itemDelegate{}, defaultWidth, defaultHeight)
@@ -56,7 +57,7 @@ func (m CreateActionsMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			//Return to prev screen
 		case tea.KeyEsc, tea.KeyCtrlQ:
 			screen_y := AuthMenuScreen()
-			return RootScreen().SwitchScreen(&screen_y)
+			return RootScreen().SwitchScreen(&screen_y, "")
 		case tea.KeyEnter:
 			item, ok := m.list.SelectedItem().(item)
 
@@ -73,8 +74,10 @@ func (m CreateActionsMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					nextScreen = CreateFileScreen(0)
 				case "view_assets":
 					nextScreen = CreateListScreen()
+				case "set_master_password":
+					nextScreen = ScreenMasterPass()
 				}
-				return RootScreen().SwitchScreen(nextScreen)
+				return RootScreen().SwitchScreen(nextScreen, "")
 			}
 		}
 	}

@@ -13,7 +13,6 @@ import (
 
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
-	"github.com/charmbracelet/bubbles/cursor"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/muesli/termenv"
@@ -22,7 +21,6 @@ import (
 type fileScreen struct {
 	focusIndex int
 	textInputs []textinput.Model
-	cursorMode cursor.Mode
 
 	caption string
 	action  string //for button caption
@@ -88,7 +86,7 @@ func CreateFileScreen(assetID int64) fileScreen {
 			//Parse sticker into sticker and filename
 			s := strings.Split(m.asset.Sticker, "|")
 			if len(s) != 2 {
-				m.err = fmt.Errorf("Asset sticker is not valid: %v", m.asset.Sticker)
+				m.err = fmt.Errorf("asset sticker is not valid: %v", m.asset.Sticker)
 				sticker.Placeholder = "Sticker is not valid"
 				file.Placeholder = "Sticker is not valid"
 			} else {
@@ -133,7 +131,7 @@ func (m fileScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				errMsg := validate(m.textInputs)
 				if errMsg != "" {
 					//Validation fails - return
-					m.err = fmt.Errorf("Validation error: %v", errMsg)
+					m.err = fmt.Errorf("validation error: %v", errMsg)
 					m.focusIndex = 0
 					return m, nil
 				} else {
@@ -146,7 +144,7 @@ func (m fileScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				body, err := os.ReadFile(filename)
 				if err != nil {
 					m.focusIndex = 0
-					m.err = fmt.Errorf("File read error: %v", err)
+					m.err = fmt.Errorf("file read error: %v", err)
 					return m, nil
 				}
 				//Get file name withot path
@@ -158,10 +156,10 @@ func (m fileScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				if m.action == "CREATE" {
 					// Create new asset on server
-					asset, err = client.App.CreateAsset(context.Background(), asset)
+					_, err = client.App.CreateAsset(context.Background(), asset)
 					if err != nil {
 						m.focusIndex = 0
-						m.err = fmt.Errorf("Asset create error: %v", err)
+						m.err = fmt.Errorf("asset create error: %v", err)
 					} else {
 						//Clear inputs
 						for i := range m.textInputs {
@@ -177,7 +175,7 @@ func (m fileScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					err = client.App.UpdateAsset(context.Background(), asset)
 					if err != nil {
 						m.focusIndex = 0
-						m.err = fmt.Errorf("Asset update error: %v", err)
+						m.err = fmt.Errorf("asset update error: %v", err)
 						m.success = "Update successful"
 						m.err = nil
 					}
@@ -191,7 +189,7 @@ func (m fileScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					err := os.WriteFile(filepath.Join(path, filename), m.asset.Body, 0644)
 					if err != nil {
 						m.focusIndex = 0
-						m.err = fmt.Errorf("File save error: %v", err)
+						m.err = fmt.Errorf("file save error: %v", err)
 					} else {
 						m.focusIndex = 0
 						m.success = "Save successful"
@@ -199,7 +197,7 @@ func (m fileScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 				} else {
 					m.focusIndex = 0
-					m.err = fmt.Errorf("Asset is not file")
+					m.err = fmt.Errorf("asset is not file")
 				}
 			}
 

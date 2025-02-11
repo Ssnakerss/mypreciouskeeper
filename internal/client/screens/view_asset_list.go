@@ -61,16 +61,16 @@ func (m ListView) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			switch m.list.SelectedItem().(listItem).Type {
 			case models.AssetTypeMemo:
 				screen_y := CreateMemoScreen(m.list.SelectedItem().(listItem).ID)
-				return RootScreen().SwitchScreen(&screen_y)
+				return RootScreen().SwitchScreen(&screen_y, models.AssetTypeMemo)
 			case models.AssetTypeCredentials:
 				screen_y := CreateCredentialsScreen(m.list.SelectedItem().(listItem).ID)
-				return RootScreen().SwitchScreen(&screen_y)
+				return RootScreen().SwitchScreen(&screen_y, models.AssetTypeCredentials)
 			case models.AssetTypeCard:
 				screen_y := CreateCardScreen(m.list.SelectedItem().(listItem).ID)
-				return RootScreen().SwitchScreen(&screen_y)
+				return RootScreen().SwitchScreen(&screen_y, models.AssetTypeCard)
 			case models.AssetTypeFile:
 				screen_y := CreateFileScreen(m.list.SelectedItem().(listItem).ID)
-				return RootScreen().SwitchScreen(&screen_y)
+				return RootScreen().SwitchScreen(&screen_y, models.AssetTypeFile)
 			default:
 				footer = "NOT IMPLEMENTED:" + m.list.SelectedItem().(listItem).Type
 			}
@@ -78,7 +78,7 @@ func (m ListView) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		case tea.KeyEsc:
 			screen_y := CreateActionsMenuScreen()
-			return RootScreen().SwitchScreen(&screen_y)
+			return RootScreen().SwitchScreen(&screen_y, "")
 		}
 
 	case tea.WindowSizeMsg:

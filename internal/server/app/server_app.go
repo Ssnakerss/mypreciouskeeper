@@ -56,6 +56,9 @@ func New(l *slog.Logger, cfg *config.Config) *Server {
 	if err != nil {
 		log.Fatal("db connection failed: ", err)
 	}
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	db.Prepare(ctx)
 
 	//Create authorization service and register it to gRPC server
 	a := services.NewAuthService(l, db, cfg.TokenTTL)

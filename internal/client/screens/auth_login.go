@@ -11,20 +11,18 @@ import (
 	"strings"
 
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
-	"github.com/charmbracelet/bubbles/cursor"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/muesli/termenv"
 )
 
 type screenLogin struct {
-	focusIndex       int
-	textInputs       []textinput.Model
-	cursorMode       cursor.Mode
-	err              error
-	success          string
-	warning          string
-	connectionStatus string
+	focusIndex int
+	textInputs []textinput.Model
+
+	err     error
+	success string
+	warning string
 }
 
 func ScreenLogin() screenLogin {
@@ -85,7 +83,7 @@ func (m screenLogin) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				errMsg := validate(m.textInputs)
 				if errMsg != "" {
 					//Validation fails - return
-					m.err = fmt.Errorf("Validation error: %v", errMsg)
+					m.err = fmt.Errorf("validation error: %v", errMsg)
 					m.focusIndex = 0
 					return m, nil
 				} else {
@@ -99,7 +97,7 @@ func (m screenLogin) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				)
 				if err != nil {
 					m.focusIndex = 1
-					m.err = fmt.Errorf("Login error: %v", err)
+					m.err = fmt.Errorf("login error: %v", err)
 				} else {
 					if client.App.Workmode == client.LOCAL {
 						m.warning = "Local login successful"
@@ -164,7 +162,7 @@ func (m *screenLogin) updateInputs(msg tea.Msg) tea.Cmd {
 // Render screen view
 func (m screenLogin) View() string {
 	var b strings.Builder
-	b.WriteString(addKey.Render(fmt.Sprintf("Login")))
+	b.WriteString(addKey.Render("LOGIN"))
 	fmt.Fprintf(&b, "\n\n")
 
 	for i := range m.textInputs {
@@ -174,9 +172,9 @@ func (m screenLogin) View() string {
 		}
 	}
 
-	button := blurredButton.Render("[Login]")
+	button := blurredButton.Render("[LOGIN]")
 	if m.focusIndex == len(m.textInputs) {
-		button = focusedButton.Render("[Login]")
+		button = focusedButton.Render("[LOGIN]")
 	}
 
 	fmt.Fprintf(&b, "\n\n%s\n\n", button)

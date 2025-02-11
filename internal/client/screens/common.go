@@ -22,12 +22,10 @@ type (
 )
 
 var (
-	focusedStyle        = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
-	blurredStyle        = lipgloss.NewStyle().Foreground(lipgloss.Color("240"))
-	cursorStyle         = focusedStyle
-	noStyle             = lipgloss.NewStyle()
-	cursorModeHelpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("244"))
-	helpStyleInput      = blurredStyle
+	focusedStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
+	blurredStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("240"))
+	cursorStyle  = focusedStyle
+	noStyle      = lipgloss.NewStyle()
 
 	focusedButton = focusedStyle.Padding(0, 2).Bold(true)
 	blurredButton = blurredStyle.Padding(0, 2)
@@ -45,7 +43,6 @@ var (
 	itemStyle         = lipgloss.NewStyle().PaddingLeft(4).Foreground(lipgloss.Color("#54B575"))
 	selectedItemStyle = lipgloss.NewStyle().PaddingLeft(2).Foreground(lipgloss.Color("#A1FCC0"))
 	paginationStyle   = list.DefaultStyles().PaginationStyle.PaddingLeft(4)
-	quitTextStyle     = lipgloss.NewStyle().Margin(1, 0, 2, 4)
 )
 
 type item struct {
@@ -96,7 +93,7 @@ func emailValidator(s string) error {
 		return fmt.Errorf("email must contain @")
 	}
 	if !strings.Contains(s, ".") {
-		return fmt.Errorf("email must contain .")
+		return fmt.Errorf("email must contain dot '.'")
 	}
 	return nil
 }
@@ -109,7 +106,7 @@ func passwordValidator(s string) error {
 
 func stickerValidator(s string) error {
 	if s == "" {
-		return fmt.Errorf("please input some sticker, please .....")
+		return fmt.Errorf("please input some sticker")
 	}
 	return nil
 }

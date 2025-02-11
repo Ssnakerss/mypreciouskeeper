@@ -14,7 +14,6 @@ import (
 
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
-	"github.com/charmbracelet/bubbles/cursor"
 	"github.com/charmbracelet/bubbles/textarea"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
@@ -24,7 +23,6 @@ import (
 type memoScreen struct {
 	focusIndex int
 	textInputs []textinput.Model
-	cursorMode cursor.Mode
 
 	textarea textarea.Model
 
@@ -42,7 +40,7 @@ func CreateMemoScreen(assetID int64) memoScreen {
 	//Else get asset by ID  and display it
 	var err error
 
-	ti := textarea.New()
+	ta := textarea.New()
 
 	t := textinput.New()
 	t.Cursor.Style = cursorStyle
@@ -58,33 +56,38 @@ func CreateMemoScreen(assetID int64) memoScreen {
 	if assetID == 0 {
 		m.caption = "Create memo"
 		m.action = "CREATE"
-		ti.Placeholder = "Your memo here  ..."
+		ta.Placeholder = "Your memo here  ..."
 		t.Placeholder = "Sticker"
 	} else {
 		//Get asset data
 		m.asset, err = client.App.GetAsset(context.Background(), assetID)
 		if err != nil {
 			m.err = err
-			ti.Placeholder = "Get error"
 			t.Placeholder = "Get error"
+			ta.Placeholder = "Get error"
+			m.textInputs[0] = t
+			m.textarea = ta
 			return m
 		}
 		memo := models.Memo{}
 		err = json.Unmarshal(m.asset.Body, &memo)
 		if err != nil {
 			m.err = err
-			ti.Placeholder = "Convert error"
 			t.Placeholder = "Convert error"
+			ta.Placeholder = "Convert error"
+			m.textInputs[0] = t
+			m.textarea = ta
 			return m
 		}
 		t.SetValue(m.asset.Sticker)
-		ti.SetValue(memo.Text)
+		ta.SetValue(memo.Text)
+
 		m.caption = "Display memo #" + strconv.FormatInt(m.asset.ID, 10)
 		m.action = "UPDATE"
 	}
 
 	m.textInputs[0] = t
-	m.textarea = ti
+	m.textarea = ta
 
 	return m
 }
@@ -109,7 +112,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			//Return to previous screen - Action menu
 		case tea.KeyEsc, tea.KeyCtrlQ:
 			screen_y := CreateActionsMenuScreen()
-			return RootScreen().SwitchScreen(&screen_y)
+			return RootScreen().SwitchScreen(&screen_y, "")
 		case tea.KeyTab:
 			if m.textarea.Focused() {
 				m.textarea.Blur()
@@ -140,7 +143,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					errMsg := validate(m.textInputs)
 					if errMsg != "" {
 						//Validation fails - return
-						m.err = fmt.Errorf("Validation error: %v", errMsg)
+						m.err = fmt.Errorf("validation error: %v", errMsg)
 						m.focusIndex = 0
 						return m, nil
 					} else {
@@ -153,7 +156,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 					body, err := json.Marshal(memo)
 					if err != nil {
-						m.err = fmt.Errorf("JSON error: %v", err)
+						m.err = fmt.Errorf("json error: %v", err)
 						return m, nil
 					}
 					asset := &models.Asset{
@@ -166,7 +169,7 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						m.asset, err = client.App.CreateAsset(context.Background(), asset)
 						if err != nil {
 							m.focusIndex = 0
-							m.err = fmt.Errorf("Asset create error: %v", err)
+							m.err = fmt.Errorf("asset create error: %v", err)
 						} else {
 							//Clear inputs
 							m.focusIndex = 0
@@ -181,11 +184,10 @@ func (m memoScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 						err = client.App.UpdateAsset(context.Background(), asset)
 						if err != nil {
 							m.focusIndex = 0
-							m.err = fmt.Errorf("Asset update error: %v", err)
+							m.err = fmt.Errorf("asset update error: %v", err)
 							m.success = "Update successful"
 							m.err = nil
 						}
-
 					}
 				}
 

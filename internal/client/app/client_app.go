@@ -98,6 +98,10 @@ type ClientApp struct {
 	login    string
 	password string
 
+	//master password
+	//use to encrypt asset body
+	masterPassword string
+
 	L   *slog.Logger
 	cfg *config.Config
 
@@ -201,4 +205,12 @@ func (c *ClientApp) Ping(
 			}
 		}
 	}
+}
+
+func (c *ClientApp) SetMasterPass(pass string) {
+	c.masterPassword = pass
+}
+
+func (c *ClientApp) GetMasterPass() []byte {
+	return []byte(c.masterPassword)
 }

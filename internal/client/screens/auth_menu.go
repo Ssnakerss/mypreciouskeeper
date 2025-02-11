@@ -73,11 +73,11 @@ func (m AuthMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if ok {
 				if item.alias == "register" {
 					screen_y := ScreenRegister()
-					return RootScreen().SwitchScreen(&screen_y)
+					return RootScreen().SwitchScreen(&screen_y, "")
 				}
 				if item.alias == "login" {
 					screen_y := ScreenLogin()
-					return RootScreen().SwitchScreen(&screen_y)
+					return RootScreen().SwitchScreen(&screen_y, "")
 				}
 			}
 		}

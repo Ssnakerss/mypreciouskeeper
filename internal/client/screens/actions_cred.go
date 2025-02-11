@@ -13,7 +13,6 @@ import (
 
 	client "github.com/Ssnakerss/mypreciouskeeper/internal/client/app"
 	"github.com/Ssnakerss/mypreciouskeeper/internal/models"
-	"github.com/charmbracelet/bubbles/cursor"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/muesli/termenv"
@@ -22,7 +21,6 @@ import (
 type credentialsScreen struct {
 	focusIndex int
 	textInputs []textinput.Model
-	cursorMode cursor.Mode
 
 	caption string
 	action  string //for button caption
@@ -124,7 +122,7 @@ func (m credentialsScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				errMsg := validate(m.textInputs)
 				if errMsg != "" {
 					//Validation fails - return
-					m.err = fmt.Errorf("Validation error: %v", errMsg)
+					m.err = fmt.Errorf("validation error: %v", errMsg)
 					m.focusIndex = 0
 					return m, nil
 				} else {
@@ -137,7 +135,7 @@ func (m credentialsScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				body, err := json.Marshal(cred)
 				if err != nil {
-					m.err = fmt.Errorf("JSON error: %v", err)
+					m.err = fmt.Errorf("json error: %v", err)
 					return m, nil
 				}
 				asset := &models.Asset{
@@ -147,10 +145,10 @@ func (m credentialsScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 				if m.action == "CREATE" {
 					// Create new asset on server
-					asset, err = client.App.CreateAsset(context.Background(), asset)
+					_, err = client.App.CreateAsset(context.Background(), asset)
 					if err != nil {
 						m.focusIndex = 0
-						m.err = fmt.Errorf("Asset create error: %v", err)
+						m.err = fmt.Errorf("asset create error: %v", err)
 					} else {
 						//Clear inputs
 						for i := range m.textInputs {
@@ -166,7 +164,7 @@ func (m credentialsScreen) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					err = client.App.UpdateAsset(context.Background(), asset)
 					if err != nil {
 						m.focusIndex = 0
-						m.err = fmt.Errorf("Asset update error: %v", err)
+						m.err = fmt.Errorf("asset update error: %v", err)
 						m.success = "Update successful"
 						m.err = nil
 					}

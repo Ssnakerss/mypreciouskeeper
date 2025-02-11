@@ -4,7 +4,6 @@ package screens
 // from the Bubbles component library.
 
 import (
-	"context"
 	"fmt"
 
 	"os"
@@ -16,56 +15,39 @@ import (
 	"github.com/muesli/termenv"
 )
 
-type screenRegister struct {
+type screenMasterPass struct {
 	focusIndex int
 	textInputs []textinput.Model
 
-	err error
-
+	err     error
 	success string
+	warning string
 }
 
-func ScreenRegister() screenRegister {
-	m := screenRegister{
-		textInputs: make([]textinput.Model, 3),
+func ScreenMasterPass() screenMasterPass {
+	m := screenMasterPass{
+		textInputs: make([]textinput.Model, 1),
 	}
 
-	var t textinput.Model
-	for i := range m.textInputs {
-		t = textinput.New()
-		t.Cursor.Style = cursorStyle
-		t.CharLimit = 32
+	t := textinput.New()
+	t.Cursor.Style = cursorStyle
+	t.CharLimit = 32
 
-		switch i {
-		case 0:
-			t.Placeholder = "Email"
-			t.Focus()
-			t.PromptStyle = focusedStyle
-			t.TextStyle = focusedStyle
-			t.Validate = emailValidator
-		case 1:
-			t.Placeholder = "Password"
-			t.EchoMode = textinput.EchoPassword
-			t.EchoCharacter = '*'
-			t.CharLimit = 64
-			t.Validate = passwordValidator
-		case 2:
-			t.Placeholder = "Confirm password"
-			t.EchoMode = textinput.EchoPassword
-			t.EchoCharacter = '*'
-			t.CharLimit = 64
-		}
-		m.textInputs[i] = t
-	}
+	t.Placeholder = "your master pass"
+	t.Focus()
+	t.PromptStyle = focusedStyle
+	t.TextStyle = focusedStyle
+	t.Validate = passwordValidator
+
+	m.textInputs[0] = t
 
 	return m
 }
 
-func (m screenRegister) Init() tea.Cmd {
+func (m screenMasterPass) Init() tea.Cmd {
 	return textinput.Blink
 }
-
-func (m screenRegister) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m screenMasterPass) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	output := termenv.NewOutput(os.Stdout)
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
@@ -77,11 +59,13 @@ func (m screenRegister) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			output.ClearScreen()
 			return m, tea.Quit
 		}
+
 		switch msg.String() {
 		case "tab", "shift+tab", "enter", "up", "down":
 			s := msg.String()
-			var err error
 			if s == "enter" && m.focusIndex == len(m.textInputs) {
+				m.success = ""
+				m.warning = ""
 				errMsg := validate(m.textInputs)
 				if errMsg != "" {
 					//Validation fails - return
@@ -91,29 +75,10 @@ func (m screenRegister) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				} else {
 					m.err = nil
 				}
-
-				//Before register check password match
-				if m.textInputs[1].Value() != m.textInputs[2].Value() {
-					m.focusIndex = 2
-					m.err = fmt.Errorf("password does not match")
-					return m, nil
-				}
-
-				_, err = client.App.Register(context.Background(), m.textInputs[0].Value(), m.textInputs[1].Value())
-
-				if err != nil {
-					m.success = ""
-					m.focusIndex = 1
-					m.err = fmt.Errorf("register error: %v", err)
-				} else {
-					m.err = nil
-					m.success = "Register successful"
-					m.err = nil
-					// screen := RootScreen()
-					// return RootScreen().SwitchScreen(&screen)
-				}
+				//Try Login via gRPC
+				client.App.SetMasterPass(m.textInputs[0].Value())
+				m.success = fmt.Sprintf("Master pass is set to '%s'", string(client.App.GetMasterPass()))
 			}
-
 			// Cycle indexes
 			if s == "up" || s == "shift+tab" {
 				m.focusIndex--
@@ -155,7 +120,7 @@ func (m screenRegister) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	return m, cmd
 }
-func (m *screenRegister) updateInputs(msg tea.Msg) tea.Cmd {
+func (m *screenMasterPass) updateInputs(msg tea.Msg) tea.Cmd {
 	cmds := make([]tea.Cmd, len(m.textInputs))
 
 	for i := range m.textInputs {
@@ -165,10 +130,10 @@ func (m *screenRegister) updateInputs(msg tea.Msg) tea.Cmd {
 	return tea.Batch(cmds...)
 }
 
-func (m screenRegister) View() string {
+// Render screen view
+func (m screenMasterPass) View() string {
 	var b strings.Builder
-	b.WriteString(addKey.Render("REGISTER"))
-
+	b.WriteString(addKey.Render("ENTER MASTER PASSWORD"))
 	fmt.Fprintf(&b, "\n\n")
 
 	for i := range m.textInputs {
@@ -178,9 +143,9 @@ func (m screenRegister) View() string {
 		}
 	}
 
-	button := blurredButton.Render("REGISTER")
+	button := blurredButton.Render("[SAVE]")
 	if m.focusIndex == len(m.textInputs) {
-		button = focusedButton.Render("REGISTER")
+		button = focusedButton.Render("[SAVE]")
 	}
 
 	fmt.Fprintf(&b, "\n\n%s\n\n", button)
@@ -190,6 +155,9 @@ func (m screenRegister) View() string {
 	}
 	if m.success != "" {
 		fmt.Fprintf(&b, "\n%s\n", successText.Render(m.success))
+	}
+	if m.warning != "" {
+		fmt.Fprintf(&b, "\n%s\n", warningText.Render(m.warning))
 	}
 
 	//Connection status 'widget'
