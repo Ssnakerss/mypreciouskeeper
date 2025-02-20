@@ -1,0 +1,7 @@
+env: "local"
+storage_path: "local.db"
+token_ttl: 24h
+grpc:
+  host: "localhost"
+  port: 44044
+  timeout: 10h

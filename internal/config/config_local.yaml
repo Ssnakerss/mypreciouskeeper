@@ -1,5 +1,0 @@
-env: "local"
-con_string: "postgres://orchestra:orchestra12qwaszx@pg-ext.os.serk.lan:5103/orchestra?sslmode=disable"
-grpc:
-  port: 44044
-  timeout: 10h

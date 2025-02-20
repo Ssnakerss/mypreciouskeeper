@@ -1,0 +1,126 @@
+syntax="proto3";
+
+package grpcserver;
+
+option go_package="mypreciouskeeper/grpcserver";
+
+//Auth service for managing account creation and login
+service Auth {
+    //Register new user
+    rpc Register(RegisterRequest) returns (RegisterResponse);
+    //Login authorize user and returns auth token if success
+    rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+//User Register object
+message RegisterRequest{
+    string email = 1; //User email (login) for register
+    string pass = 2; //User Password
+} 
+
+//Register respnse object with user id 
+message RegisterResponse {
+    int64 user_id = 1; //ID of registered user
+}
+
+message LoginRequest {
+    string email = 1; //User email for login
+    string pass = 2;  //User pass
+}
+
+message LoginResponse{
+    string token = 1; //Auth token after success login
+}
+
+//Ping service
+service Ping {
+    rpc Ping(PingRequest) returns (PingResponse);
+}
+message PingRequest{
+
+}
+message PingResponse {
+    int64 resp = 1; 
+}
+ 
+//------------------------------------------------------------------
+//Asset service for work with user's asset - create, get and list up 
+service Asset{
+    //Create new asset record
+    rpc Create(CreateRequest) returns (CreateResponse);
+    //Get asset 
+    rpc Get(GetRequest) returns (GetResponse);
+    //List up assets of current user
+    rpc List(ListRequest) returns (ListResponse);
+    //Update asset information
+    rpc Update(UpdateRequest) returns (UpdateResponse);
+    //Delete asset by id
+    rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
+
+//Asset register object
+message CreateRequest {
+    string token = 1; //JWT auth token of Current user 
+    string type = 2; //Asset type
+    string sticker = 3; //Asset sticker -  desription tag
+    bytes body = 4; //Asset body
+}
+
+message CreateResponse {
+    int64 asset_id = 1; //ID of created asset
+}
+
+message GetRequest{
+    string token = 1; //JWT auth token of current user
+    int64 asset_id = 2; //ID of asset to request 
+}
+
+message GetResponse {
+    int64 asset_id = 1;
+    string type = 2; //Asset type
+    string sticker = 3; //Asset sticker -  desription tag
+    bytes body = 4; //Asset body 
+    int64 created_at = 5; //Asset create time - Unix time 
+    int64 updated_at = 6; //Asset update time - Unix time 
+}
+
+message UpdateRequest {
+    string token = 1; //JWT auth token of Current user 
+    int64 asset_id = 2; //ID of asset to update 
+    string type = 3; //Asset type
+    string sticker = 4; //Asset sticker -  desription tag
+    bytes body = 5; //Asset body
+}
+
+message UpdateResponse{
+    int64 asset_id = 1; //Updated asset id
+}
+   
+
+message ListRequest{
+    string token = 1; //token contains current user ID 
+    string type = 2; //type of assets to retrieve
+    string sticker = 3;//Description of asset to retrieve
+}
+message ListResponse{
+    message Asset {
+        int64 asset_id = 1;//Asset id
+        string type = 2; //Asset type
+        string sticker = 3; //Asset sticker -  desription tag
+        bytes body = 4; //Asset body
+        int64 created_at = 5; //Asset create time - Unix time 
+        int64 updated_at = 6; //Asset update time - Unix time 
+    }
+    repeated Asset assets = 1;//Array of user's assets
+}
+
+message DeleteRequest{
+    string token = 1; //Auth token
+    int64 asset_id = 2; //ID of asset to delete
+
+}
+
+message DeleteResponse{
+    int64 asset_id = 1; //Updated asset id
+}
+  
